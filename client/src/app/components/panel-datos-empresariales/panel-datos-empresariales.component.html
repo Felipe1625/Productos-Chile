@@ -1,1 +1,160 @@
-<p>panel-datos-empresariales works!</p>
+<app-navbar-client></app-navbar-client>
+
+     <div class="container mt-2">
+
+          <div class="row carta-panel">
+               <div class="col-sm-12 col-md-12 col-lg-3 linea-divisoria mb-3">
+        
+                <div class="hover-seleccion">
+                  <p class="titulo-filtros">Panel de control</p>
+                  <div class="mt-1"> 
+                      <span><a class="letra-filtros" routerLink="/panel/datos-personales"><i class="fas fa-user-circle mr-2"></i>Datos personales</a></span>
+                  </div>
+                  <div class="mt-1">
+                      <span><a class="letra-filtros" routerLink="/panel/datos-empresariales"><i class="fas fa-briefcase mr-2"></i>Datos empresariales</a></span>
+                  </div>    
+                  <div class="mt-1">
+                    <span><a class="letra-filtros" routerLink="/panel/servicios-productos" ><i class="fas fa-clipboard-list mr-2"></i> Servicios</a></span>
+                </div> 
+                
+        
+                <div class="mt-1">
+                  <span><a class="letra-filtros"  routerLink="/panel/config" ><i class="fas fa-cogs mr-2"></i>Config. OnePage</a></span>
+              </div> 
+              <div class="mt-1">
+                <span><a class="letra-filtros" routerLink="/panel/preguntas-frecuentes" ><i class="fas fa-question-circle mr-2" ></i>Preguntas frecuentes</a></span>
+            </div>    
+              </div>
+                  </div>
+               
+               <div class="col-sm-12 col-md-12 col-lg-9">
+                    <h4>Datos Empresariales</h4>
+                    <div class="row mt-3">
+                         <div class="col-3 centrar-vertical" style="font-weight: 500;">Empresa</div>
+                         <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.nombrePyme"></div>
+                         
+                    </div>
+                    <div class="row mt-3">
+                         <div class="col-3 centrar-vertical" style="font-weight: 500;">Giro</div>
+                         <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.giroPyme"></div>
+                         
+                    </div>
+                    <div class="row mt-3">
+                         <div class="col-3 centrar-vertical" style="font-weight: 500;">Correo electronico</div>
+                         <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.correoContactoPyme"></div>
+                         
+                    </div>
+                    <div class="row mt-3">
+                         <div class="col-3 centrar-vertical" style="font-weight: 500;">Fono de contacto [1]</div>
+                         <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.fonoContactoUno"></div>
+                         
+                    </div>
+                    <div class="row mt-3">
+                         <div class="col-3 centrar-vertical" style="font-weight: 500;">Fono de contacto [2]</div>
+                         <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.fonoContactoDos"></div>
+                         
+                    </div>
+                    <div class="row mt-3">
+                         <div class="col-3 centrar-vertical" style="font-weight: 500;">Rubro</div>
+                         <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.nombreRubro"></div>
+                         
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-3 centrar-vertical" style="font-weight: 500;">Region</div>
+                      <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.nombreRegion"></div>
+                      
+                 </div>
+
+                    <div class="row mt-3">
+                         <div class="col-3" style="font-weight: 500;">Redes sociales</div>
+                         <div class="container col-8 remove-all-margin-padding">
+                              <div class="row">
+                                   <div class="input-group col-9">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fab fa-facebook"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                      </div>
+                                   
+                                  
+                                   
+                              </div>
+                              <div class="row mt-2">
+                                   
+
+                                        <div class="input-group col-9">
+                                             <div class="input-group-prepend">
+                                               <span class="input-group-text" id="basic-addon1"><i class="fab fa-instagram"></i></span>
+                                             </div>
+                                             <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                           </div>
+                                   
+                              </div>
+                              <div class="row mt-2">
+                                   
+                                   <div class="input-group col-9">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fab fa-twitter"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                      </div>
+                              </div>
+                              <div class="row mt-2">
+                                   
+                                        <div class="input-group col-9">
+                                             <div class="input-group-prepend">
+                                               <span class="input-group-text" id="basic-addon1"><i class="fab fa-youtube"></i></span>
+                                             </div>
+                                             <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                           </div>
+                              </div>
+                         </div>
+
+                    </div>
+
+
+            <div class="centrar-horizontal mt-3">
+              <button type="button" class="btn btn-info font-weight-bold" (click)="updateDatosEmpresariales()">Actualizar mis datos</button>
+            </div>
+                    
+                </div>
+
+
+          </div>
+
+     </div>
+
+<!-- pie de pagina -->
+<app-footer></app-footer>
+
+
+   <button class="chat rounded-circle" data-toggle="modal" data-target="#modal-contacto">
+     <i class="far fa-comments fa-2x"></i>
+   </button>
+
+
+   <!-- Modal -->
+<div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+         <div class="modal-header titulo-modal ">
+           <i class="far fa-comments centrar-vertical mr-2"></i>
+           <h5 class="modal-title" id="exampleModalLongTitle">Formulario de contacto</h5>
+           <button type="button" class="close centrar-vertical" data-dismiss="modal" aria-label="Close">
+             <i class="fas fa-times" style="color: white;"></i>
+           </button>
+         </div>
+         <div class="modal-body">
+           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
+           <div class="alert alert-primary mt-3" role="alert">
+             Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
+           </div>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+           <button type="button" class="btn btn-primary">Enviar</button>
+         </div>
+       </div>
+     </div>
+   </div>
+  

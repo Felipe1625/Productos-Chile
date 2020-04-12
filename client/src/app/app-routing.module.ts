@@ -23,6 +23,7 @@ import {PanelServiciosComponent} from './components/panel-servicios/panel-servic
 import {PanelConfigOnePageComponent} from './components/panel-config-one-page/panel-config-one-page.component'
 //seccion de preguntas frecuentes para un cliente del sistema
 import {PanelPreguntasFrecuentesComponent} from './components/panel-preguntas-frecuentes/panel-preguntas-frecuentes.component'
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -48,27 +49,33 @@ const routes: Routes = [
   },
   {
     path:'panel',
-    component : PanelPrincipalComponent
+    component : PanelPrincipalComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'panel/datos-personales',
-    component : PanelDatosPersonalesComponent
+    component : PanelDatosPersonalesComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'panel/datos-empresariales',
-    component : PanelDatosEmpresarialesComponent
+    component : PanelDatosEmpresarialesComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'panel/servicios-productos',
-    component : PanelServiciosComponent
+    component : PanelServiciosComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'panel/config',
-    component : PanelConfigOnePageComponent
+    component : PanelConfigOnePageComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'panel/preguntas-frecuentes',
-    component : PanelPreguntasFrecuentesComponent
+    component : PanelPreguntasFrecuentesComponent,
+    canActivate:[AuthGuard]
   }
 ];
 

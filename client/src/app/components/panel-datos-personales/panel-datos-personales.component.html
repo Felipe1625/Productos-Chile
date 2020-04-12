@@ -1,1 +1,130 @@
-<p>panel-datos-personales works!</p>
+<app-navbar-client></app-navbar-client>
+
+  
+
+
+
+
+  <div class="container mt-2">
+
+    <div class="row carta-panel">
+      <div class="col-sm-12 col-md-12 col-lg-3 linea-divisoria mb-3">
+        
+        <div class="hover-seleccion">
+          <p class="titulo-filtros">Panel de control</p>
+          <div class="mt-1"> 
+              <span><a class="letra-filtros" routerLink="/panel/datos-personales"><i class="fas fa-user-circle mr-2"></i>Datos personales</a></span>
+          </div>
+          <div class="mt-1">
+              <span><a class="letra-filtros" routerLink="/panel/datos-empresariales"><i class="fas fa-briefcase mr-2"></i>Datos empresariales</a></span>
+          </div>    
+          <div class="mt-1">
+            <span><a class="letra-filtros" routerLink="/panel/servicios-productos" ><i class="fas fa-clipboard-list mr-2"></i> Servicios</a></span>
+        </div> 
+        
+
+        <div class="mt-1">
+          <span><a class="letra-filtros"  routerLink="/panel/config" ><i class="fas fa-cogs mr-2"></i>Config. OnePage</a></span>
+      </div> 
+      <div class="mt-1">
+        <span><a class="letra-filtros" routerLink="/panel/preguntas-frecuentes" ><i class="fas fa-question-circle mr-2" ></i>Preguntas frecuentes</a></span>
+    </div>    
+      </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-9 mb-3">
+        <h4>Datos Personales</h4>
+        <div class="row mt-3">
+             <div class="col-3 centrar-vertical" style="font-weight: 500;">Nombre</div>
+             <div class="col-6"><input class="form-control" name="NombreUsuario" type="text"
+              [(ngModel)]="data.NombreUsuario" disabled></div>
+             
+        </div>
+        <div class="row mt-3">
+          <div class="col-3 centrar-vertical" style="font-weight: 500;">Apellido</div>
+          <div class="col-6"><input class="form-control" name="ApellidoUsuario" type="text"
+           [(ngModel)]="data.ApellidoUsuario" disabled></div>
+          
+     </div>
+       
+        <div class="row mt-3">
+             <div class="col-3 centrar-vertical" style="font-weight: 500;">Empresa asociada</div>
+             <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.nombrePyme" disabled></div>
+             
+        </div>
+
+
+
+        <div class="row mt-3">
+             <div class="col-3 centrar-vertical" style="font-weight: 500;">Correo</div>
+             <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.correo" required minlength="1"></div>
+             
+        </div>
+        <div class="offset-3 col-4 color-mensaje-error">{{mensajeCorreo}}</div>
+        <div class="row mt-3">
+          <div class="col-3 centrar-vertical" style="font-weight: 500;">Celular</div>
+          <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.celular" maxlength="9"></div>
+          
+     </div>
+     <div class="offset-3 col-4 color-mensaje-error">{{mensajeCelular}}</div>
+     <div class="row mt-3">
+      <div class="col-3 centrar-vertical" style="font-weight: 500;">Direccion</div>
+      <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.direccion" maxlength="70"></div>
+      
+       
+ </div>
+<div class="offset-3 col-4 color-mensaje-error">{{mensajeDireccion}}</div>
+<div class="centrar-horizontal mt-3">
+  <button type="button" class="btn btn-info font-weight-bold"
+  (click)="updateDatosUsuario()">Actualizar mis datos</button>
+</div>
+        
+    </div>
+    </div>
+
+  </div>
+
+
+
+  <footer class="footerh">
+    <div class="row">
+      <div class="col-md-6 col-lg-7">
+  
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 centrar margen-icono-footer">
+        <i class="fab fa-facebook-f fa-2x  icono-footer-circular-face"></i>
+        <i class="fab fa-twitter fa-2x  icono-footer-circular-tw"></i>
+        <i class="fab fa-instagram fa-2x  icono-footer-circular-insta"></i>
+        <i class="fab fa-snapchat-ghost fa-2x icono-footer-circular-snapchat"></i>
+      </div>
+    </div>
+  </footer>
+
+<button class="chat rounded-circle" data-toggle="modal" data-target="#modal-contacto">
+  <i class="far fa-comments fa-2x"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header titulo-modal ">
+        <i class="far fa-comments centrar-vertical mr-2"></i>
+        <h5 class="modal-title" id="exampleModalLongTitle">Formulario de contacto</h5>
+        <button type="button" class="close centrar-vertical" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times" style="color: white;"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
+        <div class="alert alert-primary mt-3" role="alert">
+          Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

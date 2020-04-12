@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class PanelPrincipalComponent implements OnInit {
 
   constructor() { }
-
+  
   ngOnInit(): void {
+    
   }
-
 }
