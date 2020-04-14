@@ -155,6 +155,54 @@ class AppController {
           }
           return res.json({ text: "pyme no existe en db" })
      }
+     
+
+     public async solicitarOnePage(req:any,res:any):Promise<void>{ 
+          console.log( [req.body,req.params.id])
+console.log('nombre archivo= '+req.body.target.files[0].name)
+
+          var contentHTML: any;
+         
+          contentHTML = `
+          Informacion de usuario de Productos Chile
+          
+          
+         `
+          console.log(contentHTML)
+
+          let transporter = nodemailer.createTransport({
+               host: 'smtp.gmail.com',
+               port: 587,
+               secure: false,
+               requireTLS: true,
+               auth: {
+                    user: 'felipe.ascencio@virginiogomez.cl',
+                    pass: '18416518-k'
+               }
+          });
+
+          let mailOptions = {
+               from: 'felipe.ascencio@virginiogomez.cl',
+               to: 'felipe.ascencio.sandoval@gmail.com',
+               subject: 'Mensaje de usuario Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               text: contentHTML,
+               // html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
+               // attachments: [{
+               //     filename: 'image.png',
+               //     path: '/path/to/file',
+               //     cid: 'unique@kreata.ee' //same cid value as in the html img src
+               // }]
+          };
+
+          
+
+          transporter.sendMail(mailOptions, (error:any, info:any) => {
+               if (error) {
+                    return console.log(error.message);
+               }
+               console.log('success');
+          });
+     }
 
 }
 

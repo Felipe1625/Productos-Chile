@@ -31,4 +31,8 @@ export class AppService {
     return this.http.put(`${this.API_URI}/update-datos-usuario/${idUsuario}`,data)
   }
 
+  solicitarOnePage(id,formData){
+    return this.http.post(`${this.API_URI}/solicitar-OnePage/${id}`, formData)
+  }
+
 }

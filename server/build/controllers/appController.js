@@ -163,6 +163,41 @@ class AppController {
             return res.json({ text: "pyme no existe en db" });
         });
     }
+    solicitarOnePage(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log([req.body, req.params.id]);
+            console.log('nombre archivo= ' + req.body.target.files[0].name);
+            var contentHTML;
+            contentHTML = `
+          Informacion de usuario de Productos Chile
+          
+          
+         `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'felipe.ascencio@virginiogomez.cl',
+                    pass: '18416518-k'
+                }
+            });
+            let mailOptions = {
+                from: 'felipe.ascencio@virginiogomez.cl',
+                to: 'felipe.ascencio.sandoval@gmail.com',
+                subject: 'Mensaje de usuario Productos Chile',
+                text: contentHTML,
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error.message);
+                }
+                console.log('success');
+            });
+        });
+    }
 }
 const appController = new AppController();
 exports.default = appController;

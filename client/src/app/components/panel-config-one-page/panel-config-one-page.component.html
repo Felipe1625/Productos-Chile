@@ -1,1 +1,302 @@
 <app-navbar-client></app-navbar-client>
+
+
+
+
+
+
+   <div class="container mt-2">
+
+    <div class="row carta-panel">
+      <div class="col-sm-12 col-md-12 col-lg-3 linea-divisoria mb-3">
+        
+        <div class="hover-seleccion">
+          <p class="titulo-filtros">Panel de control</p>
+          <div class="mt-1"> 
+              <span><a class="letra-filtros" routerLink="/panel/datos-personales"><i class="fas fa-user-circle mr-2"></i>Datos personales</a></span>
+          </div>
+          <div class="mt-1">
+              <span><a class="letra-filtros" routerLink="/panel/datos-empresariales"><i class="fas fa-briefcase mr-2"></i>Datos empresariales</a></span>
+          </div>    
+          <div class="mt-1">
+            <span><a class="letra-filtros" routerLink="/panel/servicios-productos" ><i class="fas fa-clipboard-list mr-2"></i> Servicios</a></span>
+        </div> 
+        
+
+        <div class="mt-1">
+          <span><a class="letra-filtros"  routerLink="/panel/config" ><i class="fas fa-cogs mr-2"></i>Config. OnePage</a></span>
+      </div> 
+      <div class="mt-1">
+        <span><a class="letra-filtros" routerLink="/panel/preguntas-frecuentes" ><i class="fas fa-question-circle mr-2" ></i>Preguntas frecuentes</a></span>
+    </div>  
+    <div class="mt-5 centrar">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAyuda">
+        Ayuda
+      </button>
+    </div>  
+      </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-9 mb-3">
+        <div class="offset-1 col-10 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+          <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+          
+        </div>
+        
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+            <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+              <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center">
+              <button class="btn btn-info rounded" style="padding:10px !important"> <i class="fas fa-pen-square fa-3x"></i></button>
+             
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-2 col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+            <button class="btn btn-info rounded" style="padding:10px !important"> <i class="fas fa-pen-square fa-3x"></i></button>
+          </div>
+          <div class="col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+            <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+          </div>
+        </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <button type="file" accept=".jpg .png" class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+  <!-- <span class="nuestroinput">
+    <label for="nuestroinput"><input id="nuestroinput" type="file"><i class="fas fa-file-upload"></i> Subir archivo</label>
+  </span> -->
+  
+<span class="mi-archivo">
+<input type="file" name="mi-archivo" id="mi-archivo" accept=".jpg, .png" (change)="guardarImagenCabecera($event)">
+</span>
+<label for="mi-archivo">
+  <span>Upload your cv</span>
+</label>
+
+<button class="btn btn-success" (click)="solicitarOnePage()">Solicitar onepage</button>
+    </div>
+    </div>
+
+  </div>
+
+
+
+  <footer class="footerh">
+    <div class="row">
+      <div class="col-md-6 col-lg-7">
+  
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 centrar margen-icono-footer">
+        <i class="fab fa-facebook-f fa-2x  icono-footer-circular-face"></i>
+        <i class="fab fa-twitter fa-2x  icono-footer-circular-tw"></i>
+        <i class="fab fa-instagram fa-2x  icono-footer-circular-insta"></i>
+        <i class="fab fa-snapchat-ghost fa-2x icono-footer-circular-snapchat"></i>
+      </div>
+    </div>
+  </footer>
+
+<button class="chat rounded-circle" data-toggle="modal" data-target="#modal-contacto">
+  <i class="far fa-comments fa-2x"></i>
+</button>
+
+<!-- Modal contacto-->
+<div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header titulo-modal ">
+        <i class="far fa-comments centrar-vertical mr-2"></i>
+        <h5 class="modal-title" id="exampleModalLongTitle">Formulario de contacto</h5>
+        <button type="button" class="close centrar-vertical" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times" style="color: white;"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
+        <div class="alert alert-primary mt-3" role="alert">
+          Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal ayuda-->
+<div class="modal fade bd-example-modal-lg" id="ModalAyuda" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+       <div class="modal-content">
+       
+         <div class="mr-1">
+          <button  type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="stepper.reset()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+         </div>
+         <div class="modal-body" style="padding-top:0px !important;padding-bottom:0px !important">
+        
+          <mat-horizontal-stepper #stepper>
+               <mat-step  label="Inicio" state="image">
+                 <h4>Guia de configuracion de One page</h4>
+                 <p>Bienvenido a la guia de configuracion de one page, donde se indicara la funcion de cada seccion de su pagina, asi como las productos y servicios que puede asociar.</p>
+                 <div class="d-flex justify-content-end">
+                   <button class="btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
+                 </div>
+                 
+               </mat-step>
+               <mat-step label="Cabecera" state="image">
+                
+                <div class="container mt-2">
+                  <div class="row">
+                    <div class="offset-2 col-8 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <i class="fas fa-plus-circle fa-3x"></i>
+                    </div>
+                    <div class="offset-2 col-8 mt-3">
+                      <h5>Agregar una imagen de cabecera</h5>
+                      <ul>
+                        <li>Para agregar una imagen de cabecera presionar el boton agregar imagen, representado por <i class="fas fa-plus-circle"></i></li>
+                        <li>Seleccionar una imagen de su equipo.</li>
+                      </ul>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+                 <div class="d-flex justify-content-between">
+                   <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
+                   <button class="ml-3 btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
+                 </div>
+               </mat-step>
+               <mat-step label="Caracteristica" state="image">
+                <div class="container mt-2">
+                  <div class="row">
+                    
+                    <div class="col-6 mt-3 mb-3">
+                      <h5>Agregar una caracteristica</h5>
+                      <ul>
+                        <li>Este punto cuenta de 2 partes: agregar una imagen y agregar la descripcion</li>
+                        <li>Para agregar una imagen de presionar el boton agregar imagen, representado por <i class="fas fa-plus-circle"></i></li>
+                        <li>Seleccionar una imagen de su equipo y subirla</li>
+                        <li>Para agregar una descripcion, presionar el boton agregar descripcion, representado por <i class="fas fa-pen-square"></i></li>
+                        <li>Ingresar la descripcion en el cuadro emergente y presionar guardar.</li>
+                      </ul>
+                      
+                    </div>
+                    <div class="card col-6 mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <i class="fas fa-plus-circle fa-3x"></i>
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <i class="fas fa-pen-square fa-3x"></i>
+                      </div>
+                    </div>
+
+                    
+                    
+                  </div>
+                </div>
+                    <div class="d-flex justify-content-between">
+                         <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
+                      <button class="btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
+                    </div>
+                  </mat-step>
+                  <mat-step label="Descripcion" state="image">
+                    <div class="container mt-2">
+                      <div class="row">
+                        <div class="offset-2 col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <i class="fas fa-pen-square fa-3x"></i>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <i class="fas fa-plus-circle fa-3x"></i>
+                        </div>
+                        <div class="offset-2 col-8 mt-3">
+                          <h5>Agregar informacion de su negocio</h5>
+                          <ul>
+                            <li>Este punto cuenta de 2 partes: agregar una descripcion usando el boton <i class="fas fa-plus-circle"></i> y agregar una imagen usando el boton <i class="fas fa-pen-square "></i></li>
+                          </ul>
+                          
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                         <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
+                      <button class="btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
+                    </div>
+                  </mat-step>
+               <mat-step label="Productos" state="image">
+                <div class="container mt-2">
+                  <div class="row">
+                    
+                    <div class="col-6 mt-3 mb-3">
+                      <h5>Producto o servicio</h5>
+                      <ul>
+                        <li>Este punto cuenta de 2 partes: agregar una imagen y agregar la descripcion del producto o servicio</li>
+                        <li>Para agregar una imagen debe presionar el boton agregar imagen, representado por <i class="fas fa-plus-circle"></i></li>
+                        <li>Seleccionar una imagen de su equipo y subirla</li>
+                        <li>Para agregar una descripcion, presionar el boton agregar descripcion, representado por <i class="fas fa-pen-square"></i></li>
+                        <li>Ingresar la descripcion en el cuadro emergente y presionar guardar.</li>
+                      </ul>
+                      
+                    </div>
+                    <div class="card col-6 mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <i class="fas fa-plus-circle fa-3x"></i>
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <i class="fas fa-pen-square fa-3x"></i>
+                      </div>
+                    </div>
+
+                    
+                    
+                  </div>
+                </div>
+                 <div class="d-flex justify-content-between">
+                    <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
+                 <button class="btn btn-primary color-vue" data-dismiss="modal" (click)="stepper.reset()">Finalizar <i class="fas fa-angle-right"></i></button> 
+                 
+               </div>
+                
+               </mat-step>
+               <ng-template matStepperIcon="edit">
+                <mat-icon>image</mat-icon>
+              </ng-template>
+               <!-- Icon overrides. -->
+               <ng-template matStepperIcon="phone">
+                 <mat-icon>call_end</mat-icon>
+               </ng-template>
+               <ng-template matStepperIcon="chat">
+                 <mat-icon>forum</mat-icon>
+               </ng-template>
+             </mat-horizontal-stepper>
+<!-- change default 'edit' icon -->
+
+
+         </div>
+         <!-- <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary">Save changes</button>
+         </div> -->
+       </div>
+     </div>
+   </div>
+
+
+

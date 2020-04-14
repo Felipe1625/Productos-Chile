@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,10 +17,11 @@ import { PanelDatosEmpresarialesComponent } from './components/panel-datos-empre
 import { PanelServiciosComponent } from './components/panel-servicios/panel-servicios.component';
 import { PanelConfigOnePageComponent } from './components/panel-config-one-page/panel-config-one-page.component';
 import { PanelPreguntasFrecuentesComponent } from './components/panel-preguntas-frecuentes/panel-preguntas-frecuentes.component';
-import {AuthGuard} from './auth.guard';
-import { NavbarClientComponent } from './components/navbar-client/navbar-client.component'
-
-
+import { AuthGuard } from './auth.guard';
+import { NavbarClientComponent } from './components/navbar-client/navbar-client.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +42,12 @@ import { NavbarClientComponent } from './components/navbar-client/navbar-client.
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatStepperModule,
+    MatIconModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

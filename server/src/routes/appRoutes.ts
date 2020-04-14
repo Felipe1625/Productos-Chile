@@ -22,6 +22,7 @@ class AppRoutes {
           this.router.get('/get-pyme/:id', appController.getPyme);
           this.router.put('/update-datos-empresariales/:id', appController.updateDatosEmpresariales);
           this.router.put('/update-datos-usuario/:id', appController.updateDatosUsuario);
+          this.router.post('/solicitar-OnePage/:id', appController.solicitarOnePage);
      }
 }
 

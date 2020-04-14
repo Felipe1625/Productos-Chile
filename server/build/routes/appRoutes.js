@@ -23,6 +23,7 @@ class AppRoutes {
         this.router.get('/get-pyme/:id', appController_1.default.getPyme);
         this.router.put('/update-datos-empresariales/:id', appController_1.default.updateDatosEmpresariales);
         this.router.put('/update-datos-usuario/:id', appController_1.default.updateDatosUsuario);
+        this.router.post('/solicitar-OnePage/:id', appController_1.default.solicitarOnePage);
     }
 }
 const appRoutes = new AppRoutes();

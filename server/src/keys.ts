@@ -12,7 +12,7 @@ export default{
           //datos de conexion a localhost
           
           host:"localhost",  
-          user:"root",
+          user:"root", 
           password:"",
           database:"productoschile"
      } 
