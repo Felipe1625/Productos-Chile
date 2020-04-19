@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     //guardamos el token en el localstorage con el nombre token, y el id y nombre de usuario lo unimos en un solo string separado por la nomneclatura (*/as), luego ese string lo encriptamos y lo guardamos en el local storage con el nombre de res
       this.authService.signin(this.user).subscribe(res => {
       this.response = res
-      localStorage.setItem('res', btoa(res['Admin'].idUsuario + '(*/as)' + res['Admin'].NombreUsuario))
+      localStorage.setItem('res', btoa(res['Admin'].idUsuario + '(*/as)' + res['Admin'].NombreUsuario+ '(*/as)' +res['Admin'].Pyme_idPyme))
       localStorage.setItem('token', res['token'])
       this.router.navigate(['/panel'])
     },

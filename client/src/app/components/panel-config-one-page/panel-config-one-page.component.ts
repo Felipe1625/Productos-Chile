@@ -29,16 +29,20 @@ export class PanelConfigOnePageComponent implements OnInit {
   
   guardarImagenCabecera(e:any){
 console.log('subir ' + e.target.files[0].name)
-this.imagenCabecera=e.target.files[0];
-
+this.imagenCabecera=e.target.files;
+console.log('image= '+this.imagenCabecera[0])
 
   }
+
 solicitarOnePage(){
   let formData=new FormData();
-  for (let i = 0; i < this.imagenCabecera.length; i++) {
-    formData.append("uploads[]",this.imagenCabecera[i],this.imagenCabecera[i].name)
-  }
-  console.log('imagen= '+formData);
+  // for (let i = 0; i < this.imagenCabecera.length; i++) {
+  //   formData.append('',this.imagenCabecera[i],this.imagenCabecera[i].name)
+  // }
+
+  formData.append("fileToUpload", this.imagenCabecera[0]);
+  console.log('formdata= '+formData.get('fileToUpload'))
+  
   this.appService.solicitarOnePage(1,formData).subscribe(res => {
     console.log(res);
     

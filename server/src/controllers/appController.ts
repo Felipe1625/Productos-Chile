@@ -35,15 +35,15 @@ class AppController {
           res.json({ text: "game delete.." })
      }
 
-     public async update(req: Request, res: Response): Promise<void> {
-          await pool.query('UPDATE games set ? where id = ?', [req.body, req.params.id]);
-          res.json({ text: "game updated.." })
-     }
+    
      public async updateDatosEmpresariales(req: Request, res: Response): Promise<void> {
           const {idPyme}=req.body;
           console.log(idPyme);
           console.log(req.body);
           await pool.query('UPDATE `pyme` set ? WHERE idPyme = ?', [req.body,req.params.id]);
+         
+
+
           console.log('UPDATE `pyme` set ? WHERE idPyme = ?', [req.body,req.params.id])
           res.json(req.body)
      }
@@ -109,12 +109,12 @@ class AppController {
           // }
           var Admin={
                idUsuario:0,
-               NombreUsuario:''
-               
+               NombreUsuario:'',
+               idPyme:0
           }
           
                console.log("consulta a la db por correo y password")
-               const admin=await pool.query('SELECT idUsuario,NombreUsuario FROM `usuario-administrador` WHERE correo=\''+email+'\' AND ClaveUsuario=\''+password+'\'')
+               const admin=await pool.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `usuario-administrador` WHERE correo=\''+email+'\' AND ClaveUsuario=\''+password+'\'')
                if(admin.length > 0){ 
                     Admin=admin[0]
                     console.log('admin Admin= '+Admin)
@@ -149,7 +149,7 @@ class AppController {
      public async getPyme(req:Request,res: Response): Promise<any> {
           console.log('getpyme metodo en node')
           
-          const pyme = await pool.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `usuario-administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
+          const pyme = await pool.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `usuario-administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
           if (pyme.length > 0) {
                 return res.json(pyme[0]);
           }
@@ -159,13 +159,13 @@ class AppController {
 
      public async solicitarOnePage(req:any,res:any):Promise<void>{ 
           console.log( [req.body,req.params.id])
-console.log('nombre archivo= '+req.body.target.files[0].name)
-
+          const {} = req.body;
           var contentHTML: any;
          
           contentHTML = `
           Informacion de usuario de Productos Chile
-          
+          Id usuario= ${req.params.id}
+          Nombre: ${req.body}
           
          `
           console.log(contentHTML)
@@ -204,6 +204,85 @@ console.log('nombre archivo= '+req.body.target.files[0].name)
           });
      }
 
+     
+     public async getProductosbyUser(req:Request,res: Response): Promise<any> {
+
+          console.log('getProductosbyUser metodo en node')
+          
+          const productos = await pool.query('SELECT p.* FROM `usuario-administrador` as u inner join `producto` as p ON u.Pyme_idPyme =  p.idPyme where u.Pyme_idPyme=? and p.Habilitado = 1 order by p.idPyme', [req.params.id]);
+          console.log('productos= '+productos)
+          
+          res.json(productos);
+          
+     }
+
+     public async getServiciosbyUser(req:Request,res: Response): Promise<any> {
+
+          console.log('getServiciosbyUser metodo en node')
+          
+          const servicios = await pool.query('SELECT s.* FROM `usuario-administrador` as u inner join `servicio` as s ON u.Pyme_idPyme =  s.idPyme where u.Pyme_idPyme=? and s.Habilitado = 1 order by s.idPyme', [req.params.id]);
+          console.log('servicios= '+servicios)
+          
+          res.json(servicios);
+          
+     }
+
+
+     public async deleteProducto(req: Request, res: Response):Promise<void> {
+          console.log('api')
+          await pool.query('UPDATE `producto` set ? WHERE idProducto = ?', [req.body,req.params.id]);
+          res.json({ text: "producto delete.." })
+     }
+
+     public async deleteService(req: Request, res: Response):Promise<void> {
+          console.log('api')
+          await pool.query('UPDATE `servicio` set ? WHERE idServicio = ?', [req.body,req.params.id]);
+          res.json({ text: "service delete.." })
+     }
+
+     public async updateProducto(req: Request, res: Response):Promise<void> {
+          console.log('api')
+          await pool.query('UPDATE `producto` set ? WHERE idProducto = ?', [req.body,req.params.id]);
+          res.json({ text: "producto updated.." })
+     }
+
+     public async updateService(req: Request, res: Response):Promise<void> {
+          console.log('api')
+          await pool.query('UPDATE `servicio` set ? WHERE idServicio = ?', [req.body,req.params.id]);
+          res.json({ text: "service updated.." })
+     }
+
+     
+     public async getTiposServiciosbyRubro(req:Request,res: Response): Promise<any> {
+
+          console.log('getTiposServiciosbyRubro metodo en node')
+          
+          const tiposServicios = await pool.query('SELECT t.* FROM `usuario-administrador` as u inner join `pyme`as p ON u.Pyme_idPyme = p.idPyme inner join `tipos-servicios-productos` as t on p.Rubro_idRubro=t.idRubro where u.idUsuario = ?', [req.params.id]);
+          console.log('tipos de Servicios= '+tiposServicios)
+          
+          res.json(tiposServicios);
+          
+     }
+
+     public async addProducto(req: Request, res: Response): Promise<void> {
+          console.log('addProducto en node')
+          console.log(req.body)
+          await pool.query('INSERT INTO `producto` set ?', [req.body]);
+          console.log(req.body)
+          res.json({ text: "create producto..." });
+         
+     }
+
+     public async addService(req: Request, res: Response): Promise<void> {
+          await pool.query('INSERT INTO `servicio` set ?', [req.body]);
+          console.log(req.body)
+          res.json({ text: "create service..." });
+         
+     }
+
+     
+
+    
 }
 
 const appController = new AppController();

@@ -31,14 +31,29 @@
                     <h4>Datos Empresariales</h4>
                     <div class="row mt-3">
                          <div class="col-3 centrar-vertical" style="font-weight: 500;">Empresa</div>
-                         <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.nombrePyme"></div>
+                         <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.nombrePyme" disabled></div>
                          
                     </div>
                     <div class="row mt-3">
+                      <div class="col-3 centrar-vertical" style="font-weight: 500;">Rubro</div>
+                      <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.nombreRubro" disabled></div>
+                      
+                 </div>
+                    <div class="row mt-3">
                          <div class="col-3 centrar-vertical" style="font-weight: 500;">Giro</div>
-                         <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.giroPyme"></div>
+                         <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.giroPyme" disabled></div>
                          
                     </div>
+                    <div class="row mt-3">
+                      <div class="col-3 centrar-vertical" style="font-weight: 500;">Region</div>
+                      
+                      <div class="col-6">
+                      <select class="form-control" name="miselect" [(ngModel)]="data.Region">
+                        <option  [value]="item" *ngFor="let item of regiones">{{item}}</option>
+                        </select>
+                      </div>
+                      
+                 </div>
                     <div class="row mt-3">
                          <div class="col-3 centrar-vertical" style="font-weight: 500;">Correo electronico</div>
                          <div class="col-6"><input class="form-control" type="text" [(ngModel)]="data.correoContactoPyme"></div>
@@ -54,16 +69,8 @@
                          <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.fonoContactoDos"></div>
                          
                     </div>
-                    <div class="row mt-3">
-                         <div class="col-3 centrar-vertical" style="font-weight: 500;">Rubro</div>
-                         <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.nombreRubro"></div>
-                         
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-3 centrar-vertical" style="font-weight: 500;">Region</div>
-                      <div class="col-6"><input class="form-control" type="email" [(ngModel)]="data.nombreRegion"></div>
-                      
-                 </div>
+                    
+                    
 
                     <div class="row mt-3">
                          <div class="col-3" style="font-weight: 500;">Redes sociales</div>
@@ -73,7 +80,7 @@
                                         <div class="input-group-prepend">
                                           <span class="input-group-text" id="basic-addon1"><i class="fab fa-facebook"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="data.redSocialFacebook">
                                       </div>
                                    
                                   
@@ -86,7 +93,7 @@
                                              <div class="input-group-prepend">
                                                <span class="input-group-text" id="basic-addon1"><i class="fab fa-instagram"></i></span>
                                              </div>
-                                             <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                             <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="data.redSocialInstagram">
                                            </div>
                                    
                               </div>
@@ -96,7 +103,7 @@
                                         <div class="input-group-prepend">
                                           <span class="input-group-text" id="basic-addon1"><i class="fab fa-twitter"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="data.redSocialTwitter">
                                       </div>
                               </div>
                               <div class="row mt-2">
@@ -105,7 +112,7 @@
                                              <div class="input-group-prepend">
                                                <span class="input-group-text" id="basic-addon1"><i class="fab fa-youtube"></i></span>
                                              </div>
-                                             <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1">
+                                             <input type="text" class="form-control" placeholder="No ingresado" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="data.redSocialYoutube">
                                            </div>
                               </div>
                          </div>

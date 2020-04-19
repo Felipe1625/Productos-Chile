@@ -15,7 +15,6 @@ class AppRoutes {
           this.router.get('/get-one/:id', appController.getOne);
           this.router.post('/a', appController.create);
           this.router.delete('/:id', appController.delete);
-          this.router.put('/:id', appController.update);
           this.router.post('/send-email-user',appController.sendEmailUser);
           this.router.post('/signin', appController.signin);
           this.router.get('/get-usuario/:id', appController.getUsuario);
@@ -23,6 +22,16 @@ class AppRoutes {
           this.router.put('/update-datos-empresariales/:id', appController.updateDatosEmpresariales);
           this.router.put('/update-datos-usuario/:id', appController.updateDatosUsuario);
           this.router.post('/solicitar-OnePage/:id', appController.solicitarOnePage);
+          this.router.get('/get-productos-by-user/:id', appController.getProductosbyUser);
+          this.router.get('/get-servicios-by-user/:id', appController.getServiciosbyUser);
+          this.router.put('/delete-producto/:id', appController.deleteProducto);
+          this.router.put('/delete-service/:id', appController.deleteService);
+          this.router.put('/update-producto/:id', appController.updateProducto);
+          this.router.put('/update-service/:id', appController.updateService);
+          
+          this.router.get('/get-tipos-servicios-by-rubro/:id', appController.getTiposServiciosbyRubro);
+          this.router.post('/add-producto', appController.addProducto);
+          this.router.post('/add-service', appController.addService);
      }
 }
 

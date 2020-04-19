@@ -35,4 +35,51 @@ export class AppService {
     return this.http.post(`${this.API_URI}/solicitar-OnePage/${id}`, formData)
   }
 
+  getProductosbyUser(id){
+    return this.http.get(`${this.API_URI}/get-productos-by-user/${id}`);
+  }
+
+  getServiciosbyUser(id){
+    return this.http.get(`${this.API_URI}/get-servicios-by-user/${id}`);
+  }
+
+  deleteProducto(id){
+    console.log('service')
+    var data={
+      Habilitado:0
+    }
+    return this.http.put(`${this.API_URI}/delete-producto/${id}`,data)
+  }
+
+  deleteService(id){
+    console.log('service')
+    var data={
+      Habilitado:0
+    }
+    return this.http.put(`${this.API_URI}/delete-service/${id}`,data)
+  }
+
+  updateProducto(id,data){
+    console.log('service')
+    return this.http.put(`${this.API_URI}/update-producto/${id}`,data)
+  }
+
+  updateService(id,data){
+    console.log('service')
+    return this.http.put(`${this.API_URI}/update-service/${id}`,data)
+  }
+
+  getTiposServiciosbyRubro(id){
+    return this.http.get(`${this.API_URI}/get-tipos-servicios-by-rubro/${id}`);
+  }
+
+  addProducto(data){
+    console.log('en service')
+    return this.http.post(`${this.API_URI}/add-producto`, data)
+  }
+
+  addService(data){
+    return this.http.post(`${this.API_URI}/add-service`, data)
+  }
+
 }

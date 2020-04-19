@@ -1,1 +1,428 @@
 <app-navbar-client></app-navbar-client>
+
+
+<div class="container mt-2">
+
+  <div class="row carta-panel">
+    <div class="col-sm-12 col-md-12 col-lg-3 linea-divisoria mb-3">
+
+      <div class="hover-seleccion">
+        <p class="titulo-filtros">Panel de control</p>
+        <div class="mt-1">
+          <span><a class="letra-filtros" routerLink="/panel/datos-personales"><i
+                class="fas fa-user-circle mr-2"></i>Datos personales</a></span>
+        </div>
+        <div class="mt-1">
+          <span><a class="letra-filtros" routerLink="/panel/datos-empresariales"><i
+                class="fas fa-briefcase mr-2"></i>Datos empresariales</a></span>
+        </div>
+        <div class="mt-1">
+          <span><a class="letra-filtros" routerLink="/panel/servicios-productos"><i
+                class="fas fa-clipboard-list mr-2"></i> Servicios</a></span>
+        </div>
+
+
+        <div class="mt-1">
+          <span><a class="letra-filtros" routerLink="/panel/config"><i class="fas fa-cogs mr-2"></i>Config.
+              OnePage</a></span>
+        </div>
+        <div class="mt-1">
+          <span><a class="letra-filtros" routerLink="/panel/preguntas-frecuentes"><i
+                class="fas fa-question-circle mr-2"></i>Preguntas frecuentes</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-9">
+
+<div class="row text-center mt-3 mb-5">
+  <div class="col-6">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add-prod">Agregar producto</button>
+  </div>
+  <div class="col-6">
+    <button class="btn btn-success" data-toggle="modal" data-target="#modal-add-serv">Agregar servicio</button>
+  </div>
+</div>
+
+      <div *ngFor="let p of list_productos;let i=index">
+
+        <div class="card border-primary mb-3">
+          <div class="card-header">Producto</div>
+          <div class="card-body">
+            <h5 class="card-title">{{p.nombreProducto}}</h5>
+            <p class="card-text">{{p.descripcionProducto}}</p>
+            <h6>Valor : {{p.valorProducto}}</h6>
+            <h6>Cantidad: {{p.cantidadProducto}}</h6>
+          </div>
+          <div class="card-footer bg-transparent ">
+            <div class="container">
+              <div class="row">
+                <div class="col-6 text-center">
+                  <button class="btn btn-info" data-toggle="modal" data-target="#modal-update-prod" (click)="getProductoService(p)"><i
+                      class="far fa-edit"></i></button>
+                </div>
+                <div class="col-6 text-center">
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-prod" (click)="getProductoService(p)"><i
+                      class="far fa-trash-alt"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+      <div *ngFor="let s of list_servicios;let i=index">
+
+        <div class="card border-success mb-3">
+          <div class="card-header">Servicio</div>
+          <div class="card-body">
+            <h5 class="card-title">{{s.nombreServicio}}</h5>
+            <p class="card-text">{{s.descripcionServicio}}</p>
+            <h6>Valor: {{s.valorServicio}}</h6>
+          </div>
+          <div class="card-footer bg-transparent ">
+            <div class="container">
+              <div class="row">
+                <div class="col-6 text-center">
+                  <button class="btn btn-info" data-toggle="modal" data-target="#modal-update-serv" (click)="getProductoService(s)"><i
+                      class="far fa-edit"></i></button>
+                </div>
+                <div class="col-6 text-center">
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-serv" (click)="getProductoService(s)"><i
+                      class="far fa-trash-alt"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+
+
+  </div>
+
+</div>
+
+<!-- pie de pagina -->
+<app-footer></app-footer>
+
+
+<button class="chat rounded-circle" data-toggle="modal" data-target="#modal-contacto">
+  <i class="far fa-comments fa-2x"></i>
+</button>
+
+
+<!-- Modal contacto-->
+<div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header titulo-modal ">
+        <i class="far fa-comments centrar-vertical mr-2"></i>
+        <h5 class="modal-title" id="exampleModalLongTitle">Formulario de contacto</h5>
+        <button type="button" class="close centrar-vertical" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times" style="color: white;"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+          placeholder="Ingrese sus dudas y consultas"></textarea>
+        <div class="alert alert-primary mt-3" role="alert">
+          Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal eliminar producto -->
+<div class="modal fade" id="modal-delete-prod" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro que desea eliminar este producto?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProductoService(true)" data-dismiss="modal">Si, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal eliminar servicio -->
+<div class="modal fade" id="modal-delete-serv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar servicio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro que desea eliminar este servicio?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProductoService(false)" data-dismiss="modal">Si, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal update producto -->
+<div class="modal fade bd-example-modal-lg" id="modal-update-prod" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Actualizar producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-2">
+          <div class="col-6 centrar-vertical">
+            Nombre
+          </div>
+          <div class="col-6">
+            <input class="form-control" type="text" [(ngModel)]="producto.nombre" maxlength="70">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 centrar-vertical">
+            Descripcion
+          </div>
+          <div class="col-6">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="producto.descripcion" maxlength="500"></textarea>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 centrar-vertical">
+            Valor
+          </div>
+          <div class="col-6">
+            <input class="form-control" type="number" [(ngModel)]="producto.valor">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 centrar-vertical">
+            Cantidad
+          </div>
+          <div class="col-6">
+            <input class="form-control" type="number" [(ngModel)]="producto.cantidad">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal" >Cancelar</button>
+        <button type="button" class="btn btn-info" (click)="updateProducto()" data-dismiss="modal">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal update servicio -->
+<div class="modal fade bd-example-modal-lg" id="modal-update-serv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Actualizar servicio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-2">
+          <div class="col-6 centrar-vertical">
+            Nombre
+          </div>
+          <div class="col-6">
+            <input class="form-control" type="text" [(ngModel)]="service.nombre" maxlength="70">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 centrar-vertical">
+            Descripcion
+          </div>
+          <div class="col-6">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="service.descripcion" maxlength="500"></textarea>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 centrar-vertical">
+            Valor
+          </div>
+          <div class="col-6">
+            <input class="form-control" type="number" [(ngModel)]="service.valor">
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info" (click)="updateService()" data-dismiss="modal">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal add producto -->
+<div class="modal fade bd-example-modal-lg" id="modal-add-prod" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Agregar producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Nombre
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="text" [(ngModel)]="nuevoProducto.nombreProducto" maxlength="70">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Descripcion
+          </div>
+          <div class="col-8">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="nuevoProducto.descripcionProducto" maxlength="500"></textarea>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Tipo
+          </div>
+          <div class="col-8">
+            <select [(ngModel)]="tipo"  class="form-control" id="exampleFormControlSelect1">
+              <option [value]="t.nombreTipo" *ngFor="let t of list_tipos_servicios;let i=index">
+                {{t.nombreTipo}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Valor
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="number" [(ngModel)]="nuevoProducto.valorProducto">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Cantidad
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="number" [(ngModel)]="nuevoProducto.cantidadProducto">
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Imagen
+          </div>
+          <div class="col-8">
+            <form>
+              <div class="form-group">
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal" >Cancelar</button>
+        <button type="button" class="btn btn-info" (click)="addProducto()" data-dismiss="modal">Crear producto</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal add servicio -->
+<div class="modal fade bd-example-modal-lg" id="modal-add-serv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Actualizar servicio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Nombre
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="text" [(ngModel)]="nuevoService.nombreServicio" maxlength="70">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Descripcion
+          </div>
+          <div class="col-8">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="nuevoService.descripcionServicio" maxlength="500"></textarea>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Tipo
+          </div>
+          <div class="col-8">
+            <select [(ngModel)]="tipo"  class="form-control" id="exampleFormControlSelect1">
+              <option [value]="t.nombreTipo" *ngFor="let t of list_tipos_servicios;let i=index">
+                {{t.nombreTipo}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4 centrar-vertical">
+            Valor
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="number" [(ngModel)]="nuevoService.valorServicio">
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info" (click)="addService()" data-dismiss="modal">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

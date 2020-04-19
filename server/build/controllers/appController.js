@@ -49,12 +49,6 @@ class AppController {
             res.json({ text: "game delete.." });
         });
     }
-    update(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('UPDATE games set ? where id = ?', [req.body, req.params.id]);
-            res.json({ text: "game updated.." });
-        });
-    }
     updateDatosEmpresariales(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idPyme } = req.body;
@@ -123,10 +117,11 @@ class AppController {
             // }
             var Admin = {
                 idUsuario: 0,
-                NombreUsuario: ''
+                NombreUsuario: '',
+                idPyme: 0
             };
             console.log("consulta a la db por correo y password");
-            const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario FROM `usuario-administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
+            const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `usuario-administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
                 Admin = admin[0];
                 console.log('admin Admin= ' + Admin);
@@ -156,7 +151,7 @@ class AppController {
     getPyme(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('getpyme metodo en node');
-            const pyme = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `usuario-administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
+            const pyme = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `usuario-administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
             if (pyme.length > 0) {
                 return res.json(pyme[0]);
             }
@@ -166,11 +161,12 @@ class AppController {
     solicitarOnePage(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log([req.body, req.params.id]);
-            console.log('nombre archivo= ' + req.body.target.files[0].name);
+            const {} = req.body;
             var contentHTML;
             contentHTML = `
           Informacion de usuario de Productos Chile
-          
+          Id usuario= ${req.params.id}
+          Nombre: ${req.body}
           
          `;
             console.log(contentHTML);
@@ -196,6 +192,74 @@ class AppController {
                 }
                 console.log('success');
             });
+        });
+    }
+    getProductosbyUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getProductosbyUser metodo en node');
+            const productos = yield database_1.default.query('SELECT p.* FROM `usuario-administrador` as u inner join `producto` as p ON u.Pyme_idPyme =  p.idPyme where u.Pyme_idPyme=? and p.Habilitado = 1 order by p.idPyme', [req.params.id]);
+            console.log('productos= ' + productos);
+            res.json(productos);
+        });
+    }
+    getServiciosbyUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getServiciosbyUser metodo en node');
+            const servicios = yield database_1.default.query('SELECT s.* FROM `usuario-administrador` as u inner join `servicio` as s ON u.Pyme_idPyme =  s.idPyme where u.Pyme_idPyme=? and s.Habilitado = 1 order by s.idPyme', [req.params.id]);
+            console.log('servicios= ' + servicios);
+            res.json(servicios);
+        });
+    }
+    deleteProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('api');
+            yield database_1.default.query('UPDATE `producto` set ? WHERE idProducto = ?', [req.body, req.params.id]);
+            res.json({ text: "producto delete.." });
+        });
+    }
+    deleteService(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('api');
+            yield database_1.default.query('UPDATE `servicio` set ? WHERE idServicio = ?', [req.body, req.params.id]);
+            res.json({ text: "service delete.." });
+        });
+    }
+    updateProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('api');
+            yield database_1.default.query('UPDATE `producto` set ? WHERE idProducto = ?', [req.body, req.params.id]);
+            res.json({ text: "producto updated.." });
+        });
+    }
+    updateService(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('api');
+            yield database_1.default.query('UPDATE `servicio` set ? WHERE idServicio = ?', [req.body, req.params.id]);
+            res.json({ text: "service updated.." });
+        });
+    }
+    getTiposServiciosbyRubro(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getTiposServiciosbyRubro metodo en node');
+            const tiposServicios = yield database_1.default.query('SELECT t.* FROM `usuario-administrador` as u inner join `pyme`as p ON u.Pyme_idPyme = p.idPyme inner join `tipos-servicios-productos` as t on p.Rubro_idRubro=t.idRubro where u.idUsuario = ?', [req.params.id]);
+            console.log('tipos de Servicios= ' + tiposServicios);
+            res.json(tiposServicios);
+        });
+    }
+    addProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('addProducto en node');
+            console.log(req.body);
+            yield database_1.default.query('INSERT INTO `producto` set ?', [req.body]);
+            console.log(req.body);
+            res.json({ text: "create producto..." });
+        });
+    }
+    addService(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield database_1.default.query('INSERT INTO `servicio` set ?', [req.body]);
+            console.log(req.body);
+            res.json({ text: "create service..." });
         });
     }
 }

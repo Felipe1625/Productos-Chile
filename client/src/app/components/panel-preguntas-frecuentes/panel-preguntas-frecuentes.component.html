@@ -1,1 +1,89 @@
-<p>panel-preguntas-frecuentes works!</p>
+
+<nav class="navbar navbar-expand-lg" style="background-color: rgb(167, 167, 167);">
+     <a class="nav-item mr-3" style="color: white !important" href="#">Empresa</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"><i class="fas fa-bars centrar"></i></span>
+     </button>
+ 
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto">
+         <li class="nav-item" style="color: white !important">
+          Usuario
+         </li> 
+       </ul>
+       <form class="form-inline my-2 my-lg-0">
+          
+         <a style="color: white !important;cursor: pointer;" class="nav-link" routerLink="/panel">Volver al panel</a>
+         
+       </form>
+     </div>
+   </nav>
+
+
+
+<div class="container mt-5">
+
+     <div class="row">
+               <div class="offset-2 col-8">
+                    <h6>Hola Samuel</h6>
+                    <h4>¿Con que podemos ayudarte?</h4>
+                    <ul class="list-group mt-5" style="cursor: pointer;">
+                         <li class="list-group-item"><i class="far fa-user mr-2 ml-1"></i> Configuracion de mi cuenta</li>
+                         <li class="list-group-item"><i class="fas fa-headset mr-2 ml-1"></i> Contactar a soporte</li>
+                         <li class="list-group-item"><i class="fas fa-lock mr-2 ml-1"></i>Seguridad</li>
+                         <li class="list-group-item"><i class="fas fa-exclamation mr-2 ml-1"></i>Normas para publicar</li>
+                       </ul>
+                  </div>
+               </div>
+          
+
+</div>
+
+<!-- pie de pagina -->
+<footer class="footer-panel margin-footer">
+     <div class="row">
+       <div class="col-md-6 col-lg-7">
+   
+       </div>
+       <div class="col-sm-12 col-md-6 col-lg-4 centrar margen-icono-footer">
+         <i class="fab fa-facebook-f fa-2x  icono-footer-circular-face"></i>
+         <i class="fab fa-twitter fa-2x  icono-footer-circular-tw"></i>
+         <i class="fab fa-instagram fa-2x  icono-footer-circular-insta"></i>
+         <i class="fab fa-snapchat-ghost fa-2x icono-footer-circular-snapchat"></i>
+       </div>
+     </div>
+   </footer>
+
+
+<button class="chat rounded-circle" data-toggle="modal" data-target="#modal-contacto">
+<i class="far fa-comments fa-2x"></i>
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header titulo-modal ">
+      <i class="far fa-comments centrar-vertical mr-2"></i>
+      <h5 class="modal-title" id="exampleModalLongTitle">Formulario de contacto</h5>
+      <button type="button" class="close centrar-vertical" data-dismiss="modal" aria-label="Close">
+        <i class="fas fa-times" style="color: white;"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
+      <div class="alert alert-primary mt-3" role="alert">
+        Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="button" class="btn btn-primary">Enviar</button>
+    </div>
+  </div>
+</div>
+</div>
+
+

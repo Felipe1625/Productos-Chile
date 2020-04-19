@@ -22,6 +22,11 @@ export class PanelDatosPersonalesComponent implements OnInit {
     var res=atob(localStorage.getItem('res'))
     this.idUsuario=res.split("(*/as)");
     this.getUsuario(this.idUsuario[0])
+    console.log(this.idUsuario)
+    console.log(this.idUsuario[0])
+    console.log(this.idUsuario[1])
+    console.log(this.idUsuario[2])
+    
   }
 
   // correoChange($event: Event) {
