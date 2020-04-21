@@ -152,14 +152,14 @@
            </button>
          </div>
          <div class="modal-body">
-           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
+           <textarea [(ngModel)]="formContacto" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
            <div class="alert alert-primary mt-3" role="alert">
              Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
            </div>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-           <button type="button" class="btn btn-primary">Enviar</button>
+           <button type="button" class="btn btn-primary" (click)="sendEmailClient()" data-dismiss="modal">Enviar</button>
          </div>
        </div>
      </div>

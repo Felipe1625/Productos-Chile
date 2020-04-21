@@ -1,1 +1,87 @@
-<p>detail works!</p>
+
+<!--usuario no logueado-->
+<nav class="navbar navbar-expand-md  navbar-dark w-100" style="background-color: rgb(167, 167, 167);">
+     <div class="d-flex flex-grow-1">
+         <a class="navbar-brand" href="index.html"><img src="Images/0.png" alt=""></a>
+         <form class="mr-2 my-auto w-100 d-inline-block order-1">
+             <div class="input-group">
+                 <input [(ngModel)]="buscar" name="formBuscar" id="input-busqueda" type="text"
+                     class="form-control border border-right-0" placeholder="Buscar...">
+                 <span class="input-group-append">
+                     <!-- <a href="html/resultados_busqueda.html"> -->
+                     <button (click)="buscarProductosServiciosPorNombre()" id="button-busqueda"
+                         class="btn btn-outline-light border border-left-0" type="button">
+                         <i class="fa fa-search"></i>
+                     </button>
+                     <!-- </a> -->
+ 
+                 </span>
+             </div>
+         </form>
+     </div>
+     <button class="navbar-toggler order-0" type="button" data-toggle="collapse" data-target="#navbar7">
+         <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="navbar-collapse collapse flex-shrink-1 flex-grow-0 order-last" id="navbar7">
+         <ul class="navbar-nav">
+ 
+             <li class="nav-item">
+                 <a class="nav-link" style="color: white !important;" href="#">Nosotros</a>
+             </li>
+             <li class="nav-item">
+                 <a style="color: white !important;" class="nav-link" href="#">Categorías</a>
+             </li>
+             <li class="nav-item">
+                 <a style="color: white !important;" class="nav-link" href="#">Contacto</a>
+             </li>
+             <li class="nav-item mr-5">
+                 <ng-container *ngIf="authService.loggedIn();else logueado">
+                     <a style="color: white !important;" class="nav-link" routerLink="/panel">Hola {{usuario}}</a>
+                 </ng-container>
+                 <ng-template #logueado>
+                     <a style="color: white !important;" class="nav-link" routerLink="/login">Ingresar</a>
+                 </ng-template>
+ 
+ 
+             </li>
+ 
+         </ul>
+     </div>
+ </nav>
+ 
+ <div class="container carta-resultados-busquedas mt-3">
+     <div class="row ">
+         <div class="col-6 centrar-horizontal">
+<img style="width: 400px;height: 400px;">
+         </div>
+         <div class="col-6">
+             <h3>{{prodServ.nombre}}</h3>
+             <h4 class="precio-detalle">${{prodServ.valor}}</h4>
+             <h4 class="mt-3">Datos de pyme</h4>
+             <p>{{prodServ.nombrePyme}}</p>
+             <p>{{prodServ.fonoContactoUno}}</p>
+             <p>{{prodServ.fonoContactoDos}}</p>
+             <p>{{prodServ.correoContactoPyme}}</p>
+             <p *ngIf="prodServ.link_OnePage!=null;else onePageNulo">link One page {{prodServ.link_OnePage}}</p>
+             <ng-template #onePageNulo>
+                <p>Actualmente esta pyme no cuenta con OnePage</p>
+             </ng-template>
+             <p *ngIf="prodServ.redSocialFacebook!=''"><i class="fab fa-facebook"></i>  {{prodServ.redSocialFacebook}}</p>
+             
+             <p *ngIf="prodServ.redSocialInstagram!=''"><i class="fab fa-instagram"></i>  {{prodServ.redSocialInstagram}}</p>
+             <p *ngIf="prodServ.redSocialTwitter!=''"><i class="fab fa-twitter"></i>  {{prodServ.redSocialTwitter}}</p>
+             <p *ngIf="prodServ.redSocialYoutube!=''"><i class="fab fa-youtube"></i>  {{prodServ.redSocialYoutube}}</p>
+         </div>
+     </div>
+ 
+ <div class="row">
+     <div class="col-6 ">
+         <h3 class="centrar-horizontal">Descripcion</h3>
+         <p>{{prodServ.descripcion}}</p>
+     </div>
+ </div>
+ 
+ 
+ </div>
+ 
+ <app-footer></app-footer>

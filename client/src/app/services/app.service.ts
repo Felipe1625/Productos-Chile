@@ -15,6 +15,10 @@ export class AppService {
     return this.http.post(`${this.API_URI}/send-email-user`, form)
   }
 
+  sendEmailClient(form){
+    return this.http.post(`${this.API_URI}/send-email-client`, form)
+  }
+
   getPyme(idPyme:string) {
     return this.http.get(`${this.API_URI}/get-pyme/${idPyme}`);
   }
@@ -80,6 +84,28 @@ export class AppService {
 
   addService(data){
     return this.http.post(`${this.API_URI}/add-service`, data)
+  }
+
+  getProductosServiciosPorNombre(data){
+    console.log('data en service')
+    console.log(data)
+    return this.http.post(`${this.API_URI}/get-productos-servicios-por-nombre`,data);
+  }
+
+  getProductosServiciosPorRubro(data){
+    console.log('data en service')
+    console.log(data)
+    return this.http.post(`${this.API_URI}/get-productos-servicios-por-rubro`,data);
+  }
+
+  getProductosServiciosPorFiltros(data){
+    console.log('data en service')
+    console.log(data)
+    return this.http.post(`${this.API_URI}/get-productos-servicios-por-filtros`,data);
+  }
+
+  getProductoServicio(id,data){
+    return this.http.post(`${this.API_URI}/get-producto-servicio/${id}`,data);
   }
 
 }

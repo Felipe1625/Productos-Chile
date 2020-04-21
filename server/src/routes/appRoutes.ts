@@ -16,6 +16,7 @@ class AppRoutes {
           this.router.post('/a', appController.create);
           this.router.delete('/:id', appController.delete);
           this.router.post('/send-email-user',appController.sendEmailUser);
+          this.router.post('/send-email-client',appController.sendEmailClient);
           this.router.post('/signin', appController.signin);
           this.router.get('/get-usuario/:id', appController.getUsuario);
           this.router.get('/get-pyme/:id', appController.getPyme);
@@ -32,6 +33,10 @@ class AppRoutes {
           this.router.get('/get-tipos-servicios-by-rubro/:id', appController.getTiposServiciosbyRubro);
           this.router.post('/add-producto', appController.addProducto);
           this.router.post('/add-service', appController.addService);
+          this.router.post('/get-productos-servicios-por-nombre', appController.getProductosServiciosPorNombre);
+          this.router.post('/get-productos-servicios-por-rubro', appController.getProductosServiciosPorRubro);
+          this.router.post('/get-productos-servicios-por-filtros', appController.getProductosServiciosPorFiltros);
+          this.router.post('/get-producto-servicio/:id', appController.getProductoServicio);
      }
 }
 

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client';
+  busqueda="";
+  resultados:any;
+  rubro:number=0;
+  prodServ:any;
 }

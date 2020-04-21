@@ -102,6 +102,40 @@ class AppController {
             console.log('success');
         });
     }
+    sendEmailClient(req, res) {
+        var contentHTML;
+        const { idUsuario, nombreUsuario, idPyme, mensaje } = req.body;
+        contentHTML = `
+          Informacion de cliente de Productos Chile
+          id cliente:${idUsuario}
+          Nombre: ${nombreUsuario}
+          id pyme: ${idPyme}
+          Mensaje: ${mensaje}
+         `;
+        console.log(contentHTML);
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            requireTLS: true,
+            auth: {
+                user: 'felipe.ascencio.sandoval@gmail.com',
+                pass: '18416518-k'
+            }
+        });
+        let mailOptions = {
+            from: 'felipe.ascencio.sandoval@gmail.com',
+            to: 'felipe.ascencio@virginiogomez.cl',
+            subject: 'Mensaje de usuario Productos Chile',
+            text: contentHTML
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error.message);
+            }
+            console.log('success');
+        });
+    }
     signin(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { email, password } = req.body;
@@ -163,6 +197,7 @@ class AppController {
             console.log([req.body, req.params.id]);
             const {} = req.body;
             var contentHTML;
+            return;
             contentHTML = `
           Informacion de usuario de Productos Chile
           Id usuario= ${req.params.id}
@@ -260,6 +295,118 @@ class AppController {
             yield database_1.default.query('INSERT INTO `servicio` set ?', [req.body]);
             console.log(req.body);
             res.json({ text: "create service..." });
+        });
+    }
+    getProductosServiciosPorNombre(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getProductosServiciosPorNombre metodo en node bla');
+            const { nombre } = req.body;
+            console.log(nombre);
+            const productosServicios = yield database_1.default.query('SELECT idProducto as id,idPyme,nombreProducto as nombre,valorProducto as valor,cantidadProducto as cantidad,idTipos_Servicios_Productos,cantidad_like_producto as likes,cantidad_dislike_producto as dislikes,rutaImagenProducto as rutaImagen,Producto FROM `producto` where Habilitado=1 and nombreProducto like \'%' + nombre + '%\' UNION ALL SELECT idServicio,idPyme,nombreServicio,valorServicio,0,idTipos_Servicios_Productos,cantidad_like_servicio,cantidad_dislike_servicio,rutaImagenServicio,Producto FROM `servicio` where Habilitado=1 and nombreServicio like \'%' + nombre + '%\'');
+            console.log('productosServicios= ' + productosServicios);
+            res.json(productosServicios);
+        });
+    }
+    getProductosServiciosPorRubro(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getProductosServiciosPorRubro metodo en node bla');
+            const { rubro } = req.body;
+            console.log(rubro);
+            const productosServicios = yield database_1.default.query('SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme where p.Habilitado=1 and py.Rubro_idRubro= ' + rubro + ' UNION ALL SELECT s.idServicio,s.idPyme,s.nombreServicio,s.valorServicio,0,s.idTipos_Servicios_Productos,s.cantidad_like_servicio,s.cantidad_dislike_servicio,s.rutaImagenServicio,s.Producto FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme where Habilitado=1 and py.Rubro_idRubro= ' + rubro + '');
+            console.log('productosServicios= ' + productosServicios);
+            res.json(productosServicios);
+        });
+    }
+    getProductosServiciosPorFiltros(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var where = "";
+            var valor = "0";
+            var consulta = "";
+            var nombreProducto = "";
+            var nombreServicio = "";
+            console.log('getProductosServiciosPorFiltros metodo en node bla');
+            const { rubro, region, precio, producto, servicio, nombre } = req.body;
+            console.log('rubro= ' + rubro);
+            console.log('region =' + region);
+            console.log('precio =' + precio);
+            console.log('producto =' + producto);
+            console.log('servicio =' + servicio);
+            console.log('nombre =' + nombre);
+            if (precio != "" && precio != undefined) {
+                if (precio == 'p10') {
+                    valor = '10000';
+                }
+                if (precio == 'p30') {
+                    valor = '30000';
+                }
+                if (precio == 'p50') {
+                    valor = '50000';
+                }
+                if (precio == 'p70') {
+                    valor = '70000';
+                }
+                if (precio == 'p100') {
+                    valor = '100000';
+                }
+            }
+            if (rubro != '' && rubro != undefined) {
+                where += " and ru.nombreRubro=\'" + rubro + '\'';
+            }
+            if (region != '' && region != undefined) {
+                where += " and re.nombreRegion=\'" + region + '\'';
+            }
+            if (nombre != '' && nombre != undefined) {
+                nombreProducto = " and p.nombreProducto LIKE \'%" + nombre + '%\'';
+                nombreServicio = " and s.nombreServicio LIKE \'%" + nombre + '%\'';
+            }
+            console.log('where= ' + where);
+            console.log('valor= ' + valor);
+            if (producto == true) {
+                if (servicio == true) {
+                    console.log('productos y servicio son true');
+                    consulta = 'SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.Habilitado=1' + where + ' and p.valorProducto > ' + valor + nombreProducto + ' UNION ALL SELECT s.idServicio,s.idPyme,s.nombreServicio,s.valorServicio,0,s.idTipos_Servicios_Productos,s.cantidad_like_servicio,s.cantidad_dislike_servicio,s.rutaImagenServicio,s.Producto FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where Habilitado=1' + where + ' and s.valorServicio > ' + valor + nombreServicio;
+                }
+                else {
+                    console.log('producto true servicio false');
+                    consulta = 'SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.Habilitado=1' + where + ' and p.valorProducto > ' + valor + nombreProducto;
+                }
+            }
+            else {
+                if (servicio == true) {
+                    console.log('producto false servicio true');
+                    consulta = 'SELECT s.idServicio,s.idPyme,s.nombreServicio,s.valorServicio,0,s.idTipos_Servicios_Productos,s.cantidad_like_servicio,s.cantidad_dislike_servicio,s.rutaImagenServicio,s.Producto FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where Habilitado=1' + where + ' and s.valorServicio > ' + valor + nombreServicio;
+                }
+                else {
+                    console.log('productos y servicio son false');
+                    res.json({ text: "p y s false" });
+                }
+            }
+            const productosServicios = yield database_1.default.query(consulta);
+            console.log('productosServicios= ' + productosServicios);
+            res.json(productosServicios);
+        });
+    }
+    getProductoServicio(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getProductoServicio metodo en node');
+            const { id, Producto } = req.body;
+            var consulta = "";
+            console.log('id= ' + id);
+            console.log('prod= ' + Producto);
+            if (Producto == 1) {
+                console.log('es un producto');
+                consulta = "SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.descripcionProducto as descripcion,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto,ru.nombreRubro,re.nombreRegion,py.nombrePyme,py.correoContactoPyme,py.fonoContactoUno,py.fonoContactoDos,py.redSocialFacebook,py.redSocialInstagram,py.redSocialTwitter,py.redSocialYoutube,py.link_OnePage FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.idProducto= ?";
+            }
+            else {
+                console.log('es un servicio');
+                consulta = "SELECT s.idServicio as id,s.idPyme,s.nombreServicio as nombre,s.descripcionServicio as descripcion,s.valorServicio as valor,0 as cantidad,s.idTipos_Servicios_Productos,s.cantidad_like_servicio as likes,s.cantidad_dislike_servicio as dislikes,s.rutaImagenServicio as rutaImagen,s.Producto,ru.nombreRubro,re.nombreRegion,py.nombrePyme,py.correoContactoPyme,py.fonoContactoUno,py.fonoContactoDos,py.redSocialFacebook,py.redSocialInstagram,py.redSocialTwitter,py.redSocialYoutube,py.link_OnePage FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where s.idServicio= ?";
+            }
+            const productoServicio = yield database_1.default.query(consulta, [req.params.id]);
+            console.log('productoServicio= ' + productoServicio);
+            if (productoServicio.length > 0) {
+                return res.json(productoServicio[0]);
+            }
+            return res.json({ text: "productoServicio no existe en db" });
         });
     }
 }

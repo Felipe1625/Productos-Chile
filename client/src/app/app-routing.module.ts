@@ -29,18 +29,19 @@ const routes: Routes = [
   {
     path:'',
     redirectTo:'/home',
-    pathMatch:'full'
+    pathMatch:'full',
+    
   },
   {
     path:'home',
     component : HomeComponent
   },
   {
-    path:'search',
+    path:'busqueda-servicio-producto',
     component : SearchComponent
   },
   {
-    path:'detail',
+    path:'detalle-item',
     component : DetailComponent
   },
   {

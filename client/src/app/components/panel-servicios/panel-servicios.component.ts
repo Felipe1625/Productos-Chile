@@ -37,7 +37,7 @@ export class PanelServiciosComponent implements OnInit {
     descripcionServicio: '',
     valorServicio: 0
   };
-
+formContacto:any=""
   tipo: any = '';
 
   constructor(private appService: AppService) { }
@@ -256,5 +256,27 @@ export class PanelServiciosComponent implements OnInit {
 
     )
   }
+
+  sendEmailClient(){
+    if(this.formContacto!=="" && this.formContacto!==undefined){
+      console.log('esta bien')
+      var form={
+        idUsuario:this.idUsuario[0],
+        nombreUsuario:this.idUsuario[1],
+        idPyme:this.idUsuario[2],
+        mensaje:this.formContacto
+      }
+      this.appService.sendEmailClient(form).subscribe(res => {
+        console.log(res)
+  
+      },
+        err => {
+          console.log(err)
+        }
+  
+      )
+    }
+  }
+
 
 }

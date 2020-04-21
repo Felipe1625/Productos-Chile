@@ -10,7 +10,7 @@ export class PanelDatosPersonalesComponent implements OnInit {
 
   constructor(private appService:AppService) { }
 
-
+  formContacto:any=""
   data :any;
   idUsuario:any;
   response:any;
@@ -128,6 +128,27 @@ if(error!=0){
     )
 
     
+  }
+
+  sendEmailClient(){
+    if(this.formContacto!=="" && this.formContacto!==undefined){
+      console.log('esta bien')
+      var form={
+        idUsuario:this.idUsuario[0],
+        nombreUsuario:this.idUsuario[1],
+        idPyme:this.idUsuario[2],
+        mensaje:this.formContacto
+      }
+      this.appService.sendEmailClient(form).subscribe(res => {
+        console.log(res)
+  
+      },
+        err => {
+          console.log(err)
+        }
+  
+      )
+    }
   }
 
 }

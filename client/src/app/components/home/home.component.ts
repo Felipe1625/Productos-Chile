@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AppService}  from '../../services/app.service'
-import { Router } from '@angular/router';
+import {AuthService} from '../../services/auth.service'
+import { Router, RouterLink } from '@angular/router';
+import {AppComponent} from '../../app.component'
 
 @Component({
   selector: 'app-home',
@@ -8,26 +10,46 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  usuario:string="";
   Email= {
     nombre: '',
     correo: '',
     mensaje: '',
   };
 
-  constructor(private appservices: AppService, private router: Router) { }
+  buscar:string=""
+
+  constructor(private appService: AppService, private router: Router,public authService:AuthService,private appComponent:AppComponent) { }
 
   ngOnInit(): void {
+    if(this.authService.loggedIn()){
+      var res=atob(localStorage.getItem('res'))
+    var x=res.split("(*/as)");
+    this.usuario=x[1]
+    console.log(this.buscar)
+    }
   }
 
   sendEmailUser(){
   console.log(this.Email)
-    this.appservices.sendEmailUser(this.Email).subscribe(
+    this.appService.sendEmailUser(this.Email).subscribe(
       res => {
         console.log(res)
       },
       err => console.error(err)
     );
+  }
+
+  buscarProductosServiciosPorNombre(){
+    console.log(this.buscar)
+    this.appComponent.busqueda=this.buscar
+    this.router.navigate(['/busqueda-servicio-producto'])
+  }
+
+  buscarProductosServiciosPorRubro(num){
+    console.log(this.buscar)
+    this.appComponent.rubro=num
+    this.router.navigate(['/busqueda-servicio-producto'])
   }
 
 }
