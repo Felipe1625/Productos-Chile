@@ -13,21 +13,29 @@ export class DetailComponent implements OnInit {
   buscar: string ='';
   usuario: string = "";
   prodServ:any;
+  cargando:boolean=true;
+
   constructor(private appService: AppService, private router: Router, private appComponent: AppComponent, public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.cargando=true;
+    console.log('idRubro= '+this.appComponent.rubroUltimoProductoServicio)
     if (this.authService.loggedIn()) {
       var res = atob(localStorage.getItem('res'))
       var x = res.split("(*/as)");
       this.usuario = x[1]
     }
-    if (this.appComponent.prodServ != "" && this.appComponent.prodServ != undefined){
-      console.log('buscar prodServ')
-      this.getProductoServicio()
+    if (this.appComponent.prodServ != "" && this.appComponent.rubroUltimoProductoServicio==-1){
+      console.log('buscar prodServ desde search')
+      this.getProductoServicioFromSearch()
+    }
+    if(this.appComponent.prodServ== "" && this.appComponent.rubroUltimoProductoServicio!=-1){
+      console.log('buscar prodServ desde home')
+      this.getProductoServicioFromHome()
     }
   }
 
-  getProductoServicio(){
+  getProductoServicioFromSearch(){
     
      var data={
        id:this.appComponent.prodServ.id,
@@ -38,6 +46,8 @@ export class DetailComponent implements OnInit {
     this.appService.getProductoServicio(data.id,data).subscribe(res => {
       console.log(res);
       this.prodServ=res;
+      this.cargando=false;
+      
     },
       err => {
         console.log(err)
@@ -46,9 +56,26 @@ export class DetailComponent implements OnInit {
     )
   }
 
+  getProductoServicioFromHome(){
+    
+    var idRubro=this.appComponent.rubroUltimoProductoServicio;
+   
+   this.appService.getProductoServicioFromHome(idRubro).subscribe(res => {
+     console.log(res);
+     this.prodServ=res;
+     this.cargando=false;
+     
+   },
+     err => {
+       console.log(err)
+     }
+
+   )
+ }
+
   buscarProductosServiciosPorNombre(){
     console.log(this.buscar)
-    this.appComponent.busqueda=this.buscar
+    this.appComponent.busqueda=this.buscar.toLocaleLowerCase()
     this.router.navigate(['/busqueda-servicio-producto'])
   }
 }

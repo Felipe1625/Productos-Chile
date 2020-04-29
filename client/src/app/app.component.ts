@@ -10,5 +10,8 @@ export class AppComponent {
   busqueda="";
   resultados:any;
   rubro:number=0;
-  prodServ:any;
+  prodServ:any='';
+  usuario:string="Usuario";
+  rubroUltimoProductoServicio:number=-1;
+
 }

@@ -22,6 +22,10 @@ import { NavbarClientComponent } from './components/navbar-client/navbar-client.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
+
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +53,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatStepperModule,
     MatIconModule
   ],
-  providers: [AuthGuard],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard,{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

@@ -415,3 +415,121 @@ border: 0px solid #000000;
   font-weight:500;
   
 }
+
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position:fixed;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.icono-face {
+ 
+  background: transparent;
+  /* border-style: solid; */
+  padding: 0;
+border: none;
+background: none;
+  bottom: 40px;
+  right: 40px;
+  width: 70px;
+  height: 70px;
+  bottom: 60px;
+  background-color: #3b5998;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  outline: none !important;
+  transition: all 0.5s;
+  transition-property: width, height, bottom, right;
+}
+
+.icono-insta {
+ 
+  background: transparent;
+  /* border-style: solid; */
+  padding: 0;
+border: none;
+background: none;
+  bottom: 40px;
+  right: 40px;
+  width: 70px;
+  height: 70px;
+  bottom: 60px;
+  background-color:#e1306c;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  outline: none !important;
+  transition: all 0.5s;
+  transition-property: width, height, bottom, right;
+}
+
+.icono-tw {
+ 
+  background: transparent;
+  /* border-style: solid; */
+  padding: 0;
+border: none;
+background: none;
+  bottom: 40px;
+  right: 40px;
+  width: 70px;
+  height: 70px;
+  bottom: 60px;
+  background-color: #00acee;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  outline: none !important;
+  transition: all 0.5s;
+  transition-property: width, height, bottom, right;
+}
+
+.icono-yt {
+ 
+  background: transparent;
+  /* border-style: solid; */
+  padding: 0;
+border: none;
+background: none;
+  bottom: 40px;
+  right: 40px;
+  width: 70px;
+  height: 70px;
+  bottom: 60px;
+  background-color: #c4302b;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  outline: none !important;
+  transition: all 0.5s;
+  transition-property: width, height, bottom, right;
+}
+
+
+
+
+
+

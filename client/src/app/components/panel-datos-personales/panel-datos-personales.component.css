@@ -284,15 +284,15 @@ color: #3483fa;
 }
 
 .estrella-seleccionada {
-    color: orange;
+    color: rgb(55, 154, 213);
   }
 
   .estrella-no-seleccionada{
-    color: rgb(196, 196, 196);
+    color: rgb(55, 154, 213);
   }
 
   .estrella-hover:hover > :last-child{
-    color: orange;
+    color: rgb(55, 154, 213);
   }
 
   .titulo-filtros{
@@ -308,11 +308,11 @@ color: #3483fa;
 
 
   .hover-seleccion > div > span:hover{
-    color: orange !important;
+    color: rgb(55, 154, 213) !important;
   }
 
   .hover-seleccion > div > span> a:hover{
-    color: orange !important;
+    color: rgb(55, 154, 213) !important;
   }
 
   .filtros > div >span{
@@ -618,18 +618,18 @@ color: #3483fa;
     color: white;
   }
   
-  .icono-footer-circular-snapchat {
+  .icono-footer-circular-youtube {
     padding-bottom: 10px;
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
     /* background-color: #3d5b99; */
-    color: #fffc00;
-    transition: 0.3s;
+    color: #c4302b;
+    transition: 0.3s; 
   }
   
-  .icono-footer-circular-snapchat:hover {
-    background-color: #fffc00;
+  .icono-footer-circular-youtube:hover {
+    background-color: #c4302b;
     color: white;
   }
   

@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppService {
-  API_URI = "http://localhost:3000/api/app" //ruta api en server
+  
+  API_URI = "https://apppc.herokuapp.com/api/app"
+  // API_URI = "http://localhost:3000/api/app" 
   constructor(private http: HttpClient) { }
 
   sendEmailUser(form:any) {
@@ -106,6 +108,33 @@ export class AppService {
 
   getProductoServicio(id,data){
     return this.http.post(`${this.API_URI}/get-producto-servicio/${id}`,data);
+  }
+
+  subirImagenNode(formData){
+    return this.http.post(`${this.API_URI}/subir-imagen-node/`, formData)
+  }
+
+  subirImagenProductoServer(formData){
+    return this.http.post(`${this.API_URI}/subir-imagen-producto-server/`, formData)
+  }
+
+  subirImagenServicioServer(formData){
+    return this.http.post(`${this.API_URI}/subir-imagen-servicio-server/`, formData)
+  }
+
+  
+  sendEmailSolicitudProducto(formData){
+    return this.http.post(`${this.API_URI}/send-email-solicitud-producto/`, formData)
+  }
+
+
+  sendEmailSolicitudServicio(formData){
+    return this.http.post(`${this.API_URI}/send-email-solicitud-servicio/`, formData)
+  }
+ 
+  getProductoServicioFromHome(id){
+    console.log('en getProductoServicioFromHome service')
+    return this.http.get(`${this.API_URI}/get-producto-servicio-from-home/${id}`);
   }
 
 }

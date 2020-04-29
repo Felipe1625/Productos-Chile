@@ -284,15 +284,15 @@ color: #3483fa;
 }
 
 .estrella-seleccionada {
-    color: orange;
+    color: rgb(55, 154, 213);
   }
 
   .estrella-no-seleccionada{
-    color: rgb(196, 196, 196);
+    color: rgb(55, 154, 213);
   }
 
   .estrella-hover:hover > :last-child{
-    color: orange;
+    color: rgb(55, 154, 213);
   }
 
   .titulo-filtros{
@@ -308,11 +308,11 @@ color: #3483fa;
 
 
   .hover-seleccion > div > span:hover{
-    color: orange !important;
+    color: rgb(55, 154, 213) !important;
   }
 
   .hover-seleccion > div > span> a:hover{
-    color: orange !important;
+    color: rgb(55, 154, 213) !important;
   }
 
   .filtros > div >span{
@@ -644,3 +644,50 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] { -moz-appearance:textfield; }
+
+
+input[type="file"]#input-prod {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+label[for="input-prod"] {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #106ba0;
+  display: inline-block;
+  transition: all 0.5s;
+  cursor: pointer;
+  padding: 15px 40px !important;
+  text-transform: uppercase;
+  width: fit-content;
+  text-align: center;
+}
+
+input[type="file"]#input-serv {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+label[for="input-serv"] {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #106ba0;
+  display: inline-block;
+  transition: all 0.5s;
+  cursor: pointer;
+  padding: 15px 40px !important;
+  text-transform: uppercase;
+  width: fit-content;
+  text-align: center;
+}

@@ -14,11 +14,16 @@ class Server {
      }
 
      config(): void {
+          const corsOptions = {
+               origin: '*',
+               optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+          };
           this.app.set('port', process.env.PORT || 3000);
           this.app.use(morgan('dev'));
-          this.app.use(cors());
+          this.app.use(cors(corsOptions));
           this.app.use(express.json());
           this.app.use(express.urlencoded({extended:false}));
+          
      }
 
      routes(): void {

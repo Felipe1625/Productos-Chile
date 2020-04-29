@@ -1,8 +1,8 @@
 
 <!--usuario no logueado-->
-<nav class="navbar navbar-expand-md  navbar-dark w-100" style="background-color: rgb(167, 167, 167);">
+<nav class="navbar navbar-expand-md  navbar-dark w-100" style="background-color: rgb(55, 154, 213);">
      <div class="d-flex flex-grow-1">
-         <a class="navbar-brand" href="index.html"><img src="Images/0.png" alt=""></a>
+        <a class="navbar-brand"routerLink="/home"><img src="../../../assets/icono.png" alt="" style="height: 40px !important;"></a>
          <form class="mr-2 my-auto w-100 d-inline-block order-1">
              <div class="input-group">
                  <input [(ngModel)]="buscar" name="formBuscar" id="input-busqueda" type="text"
@@ -51,8 +51,13 @@
  
  <div class="container carta-resultados-busquedas mt-3">
      <div class="row ">
-         <div class="col-6 centrar-horizontal">
-<img style="width: 400px;height: 400px;">
+         <div class="col-6 centrar">
+
+<img *ngIf="prodServ.rutaImagen!=null;else imagenDefecto" class="imagen-size" src="{{prodServ.rutaImagen}}"> 
+<ng-template #imagenDefecto>
+    <img class="imagen-size" src="../../../assets/defecto/producto.png"> 
+</ng-template>
+
          </div>
          <div class="col-6">
              <h3>{{prodServ.nombre}}</h3>
@@ -62,15 +67,38 @@
              <p>{{prodServ.fonoContactoUno}}</p>
              <p>{{prodServ.fonoContactoDos}}</p>
              <p>{{prodServ.correoContactoPyme}}</p>
-             <p *ngIf="prodServ.link_OnePage!=null;else onePageNulo">link One page {{prodServ.link_OnePage}}</p>
+             
+             <div class="row">
+
+                <a *ngIf="prodServ.link_OnePage!=null;else onePageNulo" href="{{prodServ.link_OnePage}}" target="_blank">
+                    <button type="button " class="btn btn-primary mb-4 mt-2 ml-3" >Página oficial</button>
+                </a>
+
+             </div>
              <ng-template #onePageNulo>
                 <p>Actualmente esta pyme no cuenta con OnePage</p>
              </ng-template>
-             <p *ngIf="prodServ.redSocialFacebook!=''"><i class="fab fa-facebook"></i>  {{prodServ.redSocialFacebook}}</p>
+
+
+<a *ngIf="prodServ.redSocialFacebook!=''"  href="{{prodServ.redSocialFacebook}}" target="_blank">
+    <button class="btn btn-success icono-face rounded-circle"><i class="fab fa-facebook fa-2x"></i></button>
+</a>
+<a *ngIf="prodServ.redSocialInstagram!=''" href="{{prodServ.redSocialInstagram}}" target="_blank">
+    <button class="btn btn-success icono-insta rounded-circle"><i class="fab fa-instagram fa-2x"></i></button>
+</a>
+<a *ngIf="prodServ.redSocialTwitter!=''" href="{{prodServ.redSocialTwitter}}" target="_blank">
+    <button class="btn btn-success icono-tw rounded-circle"><i class="fab fa-twitter fa-2x"></i></button>
+</a>
+<a *ngIf="prodServ.redSocialYoutube!=''" href="{{prodServ.redSocialYoutube}}" target="_blank">
+    <button class="btn btn-success icono-yt rounded-circle"><i class="fab fa-youtube fa-2x"></i></button>
+</a>
+
+
+             <!-- <p *ngIf="prodServ.redSocialFacebook!=''"><i class="fab fa-facebook"></i>  {{prodServ.redSocialFacebook}}</p>
              
              <p *ngIf="prodServ.redSocialInstagram!=''"><i class="fab fa-instagram"></i>  {{prodServ.redSocialInstagram}}</p>
              <p *ngIf="prodServ.redSocialTwitter!=''"><i class="fab fa-twitter"></i>  {{prodServ.redSocialTwitter}}</p>
-             <p *ngIf="prodServ.redSocialYoutube!=''"><i class="fab fa-youtube"></i>  {{prodServ.redSocialYoutube}}</p>
+             <p *ngIf="prodServ.redSocialYoutube!=''"><i class="fab fa-youtube"></i>  {{prodServ.redSocialYoutube}}</p> -->
          </div>
      </div>
  
@@ -85,3 +113,6 @@
  </div>
  
  <app-footer></app-footer>
+
+
+ <div *ngIf="cargando" class="loader"></div>

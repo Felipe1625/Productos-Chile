@@ -19,7 +19,7 @@
               <span><a class="letra-filtros" routerLink="/panel/datos-empresariales"><i class="fas fa-briefcase mr-2"></i>Datos empresariales</a></span>
           </div>    
           <div class="mt-1">
-            <span><a class="letra-filtros" routerLink="/panel/servicios-productos" ><i class="fas fa-clipboard-list mr-2"></i> Servicios</a></span>
+            <span><a class="letra-filtros" routerLink="/panel/servicios-productos" ><i class="fas fa-clipboard-list mr-2"></i> Servicios y Productos</a></span>
         </div> 
         
 
@@ -27,7 +27,7 @@
           <span><a class="letra-filtros"  routerLink="/panel/config" ><i class="fas fa-cogs mr-2"></i>Config. OnePage</a></span>
       </div> 
       <div class="mt-1">
-        <span><a class="letra-filtros" routerLink="/panel/preguntas-frecuentes" ><i class="fas fa-question-circle mr-2" ></i>Preguntas frecuentes</a></span>
+        <span><a class="letra-filtros" routerLink="/panel/preguntas-frecuentes" ><i class="fas fa-question-circle mr-2" ></i>Preguntas frecuentes</a></span> 
     </div>  
     <div class="mt-5 centrar">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAyuda">
@@ -38,66 +38,372 @@
       </div>
       <div class="col-sm-12 col-md-12 col-lg-9 mb-3">
         <div class="offset-1 col-10 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-          <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+          <!-- <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button> -->
           
+          <span class="input-cabecera">
+            <input type="file" name="input-cabecera" id="input-cabecera" accept=".jpg, .png" (change)="guardarImagenCabecera($event)">
+            </span>
+            <label for="input-cabecera">
+              <span>Subir imagen</span>
+            </label>
+            <label class="ml-4">{{mensajeImagenCabecera}}</label>
+        </div>
+
+        <div class="offset-1 col-10 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+          <!-- <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button> -->
+          
+          <span class="input-cabecera2">
+            <input type="file" name="input-cabecera2" id="input-cabecera2" accept=".jpg, .png" (change)="guardarImagenCabecera2($event)">
+            </span>
+            <label for="input-cabecera2">
+              <span>Subir imagen</span>
+            </label>
+            <label class="ml-4">{{mensajeImagenCabecera2}}</label>
+        </div>
+
+        <div class="offset-1 col-10 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+          <!-- <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button> -->
+          
+          <span class="input-cabecera3">
+            <input type="file" name="input-cabecera3" id="input-cabecera3" accept=".jpg, .png" (change)="guardarImagenCabecera3($event)">
+            </span>
+            <label for="input-cabecera3">
+              <span>Subir imagen</span>
+            </label>
+            <label class="ml-4">{{mensajeImagenCabecera3}}</label>
         </div>
         
         <div class="d-flex justify-content-center align-items-center">
           <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
             <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-              <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+              <span class="input-caracteristica">
+                <input type="file" name="input-caracteristica" id="input-caracteristica" accept=".jpg, .png" (change)="guardarImagenCaracteristica($event)">
+                </span>
+                <label for="input-caracteristica">
+                  <span>Subir imagen</span>
+                </label>
+                <label class="ml-4">{{mensajeImagenCaracteristica}}</label>
             </div>
+
+
+            
             <div class="card-body d-flex justify-content-center align-items-center">
-              <button class="btn btn-info rounded" style="padding:10px !important"> <i class="fas fa-pen-square fa-3x"></i></button>
+              <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica1"> <i class="fas fa-pen-square fa-3x"></i></button>
              
             </div>
           </div>
         </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+            <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+              <span class="input-caracteristica2">
+                <input type="file" name="input-caracteristica2" id="input-caracteristica2" accept=".jpg, .png" (change)="guardarImagenCaracteristica2($event)">
+                </span>
+                <label for="input-caracteristica2">
+                  <span>Subir imagen</span>
+                </label>
+                <label class="ml-4">{{mensajeImagenCaracteristica2}}</label>
+            </div>
+
+
+            
+            <div class="card-body d-flex justify-content-center align-items-center">
+              <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica2"> <i class="fas fa-pen-square fa-3x"></i></button>
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+            <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+              <span class="input-caracteristica3">
+                <input type="file" name="input-caracteristica3" id="input-caracteristica3" accept=".jpg, .png" (change)="guardarImagenCaracteristica3($event)">
+                </span>
+                <label for="input-caracteristica3">
+                  <span>Subir imagen</span>
+                </label>
+                <label class="ml-4">{{mensajeImagenCaracteristica3}}</label>
+            </div>
+
+
+            
+            <div class="card-body d-flex justify-content-center align-items-center">
+              <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica3"> <i class="fas fa-pen-square fa-3x"></i></button>
+             
+            </div>
+          </div>
+        </div>
+
+        
         <div class="row">
           <div class="offset-2 col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-            <button class="btn btn-info rounded" style="padding:10px !important"> <i class="fas fa-pen-square fa-3x"></i></button>
+            <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-pyme"> <i class="fas fa-pen-square fa-3x"></i></button>
           </div>
           <div class="col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-            <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+            <span class="input-pyme-imagen">
+              <input type="file" name="input-pyme-imagen" id="input-pyme-imagen" accept=".jpg, .png" (change)="guardarImagenPyme($event)">
+              </span>
+              <label for="input-pyme-imagen">
+                <span>Subir imagen</span>
+              </label>
+              <label class="ml-4">{{mensajeImagenPyme}}</label>
           </div>
         </div>
 
   <div class="d-flex justify-content-center align-items-center">
     <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
       <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <button type="file" accept=".jpg .png" class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button>
+        <span class="input-prodServ">
+          <input type="file" name="input-prodServ" id="input-prodServ" accept=".jpg, .png" (change)="guardarImagenProdServ($event)">
+          </span>
+          <label for="input-prodServ">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ}}</label>
+         
       </div>
       <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important"> <i class="fas fa-pen-square fa-3x"></i></button>
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv1"> <i class="fas fa-pen-square fa-3x"></i></button>
        
       </div>
     </div>
   </div>
-  <!-- <span class="nuestroinput">
-    <label for="nuestroinput"><input id="nuestroinput" type="file"><i class="fas fa-file-upload"></i> Subir archivo</label>
-  </span> -->
   
-<span class="mi-archivo">
-<input type="file" name="mi-archivo" id="mi-archivo" accept=".jpg, .png" (change)="guardarImagenCabecera($event)">
-</span>
-<label for="mi-archivo">
-  <span>Upload your cv</span>
-</label>
 
-<div class="form-group">
-  <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
-  <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ2">
+          <input type="file" name="input-prodServ2" id="input-prodServ2" accept=".jpg, .png" (change)="guardarImagenProdServ2($event)">
+          </span>
+          <label for="input-prodServ2">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ2}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv2"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ3">
+          <input type="file" name="input-prodServ3" id="input-prodServ3" accept=".jpg, .png" (change)="guardarImagenProdServ3($event)">
+          </span>
+          <label for="input-prodServ3">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ3}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv3"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ4">
+          <input type="file" name="input-prodServ4" id="input-prodServ4" accept=".jpg, .png" (change)="guardarImagenProdServ4($event)">
+          </span>
+          <label for="input-prodServ4">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ4}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv4"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ5">
+          <input type="file" name="input-prodServ5" id="input-prodServ5" accept=".jpg, .png" (change)="guardarImagenProdServ5($event)">
+          </span>
+          <label for="input-prodServ5">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ5}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv5"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ6">
+          <input type="file" name="input-prodServ6" id="input-prodServ6" accept=".jpg, .png" (change)="guardarImagenProdServ6($event)">
+          </span>
+          <label for="input-prodServ6">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ6}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv6"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ7">
+          <input type="file" name="input-prodServ7" id="input-prodServ7" accept=".jpg, .png" (change)="guardarImagenProdServ7($event)">
+          </span>
+          <label for="input-prodServ7">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ7}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv7"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ8">
+          <input type="file" name="input-prodServ8" id="input-prodServ8" accept=".jpg, .png" (change)="guardarImagenProdServ8($event)">
+          </span>
+          <label for="input-prodServ8">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ8}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv8"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ9">
+          <input type="file" name="input-prodServ9" id="input-prodServ9" accept=".jpg, .png" (change)="guardarImagenProdServ9($event)">
+          </span>
+          <label for="input-prodServ9">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ9}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv9"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ10">
+          <input type="file" name="input-prodServ10" id="input-prodServ10" accept=".jpg, .png" (change)="guardarImagenProdServ10($event)">
+          </span>
+          <label for="input-prodServ10">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ10}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv10"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ11">
+          <input type="file" name="input-prodServ11" id="input-prodServ11" accept=".jpg, .png" (change)="guardarImagenProdServ11($event)">
+          </span>
+          <label for="input-prodServ11">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ11}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv11"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
+      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+        <span class="input-prodServ12">
+          <input type="file" name="input-prodServ12" id="input-prodServ12" accept=".jpg, .png" (change)="guardarImagenProdServ12($event)">
+          </span>
+          <label for="input-prodServ12">
+            <span>Subir imagen</span>
+          </label>
+        
+          <label class="ml-4">{{mensajeImagenProdServ12}}</label>
+         
+      </div>
+      <div class="card-body d-flex justify-content-center align-items-center">
+        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv12"> <i class="fas fa-pen-square fa-3x"></i></button>
+       
+      </div>
+    </div>
+  </div>
+
+
+<div class="centrar-horizontal">
+  <button class="btn btn-success btn-block p-3 mt-5" style="font-size: large;font-weight: bolder;" (click)="solicitarOnePage()">Solicitar OnePage</button>
 </div>
 
-
-
-
-
-<button class="btn btn-success" (click)="onSubmit()">Solicitar onepage</button>
-    </div>
+    </div> 
     </div>
 
   </div>
+
+  
 
 
 
@@ -110,7 +416,7 @@
         <i class="fab fa-facebook-f fa-2x  icono-footer-circular-face"></i>
         <i class="fab fa-twitter fa-2x  icono-footer-circular-tw"></i>
         <i class="fab fa-instagram fa-2x  icono-footer-circular-insta"></i>
-        <i class="fab fa-snapchat-ghost fa-2x icono-footer-circular-snapchat"></i>
+        <i class="fab fa-youtube fa-2x icono-footer-circular-youtube"></i>
       </div>
     </div>
   </footer>
@@ -133,7 +439,7 @@
       <div class="modal-body">
         <textarea [(ngModel)]="formContacto" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
         <div class="alert alert-primary mt-3" role="alert">
-          Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
+          Recuerde visitar la seccion de <a routerLink="/panel/preguntas-frecuentes" data-dismiss="modal">preguntas frecuentes</a>.
         </div>
       </div>
       <div class="modal-footer">
@@ -308,4 +614,330 @@
    </div>
 
 
+
+   <div class="modal fade" id="modal-caracteristica1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para primera caracteristica</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoCaracteristicas" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-caracteristica2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para segunda caracteristica</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoCaracteristicas2" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="modal-caracteristica3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para tercera caracteristica</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoCaracteristicas3" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="modal fade" id="modal-pyme" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion de pyme</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoPyme"  class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="modal-prodserv1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 1</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 2</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv2" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 3</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv3" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="modal-prodserv4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 4</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv4" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 5</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv5" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 6</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv6" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv7" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 7</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv7" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv8" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 8</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv8" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv9" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 9</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv9" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv10" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 10</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv10" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv11" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 11</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv11" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-prodserv12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 12</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="infoProdserv12" class="form-control" id="c1" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 

@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit {
 
   regiones:string[]=['XV Región de Arica y Parinacota','I Región de Tarapacá','II Región de Antofagasta','III Región de Atacama','IV Región de Coquimbo','V Región de Valparaíso','Región Metropolitana','VI Región del Libertador General Bernardo O’Higgins','VII Región del Maule','XVI Región de Ñuble','VIII Región del Biobío','IX Región de La Araucanía','XIV Región de Los Ríos','X Región de Los Lagos','XI Región Aysén del General Carlos Ibáñez del Campo','XII Región de Magallanes y Antártica Chilena']
 
-  rubros:string[]=['informática','pasteleria']
+  rubros:string[]=['Informática','Deportes y fitness','Música','Animales y Mascotas','Arte','Librería','Videojuegos','Vehículos','Celulares y Telefonía','Gastronomía','Vestuario','Herramientas','Turismo']
   region:string='';
   rubro:string=""
   list_resultados: any;
@@ -22,10 +22,11 @@ export class SearchComponent implements OnInit {
   precio:string="";
   producto:boolean=true;
   servicio:boolean=true;
+  cargando:boolean=true;
   constructor(private appService: AppService, private router: Router, private appComponent: AppComponent, public authService: AuthService) { }
 
   ngOnInit(): void {
-
+    this.cargando=true;
     if (this.authService.loggedIn()) {
       var res = atob(localStorage.getItem('res'))
       var x = res.split("(*/as)");
@@ -47,11 +48,11 @@ export class SearchComponent implements OnInit {
     var data
     if (num == 0) {
       data = {
-        nombre: busqueda
+        nombre: busqueda.toLocaleLowerCase()
       }
     } else {
       data = {
-        nombre: this.buscar
+        nombre: this.buscar.toLocaleLowerCase()
       }
       
     }
@@ -60,7 +61,7 @@ export class SearchComponent implements OnInit {
     this.appService.getProductosServiciosPorNombre(data).subscribe(res => {
       console.log(res);
       this.list_resultados = res;
-
+      this.cargando=false;
     },
       err => {
         console.log(err)
@@ -77,7 +78,7 @@ export class SearchComponent implements OnInit {
     this.appService.getProductosServiciosPorRubro(data).subscribe(res => {
       console.log(res);
       this.list_resultados = res;
-
+      this.cargando=false;
     },
       err => {
         console.log(err)
@@ -106,6 +107,7 @@ export class SearchComponent implements OnInit {
   this.appService.getProductosServiciosPorFiltros(data).subscribe(res => {
     console.log(res);
     this.list_resultados = res;
+    this.cargando=false;
   },
     err => {
       console.log(err)
@@ -145,6 +147,7 @@ export class SearchComponent implements OnInit {
   verDetalle(item){
     console.log(item)
     this.appComponent.prodServ=item
+    this.appComponent.rubroUltimoProductoServicio=-1
     this.router.navigate(['/detalle-item'])
   }
 }

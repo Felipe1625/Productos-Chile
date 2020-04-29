@@ -1,0 +1,18 @@
+.centrar
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.centrar-horizontal
+{
+    text-align: center;
+} 
+
+
+.centrar-vertical
+{
+    display: flex;
+    align-items: center;
+} 

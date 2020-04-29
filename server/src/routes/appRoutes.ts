@@ -2,6 +2,20 @@ import { Router } from "express";
 import appController from "../controllers/appController";
 import jwt from 'jsonwebtoken';
 
+var multipart = require('connect-multiparty');
+const multiPartMiddleware=multipart({
+     uploadDir:'./src/solicitud-onePage'
+     
+})
+
+const multiPartMiddlewareProducto=multipart({
+     uploadDir:'./src/imagenes/productos'
+})
+
+const multiPartMiddlewareServicio=multipart({
+     uploadDir:'./src/imagenes/servicios'
+})
+
 class AppRoutes {
 
      public router: Router = Router();
@@ -37,6 +51,12 @@ class AppRoutes {
           this.router.post('/get-productos-servicios-por-rubro', appController.getProductosServiciosPorRubro);
           this.router.post('/get-productos-servicios-por-filtros', appController.getProductosServiciosPorFiltros);
           this.router.post('/get-producto-servicio/:id', appController.getProductoServicio);
+          this.router.get('/get-producto-servicio-from-home/:id', appController.getProductoServicioFromHome);
+          this.router.post('/subir-imagen-node',multiPartMiddleware,appController.subirImagenNode)
+          this.router.post('/subir-imagen-producto-server',multiPartMiddlewareProducto,appController.subirImagenProductoServer)
+          this.router.post('/subir-imagen-servicio-server',multiPartMiddlewareServicio,appController.subirImagenServicioServer)
+          this.router.post('/send-email-solicitud-producto',multiPartMiddlewareServicio,appController.sendEmailSolicitudProducto)
+          this.router.post('/send-email-solicitud-servicio',multiPartMiddlewareServicio,appController.sendEmailSolicitudServicio)
      }
 }
 

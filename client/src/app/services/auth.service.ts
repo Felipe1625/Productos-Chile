@@ -6,11 +6,12 @@ import {Router} from '@angular/router'
   providedIn: 'root'
 })
 export class AuthService {
-  API_URI="http://localhost:3000/api" //ruta api en server
+  API_URI = "https://apppc.herokuapp.com/api/app"
+  // API_URI = "http://localhost:3000/api/app" 
   constructor(private http:HttpClient,private router:Router) { }
 
   signin(user){
-    return this.http.post(`${this.API_URI}/app/signin`,user)
+    return this.http.post(`${this.API_URI}/signin`,user)
   }
 
   //para eliminar el token del localStorage
@@ -18,7 +19,7 @@ export class AuthService {
     localStorage.removeItem('token')
     localStorage.removeItem('res')
     if(!(this.loggedIn())){
-      this.router.navigate(['/home'])
+      this.router.navigate([''])
     }
    
   }

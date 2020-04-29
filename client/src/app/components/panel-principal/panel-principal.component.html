@@ -14,7 +14,7 @@
               <span><a class="letra-filtros" routerLink="/panel/datos-empresariales" ><i class="fas fa-briefcase mr-2"></i>Datos empresariales</a></span>
           </div>     
           <div class="mt-1">
-            <span><a class="letra-filtros" routerLink="/panel/servicios-productos"><i class="fas fa-clipboard-list mr-2"></i> Servicios</a></span>
+            <span><a class="letra-filtros" routerLink="/panel/servicios-productos"><i class="fas fa-clipboard-list mr-2"></i> Servicios y Productos</a></span>
         </div> 
         
 
@@ -42,7 +42,7 @@
         <i class="fab fa-facebook-f fa-2x  icono-footer-circular-face"></i>
         <i class="fab fa-twitter fa-2x  icono-footer-circular-tw"></i>
         <i class="fab fa-instagram fa-2x  icono-footer-circular-insta"></i>
-        <i class="fab fa-snapchat-ghost fa-2x icono-footer-circular-snapchat"></i>
+        <i class="fab fa-youtube fa-2x icono-footer-circular-youtube"></i>
       </div>
     </div>
   </footer>
@@ -66,7 +66,7 @@
       <div class="modal-body">
         <textarea [(ngModel)]="formContacto" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
         <div class="alert alert-primary mt-3" role="alert">
-          Recuerde visitar la seccion de <a href="../html/faq_clientes.html">preguntas frecuentes</a>.
+          Recuerde visitar la seccion de <a routerLink="/panel/preguntas-frecuentes" data-dismiss="modal">preguntas frecuentes</a>.
         </div>
       </div>
       <div class="modal-footer">

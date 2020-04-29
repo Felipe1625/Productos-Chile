@@ -23,11 +23,25 @@
                         <!-- <label for="inputPassword"> Contraseña </label> -->
                     </div>
                     <!-- <a href="../html/panel.html"> -->
-                       <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="signin()" style="font-weight: 400;">
+                       <button *ngIf="!btnIngresar;else cargando" [disabled]="btnIngresar" class="btn btn-lg btn-primary btn-block" type="submit" (click)="signin()" style="font-weight: 400;">
                         Ingresar
                     </button> 
                     <button type="button" class="btn btn-light btn-block" style="color: #007bff;font-weight: 700;" routerLink="/home">Volver</button>
+                    <ng-template #cargando>
+                        <button class="btn btn-lg btn-primary btn-block centrar" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                              Un momento...
+                          </button>
+                    </ng-template>
+                    
+                     
                     <!-- </a> -->
+                   
+                        <div  *ngIf="mensajeError" class="alert alert-danger text-center" role="alert">
+                            Error en datos ingresados
+                          </div>
+                   
+                    
                     
                     <p class="mt-4 mb-3 text-muted text-center">
                         © 2020 Producto Chile. Todos los derechos reservados.

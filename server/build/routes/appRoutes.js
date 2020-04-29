@@ -6,6 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const appController_1 = __importDefault(require("../controllers/appController"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var multipart = require('connect-multiparty');
+const multiPartMiddleware = multipart({
+    uploadDir: './src/solicitud-onePage'
+});
+const multiPartMiddlewareProducto = multipart({
+    uploadDir: './src/imagenes/productos'
+});
+const multiPartMiddlewareServicio = multipart({
+    uploadDir: './src/imagenes/servicios'
+});
 class AppRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -37,6 +47,12 @@ class AppRoutes {
         this.router.post('/get-productos-servicios-por-rubro', appController_1.default.getProductosServiciosPorRubro);
         this.router.post('/get-productos-servicios-por-filtros', appController_1.default.getProductosServiciosPorFiltros);
         this.router.post('/get-producto-servicio/:id', appController_1.default.getProductoServicio);
+        this.router.get('/get-producto-servicio-from-home/:id', appController_1.default.getProductoServicioFromHome);
+        this.router.post('/subir-imagen-node', multiPartMiddleware, appController_1.default.subirImagenNode);
+        this.router.post('/subir-imagen-producto-server', multiPartMiddlewareProducto, appController_1.default.subirImagenProductoServer);
+        this.router.post('/subir-imagen-servicio-server', multiPartMiddlewareServicio, appController_1.default.subirImagenServicioServer);
+        this.router.post('/send-email-solicitud-producto', multiPartMiddlewareServicio, appController_1.default.sendEmailSolicitudProducto);
+        this.router.post('/send-email-solicitud-servicio', multiPartMiddlewareServicio, appController_1.default.sendEmailSolicitudServicio);
     }
 }
 const appRoutes = new AppRoutes();

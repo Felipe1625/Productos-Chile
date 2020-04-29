@@ -1,7 +1,7 @@
 <!--usuario no logueado-->
-<nav class="navbar navbar-expand-md  navbar-dark w-100" style="background-color: rgb(167, 167, 167);">
+<nav class="navbar navbar-expand-md  navbar-dark w-100" style="background-color: rgb(55, 154, 213);">
     <div class="d-flex flex-grow-1">
-        <a class="navbar-brand" href="index.html"><img src="Images/0.png" alt=""></a>
+        <a class="navbar-brand"routerLink="/home"><img src="../../../assets/icono.png" alt="" style="height: 40px !important;"></a>
         <form class="mr-2 my-auto w-100 d-inline-block order-1">
             <div class="input-group">
                 <input [(ngModel)]="buscar" name="formBuscar" id="input-busqueda" type="text"
@@ -126,7 +126,13 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-4 imagen-en-carta">
-                        <img class="imagen-size" src="../Images/default-image.jpg">
+                        <img *ngIf="item.Producto==1 && item.rutaImagen==null" class="imagen-size" src="../../../assets/defecto/producto.png">
+                        <img *ngIf="item.Producto==0 && item.rutaImagen==null" class="imagen-size" src="../../../assets/defecto/servicio.png">
+                        <img *ngIf="item.Producto==1 && item.rutaImagen!=null" class="imagen-size" src="{{item.rutaImagen}}">
+                        <img *ngIf="item.Producto==0 && item.rutaImagen!=null" class="imagen-size" src="{{item.rutaImagen}}">
+                        
+                        
+                      
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-8 ">
                         <h5 class="margen-info-responsive">{{item.nombre}}</h5>
@@ -155,3 +161,6 @@
 </div>
 
 <app-footer></app-footer>
+
+
+<div *ngIf="cargando" class="loader"></div>

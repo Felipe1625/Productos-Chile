@@ -1,21 +1,21 @@
 <!--navbar usuario logueado-->
-<nav class="navbar navbar-expand-lg" style="background-color: rgb(167, 167, 167);">
-     <a class="nav-item mr-3" style="color: white !important" href="#">Empresa</a>
+<nav class="navbar navbar-expand-lg" style="background-color: rgb(55, 154, 213);">
+     <a class="nav-item mr-3" style="color: white !important;">{{idUsuario[1]}}</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"><i class="fas fa-bars centrar"></i></span>
+       <span class="navbar-toggler-icon centrar"><i class="fas fa-bars" style="color: white;"></i></span>
      </button>
  
      <div class="collapse navbar-collapse" id="navbarSupportedContent">
        <ul class="navbar-nav mr-auto">
          <li class="nav-item" style="color: white !important">
-          Usuario
+          
          </li> 
        </ul>
        <form class="form-inline my-2 my-lg-0">
-          <a  href="../OnePage/index.html" target="_blank">
-               <button class="btn btn-info my-2 my-sm-0 mr-3" type="button">One page</button>
-             </a>
+        <a *ngIf="idUsuario[3]!='null'" href="{{idUsuario[3]}}" target="_blank">
+          <button type="button" class="btn btn-info">One page</button>
+      </a>
          <a style="color: white !important;cursor: pointer;" class="nav-link" (click)="authService.loggedOut()">Salir</a>
          
        </form>

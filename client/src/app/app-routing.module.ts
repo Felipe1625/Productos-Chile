@@ -28,55 +28,70 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'/home',
+    // redirectTo:'/home',
     pathMatch:'full',
-    
-  },
-  {
-    path:'home',
     component : HomeComponent
   },
+  
+  // {
+  //   path:'home',
+  //   component : HomeComponent
+  // },
   {
     path:'busqueda-servicio-producto',
+    pathMatch:'full',
     component : SearchComponent
   },
   {
     path:'detalle-item',
+    pathMatch:'full',
     component : DetailComponent
   },
   {
     path:'login',
+    pathMatch:'full',
     component : LoginComponent
   },
   {
     path:'panel',
+    pathMatch:'full',
     component : PanelPrincipalComponent,
     canActivate:[AuthGuard]
   },
   {
     path:'panel/datos-personales',
+    pathMatch:'full',
     component : PanelDatosPersonalesComponent,
     canActivate:[AuthGuard]
   },
   {
     path:'panel/datos-empresariales',
+    pathMatch:'full',
     component : PanelDatosEmpresarialesComponent,
     canActivate:[AuthGuard]
   },
   {
     path:'panel/servicios-productos',
+    pathMatch:'full',
     component : PanelServiciosComponent,
     canActivate:[AuthGuard]
   },
   {
     path:'panel/config',
+    pathMatch:'full',
     component : PanelConfigOnePageComponent,
     canActivate:[AuthGuard]
   },
   {
     path:'panel/preguntas-frecuentes',
+    pathMatch:'full',
     component : PanelPreguntasFrecuentesComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path: '**',
+    pathMatch:'full',
+    redirectTo: ''
   }
 ];
 

@@ -284,15 +284,15 @@ color: #3483fa;
 }
 
 .estrella-seleccionada {
-    color: orange;
+    color: rgb(55, 154, 213);
   }
 
   .estrella-no-seleccionada{
-    color: rgb(196, 196, 196);
+    color: rgb(55, 154, 213);
   }
 
   .estrella-hover:hover > :last-child{
-    color: orange;
+    color: rgb(55, 154, 213);
   }
 
   .titulo-filtros{
@@ -308,11 +308,11 @@ color: #3483fa;
 
 
   .hover-seleccion > div > span:hover{
-    color: orange !important;
+    color: rgb(55, 154, 213) !important;
   }
 
   .hover-seleccion > div > span> a:hover{
-    color: orange !important;
+    color: rgb(55, 154, 213) !important;
   }
 
   .filtros > div >span{
