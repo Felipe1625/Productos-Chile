@@ -8,6 +8,36 @@
     
      
    }
+
+ /* @media only screen and (min-width: 300px) and (max-width: 767px) {
+    
+.footerh{
+  background-image: url("../../../assets/footer-movil.png");
+}
+} */
+
+/* @media only screen and (min-width: 768px) and (max-width: 991px) {
+    
+  .footerh{
+    background-image: url("../../../assets/footer-tablet.png");
+  } 
+  } */
+
+  /* @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    
+    .footerh{
+      background-image: url("../../../assets/footer-pc.jpg");
+    }
+    } */
+
+    /* @media only screen and (min-width: 1200px)  {
+    
+      .footerh{
+        background-image: url("../../../assets/footer-pc.png");
+      }
+      }  */
+
+
    
    .footer-panel{
        margin-top: 20px;

@@ -13,5 +13,5 @@ export class AppComponent {
   prodServ:any='';
   usuario:string="Usuario";
   rubroUltimoProductoServicio:number=-1;
-
+  entidad:string=""
 }

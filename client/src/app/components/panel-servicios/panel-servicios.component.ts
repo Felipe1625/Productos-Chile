@@ -50,7 +50,7 @@ mensajeImagenServ:string='Imagen no subida'
   ngOnInit(): void {
     var res = atob(localStorage.getItem('res'))
     this.idUsuario = res.split("(*/as)");
-    this.getProductosbyUser(this.idUsuario[0])
+    this.getProductosbyUser(this.idUsuario[2]) 
     this.getTiposServiciosbyRubro(this.idUsuario[0])
 
   }

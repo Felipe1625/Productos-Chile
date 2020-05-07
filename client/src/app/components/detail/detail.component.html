@@ -10,7 +10,7 @@
                  <span class="input-group-append">
                      <!-- <a href="html/resultados_busqueda.html"> -->
                      <button (click)="buscarProductosServiciosPorNombre()" id="button-busqueda"
-                         class="btn btn-outline-light border border-left-0" type="button">
+                         class="btn btn-outline-light border border-left-0" type="submit">
                          <i class="fa fa-search"></i>
                      </button>
                      <!-- </a> -->
@@ -34,6 +34,9 @@
              <li class="nav-item">
                  <a style="color: white !important;" class="nav-link" href="#">Contacto</a>
              </li>
+             <li class="nav-item" style="cursor: pointer;">
+                <a style="color: white !important;" class="nav-link" href="http://www.app.productochile.cl" target="_blank">App</a>
+              </li>
              <li class="nav-item mr-5">
                  <ng-container *ngIf="authService.loggedIn();else logueado">
                      <a style="color: white !important;" class="nav-link" routerLink="/panel">Hola {{usuario}}</a>
@@ -79,26 +82,24 @@
                 <p>Actualmente esta pyme no cuenta con OnePage</p>
              </ng-template>
 
+<h4 class="mb-3" *ngIf="prodServ.redSocialFacebook!='' || prodServ.redSocialInstagram!=''
+ || prodServ.redSocialTwitter!='' || prodServ.redSocialYoutube!=''">Visita sus redes sociales</h4>
 
 <a *ngIf="prodServ.redSocialFacebook!=''"  href="{{prodServ.redSocialFacebook}}" target="_blank">
-    <button class="btn btn-success icono-face rounded-circle"><i class="fab fa-facebook fa-2x"></i></button>
+    <button *ngIf="prodServ.redSocialFacebook!=''" class="btn btn-success icono-face rounded-circle"><i class="fab fa-facebook fa-2x"></i></button>
 </a>
 <a *ngIf="prodServ.redSocialInstagram!=''" href="{{prodServ.redSocialInstagram}}" target="_blank">
-    <button class="btn btn-success icono-insta rounded-circle"><i class="fab fa-instagram fa-2x"></i></button>
+    <button *ngIf="prodServ.redSocialInstagram!=''" class="btn btn-success icono-insta rounded-circle"><i class="fab fa-instagram fa-2x"></i></button>
 </a>
 <a *ngIf="prodServ.redSocialTwitter!=''" href="{{prodServ.redSocialTwitter}}" target="_blank">
-    <button class="btn btn-success icono-tw rounded-circle"><i class="fab fa-twitter fa-2x"></i></button>
+    <button *ngIf="prodServ.redSocialTwitter!=''" class="btn btn-success icono-tw rounded-circle"><i class="fab fa-twitter fa-2x"></i></button>
 </a>
 <a *ngIf="prodServ.redSocialYoutube!=''" href="{{prodServ.redSocialYoutube}}" target="_blank">
-    <button class="btn btn-success icono-yt rounded-circle"><i class="fab fa-youtube fa-2x"></i></button>
+    <button *ngIf="prodServ.redSocialYoutube!=''" class="btn btn-success icono-yt rounded-circle"><i class="fab fa-youtube fa-2x"></i></button>
 </a>
 
 
-             <!-- <p *ngIf="prodServ.redSocialFacebook!=''"><i class="fab fa-facebook"></i>  {{prodServ.redSocialFacebook}}</p>
-             
-             <p *ngIf="prodServ.redSocialInstagram!=''"><i class="fab fa-instagram"></i>  {{prodServ.redSocialInstagram}}</p>
-             <p *ngIf="prodServ.redSocialTwitter!=''"><i class="fab fa-twitter"></i>  {{prodServ.redSocialTwitter}}</p>
-             <p *ngIf="prodServ.redSocialYoutube!=''"><i class="fab fa-youtube"></i>  {{prodServ.redSocialYoutube}}</p> -->
+    
          </div>
      </div>
  
@@ -113,6 +114,30 @@
  </div>
  
  <app-footer></app-footer>
+ <button class="btn btn-success chat rounded-circle" data-toggle="modal" data-target="#modal-contacto"><i class="fab fa-whatsapp fa-2x"></i></button>
+<!-- Modal contacto-->
+<div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header titulo-modal centrar-vertical">
+          <i class="far fa-comments  mr-2"></i>
+          <h5 class="modal-title" id="exampleModalLongTitle">Formulario de contacto</h5>
+          <button type="button" class="close centrar-vertical" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" style="color: white;"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Si deseas información acerca de este producto o servicio, haz click en el siguiente botón de contacto para hablar directamente con el encargado de la pyme asociada.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+          <a target="_blank" href="https://api.whatsapp.com/send?phone={{prodServ.fonoContactoUno}}&text=Hola, deseo más información acerca de este producto: {{prodServ.nombre}}"><button type="button" class="btn btn-primary btn-whatsapp">Contacto</button></a>
+        </div> 
+      </div>
+  
+    </div>
+  </div>
+
 
 
  <div *ngIf="cargando" class="loader"></div>

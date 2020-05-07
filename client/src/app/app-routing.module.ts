@@ -24,6 +24,9 @@ import {PanelConfigOnePageComponent} from './components/panel-config-one-page/pa
 //seccion de preguntas frecuentes para un cliente del sistema
 import {PanelPreguntasFrecuentesComponent} from './components/panel-preguntas-frecuentes/panel-preguntas-frecuentes.component'
 import { AuthGuard } from './auth.guard';
+import { PymeComponent } from './components/pyme/pyme.component';
+import { PanelDetallePreguntasFrecuentesComponent } from './components/panel-detalle-preguntas-frecuentes/panel-detalle-preguntas-frecuentes.component';
+import { PanelChangePasswordComponent } from './components/panel-change-password/panel-change-password.component';
 
 const routes: Routes = [
   {
@@ -41,6 +44,11 @@ const routes: Routes = [
     path:'busqueda-servicio-producto',
     pathMatch:'full',
     component : SearchComponent
+  },
+  {
+    path:'detalle-pyme',
+    pathMatch:'full',
+    component : PymeComponent
   },
   {
     path:'detalle-item',
@@ -65,6 +73,12 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path:'panel/cambiar-contraseña',
+    pathMatch:'full',
+    component : PanelChangePasswordComponent,
+    canActivate:[AuthGuard]
+  },
+  {
     path:'panel/datos-empresariales',
     pathMatch:'full',
     component : PanelDatosEmpresarialesComponent,
@@ -86,6 +100,12 @@ const routes: Routes = [
     path:'panel/preguntas-frecuentes',
     pathMatch:'full',
     component : PanelPreguntasFrecuentesComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'panel/detalle-preguntas-frecuentes',
+    pathMatch:'full',
+    component : PanelDetallePreguntasFrecuentesComponent,
     canActivate:[AuthGuard]
   },
   {

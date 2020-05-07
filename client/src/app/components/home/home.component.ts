@@ -84,4 +84,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/detalle-item'])
   }
 
+  buscarPymePorEntidad(nombre:string){
+    console.log('buscar por entidad')
+    console.log(nombre)
+    this.appComponent.entidad=nombre
+    this.router.navigate(['/detalle-pyme'])
+  }
+
 }

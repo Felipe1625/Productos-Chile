@@ -1,943 +1,1328 @@
-<app-navbar-client></app-navbar-client>
+<nav class="navbar navbar-expand-lg" style="background-color: rgb(55, 154, 213);">
+
+  <div class="d-flex centrar">
+    <a class="navbar-brand" routerLink="/home"><img src="../../../assets/icono.png" alt=""
+        style="height: 40px !important;"></a>
+    <a class="nav-item mr-3" style="color: white !important;">{{idUsuario[1]}}</a>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon centrar"><i class="fas fa-bars" style="color: white;"></i></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" style="color: white !important">
+
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+
+      <a style="color: white !important;cursor: pointer;" class="nav-link" routerLink="/panel">Volver al panel</a>
+
+    </form>
+  </div>
+</nav>
 
 
 
+<div class="container mt-5">
+
+  <div class="row">
 
 
-
-   <div class="container mt-2">
-
-    <div class="row carta-panel">
-      <div class="col-sm-12 col-md-12 col-lg-3 linea-divisoria mb-3">
-        
-        <div class="hover-seleccion">
-          <p class="titulo-filtros">Panel de control</p>
-          <div class="mt-1"> 
-              <span><a class="letra-filtros" routerLink="/panel/datos-personales"><i class="fas fa-user-circle mr-2"></i>Datos personales</a></span>
+    <mat-vertical-stepper [linear]="isLinear" #stepper class="col-12">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Bienvenido</ng-template>
+          <div>
+            <h4>Bienvenido a su configuracion de OnePage</h4>
+            <h5 class="mt-2">¿Que es OnePage?</h5>
+            <p>OnePage es una pagina creada especialmente para cada pyme presente en Producto Chile, con el fin de
+              potenciar su presencia en internet, llegando a nuevos clientes. </p>
+            <h5>¿Como obtengo mi OnePage?</h5>
+            <p>Para obtenerlo, solo debe ingresar la informacíon solicitada en los siguientes pasos, asi como imagenes
+              para apoyar de manera visual su OnePage</p>
+            <h5>¿Debo pagar un costo extra para tener mi OnePage?</h5>
+            <p>La creacion de su OnePage no tiene un costo adicional.</p>
+            <button class="btn btn-info" matStepperNext>Siguiente</button>
           </div>
-          <div class="mt-1">
-              <span><a class="letra-filtros" routerLink="/panel/datos-empresariales"><i class="fas fa-briefcase mr-2"></i>Datos empresariales</a></span>
-          </div>    
-          <div class="mt-1">
-            <span><a class="letra-filtros" routerLink="/panel/servicios-productos" ><i class="fas fa-clipboard-list mr-2"></i> Servicios y Productos</a></span>
-        </div> 
-        
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Cabecera</ng-template>
 
-        <div class="mt-1">
-          <span><a class="letra-filtros"  routerLink="/panel/config" ><i class="fas fa-cogs mr-2"></i>Config. OnePage</a></span>
-      </div> 
-      <div class="mt-1">
-        <span><a class="letra-filtros" routerLink="/panel/preguntas-frecuentes" ><i class="fas fa-question-circle mr-2" ></i>Preguntas frecuentes</a></span> 
-    </div>  
-    <div class="mt-5 centrar">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAyuda">
-        Ayuda
-      </button>
-    </div>  
-      </div>
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-9 mb-3">
-        <div class="offset-1 col-10 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-          <!-- <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button> -->
-          
-          <span class="input-cabecera">
-            <input type="file" name="input-cabecera" id="input-cabecera" accept=".jpg, .png" (change)="guardarImagenCabecera($event)">
-            </span>
-            <label for="input-cabecera">
-              <span>Subir imagen</span>
-            </label>
-            <label class="ml-4">{{mensajeImagenCabecera}}</label>
-        </div>
-
-        <div class="offset-1 col-10 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-          <!-- <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button> -->
-          
-          <span class="input-cabecera2">
-            <input type="file" name="input-cabecera2" id="input-cabecera2" accept=".jpg, .png" (change)="guardarImagenCabecera2($event)">
-            </span>
-            <label for="input-cabecera2">
-              <span>Subir imagen</span>
-            </label>
-            <label class="ml-4">{{mensajeImagenCabecera2}}</label>
-        </div>
-
-        <div class="offset-1 col-10 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-          <!-- <button class="btn btn-info rounded-circle" style="padding:10px !important"><i class="fas fa-plus-circle fa-3x"></i></button> -->
-          
-          <span class="input-cabecera3">
-            <input type="file" name="input-cabecera3" id="input-cabecera3" accept=".jpg, .png" (change)="guardarImagenCabecera3($event)">
-            </span>
-            <label for="input-cabecera3">
-              <span>Subir imagen</span>
-            </label>
-            <label class="ml-4">{{mensajeImagenCabecera3}}</label>
-        </div>
-        
-        <div class="d-flex justify-content-center align-items-center">
-          <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-            <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-              <span class="input-caracteristica">
-                <input type="file" name="input-caracteristica" id="input-caracteristica" accept=".jpg, .png" (change)="guardarImagenCaracteristica($event)">
-                </span>
-                <label for="input-caracteristica">
-                  <span>Subir imagen</span>
-                </label>
-                <label class="ml-4">{{mensajeImagenCaracteristica}}</label>
-            </div>
-
-
-            
-            <div class="card-body d-flex justify-content-center align-items-center">
-              <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica1"> <i class="fas fa-pen-square fa-3x"></i></button>
-             
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-center align-items-center">
-          <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-            <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-              <span class="input-caracteristica2">
-                <input type="file" name="input-caracteristica2" id="input-caracteristica2" accept=".jpg, .png" (change)="guardarImagenCaracteristica2($event)">
-                </span>
-                <label for="input-caracteristica2">
-                  <span>Subir imagen</span>
-                </label>
-                <label class="ml-4">{{mensajeImagenCaracteristica2}}</label>
-            </div>
-
-
-            
-            <div class="card-body d-flex justify-content-center align-items-center">
-              <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica2"> <i class="fas fa-pen-square fa-3x"></i></button>
-             
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-center align-items-center">
-          <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-            <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-              <span class="input-caracteristica3">
-                <input type="file" name="input-caracteristica3" id="input-caracteristica3" accept=".jpg, .png" (change)="guardarImagenCaracteristica3($event)">
-                </span>
-                <label for="input-caracteristica3">
-                  <span>Subir imagen</span>
-                </label>
-                <label class="ml-4">{{mensajeImagenCaracteristica3}}</label>
-            </div>
-
-
-            
-            <div class="card-body d-flex justify-content-center align-items-center">
-              <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica3"> <i class="fas fa-pen-square fa-3x"></i></button>
-             
-            </div>
-          </div>
-        </div>
-
-        
-        <div class="row">
-          <div class="offset-2 col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-            <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-pyme"> <i class="fas fa-pen-square fa-3x"></i></button>
-          </div>
-          <div class="col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-            <span class="input-pyme-imagen">
-              <input type="file" name="input-pyme-imagen" id="input-pyme-imagen" accept=".jpg, .png" (change)="guardarImagenPyme($event)">
+          <div>
+            <h4>Cabecera</h4>
+            <p>La cabecera se encuentra en la parte superior de una pagina de internet, ¿has visto las imagenes
+              presentes en productochile.cl que se mueven de una forma atractiva? Eso es una cabecera! para tener una
+              similar, solo debes ingresar las imagenes que te gustaria que estuvieran presentes, ya sea de tu negocio o
+              tu equipo de trabajo, recuerda que puedes ingresar un maximo de 3 imagenes, por lo que seleccionalas con
+              cuidado!</p>
+            <div>
+              <span class="input-cabecera">
+                <input type="file" name="input-cabecera" id="input-cabecera" accept=".jpg, .png"
+                  (change)="guardarImagenCabecera($event)" [disabled]="imagenesCabeceraSubidas">
               </span>
-              <label for="input-pyme-imagen">
-                <span>Subir imagen</span>
+              <label for="input-cabecera">
+                <i class="fas fa-file-image"></i><span> Subir imagen 1</span>
               </label>
-              <label class="ml-4">{{mensajeImagenPyme}}</label>
+              <label class="ml-4">{{mensajeImagenCabecera}}</label>
+            </div>
+            <div>
+              <span class="input-cabecera2">
+                <input type="file" name="input-cabecera2" id="input-cabecera2" accept=".jpg, .png"
+                  (change)="guardarImagenCabecera2($event)" [disabled]="imagenesCabeceraSubidas">
+              </span>
+              <label for="input-cabecera2">
+                <i class="fas fa-file-image"></i><span> Subir imagen 2</span>
+              </label>
+              <label class="ml-4">{{mensajeImagenCabecera2}}</label>
+            </div>
+            <div>
+              <span class="input-cabecera3">
+                <input type="file" name="input-cabecera3" id="input-cabecera3" accept=".jpg, .png"
+                  (change)="guardarImagenCabecera3($event)" [disabled]="imagenesCabeceraSubidas">
+              </span>
+              <label for="input-cabecera3">
+                <i class="fas fa-file-image"></i><span> Subir imagen 3</span>
+              </label>
+              <label class="ml-4">{{mensajeImagenCabecera3}}</label>
+            </div>
+            <div *ngIf="!imagenesCabeceraSubidas;else mensajeImagenesCabeceraSubidas">
+              <button *ngIf="!subiendoimagenesCabecera;else cargandoimagenesCabecera" class="btn btn-success mt-4"
+                (click)="subirImagenesCabecera()">Guardar imagenes</button>
+              <ng-template #cargandoimagenesCabecera>
+                <button class="btn btn-success centrar" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                  Guardando....
+                </button>
+              </ng-template>
+            </div>
+
+            <ng-template #mensajeImagenesCabeceraSubidas>
+              <div>
+                <div class="alert alert-success" role="alert">
+                  Imagenes guardadas con exito!
+                </div>
+                <button class="btn btn-info" matStepperNext>Siguiente</button>
+              </div>
+
+            </ng-template>
+
+
+
           </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Caracteristica</ng-template>
+
+          <div>
+            <h4>Caracteristica</h4>
+            <p>Las caracteristicas, tanto de tu negocio como de tus productos y/o servicios son importantes, ya que
+              demuestran tu visíon y tu profesionalismo. Puedes ingresar hasta 3 caracteristicas, acompañadas de
+              imagenes para ser mas atractivo al usuario. Con estos recursos, presentaremos hermosas cartas para
+              resaltar lo que crees mas importante de tu negocio.</p>
+            <div class="row">
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="card mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center"
+                      style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="input-caracteristica ml-2">
+                        <input type="file" name="input-caracteristica" id="input-caracteristica" accept=".jpg, .png"
+                          (change)="guardarImagenCaracteristica($event)" [disabled]="imagenesCaracteristicasSubidas">
+                      </span>
+
+                      <label for="input-caracteristica">
+                        <span>Subir imagen</span>
+                      </label>
+
+                      <label class="ml-3 mr-2">{{mensajeImagenCaracteristica}}</label>
+
+
+                    </div>
+
+
+
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <!-- <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica1"> <i class="fas fa-pen-square fa-3x"></i></button> -->
+                      <textarea class="form-control" [(ngModel)]="infoCaracteristicas"
+                        [ngModelOptions]="{standalone: true}" id="txt_caracteristica" rows="3"></textarea>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="card mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center"
+                      style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="input-caracteristica2 ml-2">
+                        <input type="file" name="input-caracteristica2" id="input-caracteristica2" accept=".jpg, .png"
+                          (change)="guardarImagenCaracteristica2($event)" [disabled]="imagenesCaracteristicasSubidas">
+                      </span>
+                      <label for="input-caracteristica2">
+                        <span>Subir imagen</span>
+                      </label>
+                      <label class="ml-3 mr-2">{{mensajeImagenCaracteristica2}}</label>
+                    </div>
+
+
+
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <!-- <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica2"> <i class="fas fa-pen-square fa-3x"></i></button> -->
+                      <textarea class="form-control" [(ngModel)]="infoCaracteristicas2"
+                        [ngModelOptions]="{standalone: true}" id="txt_caracteristica2" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center"
+                      style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="input-caracteristica3 ml-2">
+                        <input type="file" name="input-caracteristica3" id="input-caracteristica3" accept=".jpg, .png"
+                          (change)="guardarImagenCaracteristica3($event)" [disabled]="imagenesCaracteristicasSubidas">
+                      </span>
+                      <label for="input-caracteristica3">
+                        <span>Subir imagen</span>
+                      </label>
+                      <label class="ml-3 mr-2">{{mensajeImagenCaracteristica3}}</label>
+                    </div>
+
+
+
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <!-- <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-caracteristica3"> <i class="fas fa-pen-square fa-3x"></i></button> -->
+                      <textarea class="form-control" [(ngModel)]="infoCaracteristicas3"
+                        [ngModelOptions]="{standalone: true}" id="txt_caracteristica3" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!imagenesCaracteristicasSubidas;else mensajeImagenesCaracteristicaSubidas" class="centrar mt-2">
+              <button *ngIf="!subiendoimagenesCaracteristicas;else cargandoimagenesCaracteristica"
+                class="btn btn-success" (click)="subirImagenesCaracteristicas()">Guardar caracteristicas</button>
+              <ng-template #cargandoimagenesCaracteristica>
+                <button class="btn btn-success centrar" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                  Guardando....
+                </button>
+              </ng-template>
+            </div>
+            <ng-template #mensajeImagenesCaracteristicaSubidas>
+              <div>
+                <div class="alert alert-success" role="alert">
+                  Datos guardados con exito!
+                </div>
+                <button class="btn btn-info" matStepperNext>Siguiente</button>
+              </div>
+
+            </ng-template>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Pyme</ng-template>
+
+          <div>
+            <h4>Pyme</h4>
+            <p>La historia de una pyme denota el trabajo detras de ella, por lo que es importante contarla. Las
+              historias ayudan a crear marcas, a asentarlas y hacer que sean diferentes a la competencia, que destaquen
+              y que llamen la atención sobre ellas.Agregar la historia de tu negocio junto a una imagen del mismo
+              atraera a potenciales clientes.</p>
+            <div class="row" style="height: auto !important;">
+              <div class=" offset-lg-2 col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center"
+                style="background-color: rgb(185, 185, 185);">
+                <textarea class="form-control mt-4 mb-4" [(ngModel)]="infoPyme" [ngModelOptions]="{standalone: true}"
+                  id="txt_pyme" rows="3"></textarea>
+              </div>
+              <div class=" col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center"
+                style="background-color: rgb(185, 185, 185);">
+                <span class="input-pyme-imagen mt-4 mb-4">
+                  <input type="file" name="input-pyme-imagen" id="input-pyme-imagen" accept=".jpg, .png"
+                    (change)="guardarImagenPyme($event)" [disabled]="imagenPymeSubida">
+                </span>
+                <label for="input-pyme-imagen">
+                  <span>Subir imagen</span>
+                </label>
+                <label class="ml-4">{{mensajeImagenPyme}}</label>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div *ngIf="!imagenPymeSubida;else mensajeImagenPymeSubida" class="centrar mt-2">
+                <button *ngIf="!subiendoimagenPyme;else cargandoimagenPyme" class="btn btn-success"
+                  (click)="subirImagenPyme()">Guardar pyme</button>
+                <ng-template #cargandoimagenPyme>
+                  <button class="btn btn-success centrar" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                    Guardando....
+                  </button>
+                </ng-template>
+              </div>
+              <ng-template #mensajeImagenPymeSubida>
+                <div>
+                  <div class="alert alert-success" role="alert">
+                    Datos guardados con exito!
+                  </div>
+                  <button class="btn btn-info" matStepperNext>Siguiente</button>
+                </div>
+
+              </ng-template>
+            </div>
+
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Producto y Servicio</ng-template>
+
+          <div>
+            <h4>Productos y Servicios</h4>
+            <p>La calidad de los productos es de una importancia tremenda en el mundo de los negocios, digamos que es el
+              pilar fundamental donde se unirán todos los demás. Es el que garantiza la satisfacción del cliente y hace
+              que se perciba la marca distanciándose del resto de la competencia.</p>
+
+
+
+
+
+              <!--aqui empieza los 9 productos-->
+
+
+
+
+            <div *ngIf="this.idUsuario[4]==0;else mensajeAlmacen">
+              <p>
+                Puede ingresar hasta 9 productos o servicios, adjuntando una imagen por cada uno y su descripcion,
+                recuerde que puede ingresar menos productos o servicios de lo indicado previamente.
+              </p>
+
+              <div class="row">
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="input-prodServ ml-2">
+                          <input type="file" name="input-prodServ" id="input-prodServ" accept=".jpg, .png" (change)="guardarImagenProdServ($event)">
+                          </span>
+                          <label for="input-prodServ">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServ}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdserv"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodserv" rows="3"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="input-prodServ2 ml-2">
+                          <input type="file" name="input-prodServ2" id="input-prodServ2" accept=".jpg, .png" (change)="guardarImagenProdServ2($event)">
+                          </span>
+                          <label for="input-prodServ2">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServ2}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdserv2"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodserv2" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="input-prodServ3 ml-2">
+                          <input type="file" name="input-prodServ3" id="input-prodServ3" accept=".jpg, .png" (change)="guardarImagenProdServ3($event)">
+                          </span>
+                          <label for="input-prodServ3">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServ3}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdserv3"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodserv3" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+               
+              </div>
+              <div class="row">
+                
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="input-prodServ4 ml-2">
+                        <input type="file" name="input-prodServ4" id="input-prodServ4" accept=".jpg, .png" (change)="guardarImagenProdServ4($event)">
+                        </span>
+                        <label for="input-prodServ4">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServ4}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdserv4"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodserv4" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+                
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="input-prodServ5 ml-2">
+                        <input type="file" name="input-prodServ5" id="input-prodServ5" accept=".jpg, .png" (change)="guardarImagenProdServ5($event)">
+                        </span>
+                        <label for="input-prodServ5">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServ5}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdserv5"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodserv5" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="input-prodServ6 ml-2">
+                        <input type="file" name="input-prodServ6" id="input-prodServ6" accept=".jpg, .png" (change)="guardarImagenProdServ6($event)">
+                        </span>
+                        <label for="input-prodServ6">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServ6}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdserv6"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodserv6" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+             
+            </div>
+            <div class="row">
+                
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                  <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                    <span class="input-prodServ7 ml-2">
+                      <input type="file" name="input-prodServ7" id="input-prodServ7" accept=".jpg, .png" (change)="guardarImagenProdServ7($event)">
+                      </span>
+                      <label for="input-prodServ7">
+                        <span>Subir imagen</span>
+                      </label>
+                    
+                      <label class="ml-3 mr-2">{{mensajeImagenProdServ7}}</label>
+                     
+                  </div>
+                  <div class="card-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control" [(ngModel)]="infoProdserv7"
+                    [ngModelOptions]="{standalone: true}" id="txt_prodserv7" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+              
+            
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                  <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                    <span class="input-prodServ8 ml-2">
+                      <input type="file" name="input-prodServ8" id="input-prodServ8" accept=".jpg, .png" (change)="guardarImagenProdServ8($event)">
+                      </span>
+                      <label for="input-prodServ8">
+                        <span>Subir imagen</span>
+                      </label>
+                    
+                      <label class="ml-3 mr-2">{{mensajeImagenProdServ8}}</label>
+                     
+                  </div>
+                  <div class="card-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control" [(ngModel)]="infoProdserv8"
+                    [ngModelOptions]="{standalone: true}" id="txt_prodserv8" rows="3"></textarea>
+                   
+                  </div>
+                </div>
+              </div>
+            
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                  <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                    <span class="input-prodServ9 ml-2">
+                      <input type="file" name="input-prodServ9" id="input-prodServ9" accept=".jpg, .png" (change)="guardarImagenProdServ9($event)">
+                      </span>
+                      <label for="input-prodServ9">
+                        <span>Subir imagen</span>
+                      </label>
+                    
+                      <label class="ml-3 mr-2">{{mensajeImagenProdServ9}}</label>
+                     
+                  </div>
+                  <div class="card-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control" [(ngModel)]="infoProdserv9"
+                    [ngModelOptions]="{standalone: true}" id="txt_prodserv9" rows="3"></textarea>
+                   
+                  </div>
+                </div>
+              </div>
+           
+          </div>
+
+          <div class="mt-4">
+            <div *ngIf="!imagen_PS_NoAlmacenSubida;else mensaje_PS_NoAlmacen_Subida" class="centrar mt-2">
+              <button *ngIf="!subiendoimagenes_PS_NoAlmacen;else cargando_PS_NoAlmacen" class="btn btn-success"
+                (click)="subir_PS_NoAlmacen()">Guardar</button>
+              <ng-template #cargando_PS_NoAlmacen>
+                <button class="btn btn-success centrar" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                  Guardando....
+                </button>
+              </ng-template>
+            </div>
+            <ng-template #mensaje_PS_NoAlmacen_Subida>
+              <div>
+                <div class="alert alert-success" role="alert">
+                  Datos guardados con exito!
+                </div>
+                <button class="btn btn-info" matStepperNext>Siguiente</button>
+              </div>
+
+            </ng-template>
+          </div>
+
+
+            </div>
+
+
+
+
+
+          <!--aqui terminan los 9 productos-->
+
+
+
+          <!--aqui empiezan los 30 productos-->
+
+
+
+            <ng-template #mensajeAlmacen>
+              <div>
+                <p>
+                  Puede ingresar hasta 30 productos o servicios, adjuntando una imagen por cada uno y su descripcion,
+                  recuerde que puede ingresar menos productos o servicios de lo indicado previamente.
+                </p>
+
+                
+                  <div *ngIf="alertaPSSubidas1_10">
+                    <div class="alert alert-success mt-2" role="alert">
+                      Productos y servicios guardados N° 1-10!
+                    </div>
+                  </div>
+    
+                
+
+               
+                  <div *ngIf="alertaPSSubidas10_20">
+                    <div class="alert alert-success mt-2" role="alert">
+                      Productos y servicios guardados N° 10-20!
+                    </div>
+                  </div>
+    
+                
+                  <div *ngIf="alertaPSSubidas20_30">
+                    <div class="alert alert-success mt-2" role="alert">
+                      Productos y servicios guardados N° 20-30!
+                    </div>
+                  </div>
+                  <div *ngIf="btnSiguientePS">
+                    <button class="btn btn-info" matStepperNext>Siguiente</button>
+                  </div>
+                
+
+                <div *ngIf="this.prodServ0_10==true">
+                  <h5>Productos y servicios N° 1-10</h5>
+                  <div class="row">
+                
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p1 ml-2">
+                            <input type="file" name="_p1" id="_p1" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen($event)">
+                            </span>
+                            <label for="_p1">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen" rows="3"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p2 ml-2">
+                            <input type="file" name="_p2" id="_p2" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen2($event)">
+                            </span>
+                            <label for="_p2">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen2}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen2"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen2" rows="3"></textarea>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p3 ml-2">
+                            <input type="file" name="_p3" id="_p3" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen3($event)">
+                            </span>
+                            <label for="_p3">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen3}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen3"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen3" rows="3"></textarea>
+                         
+                        </div>
+                      </div>
+                    </div>
+                 
+                </div>
+                <div class="row">
+                  
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p4 ml-2">
+                          <input type="file" name="_p4" id="_p4" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen4($event)">
+                          </span>
+                          <label for="_p4">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen4}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen4"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalamcen4" rows="3"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p5 ml-2">
+                          <input type="file" name="_p5" id="_p5" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen5($event)">
+                          </span>
+                          <label for="_p5">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen5}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen5"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalamcen5" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p6 ml-2">
+                          <input type="file" name="_p6" id="_p6" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen6($event)">
+                          </span>
+                          <label for="_p6">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen6}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen6"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen6" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+               
+              </div>
+              <div class="row">
+                  
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p7 ml-2">
+                        <input type="file" name="_p7" id="_p7" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen7($event)">
+                        </span>
+                        <label for="_p7">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen7}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen7"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen7" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+                
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p8 ml-2">
+                        <input type="file" name="_p8" id="_p8" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen8($event)">
+                        </span>
+                        <label for="_p8">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen8}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen8"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen8" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p9 ml-2">
+                        <input type="file" name="_p9" id="_p9" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen9($event)">
+                        </span>
+                        <label for="_p9">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen9}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen9"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen9" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+             
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                  <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                    <span class="_p10 ml-2">
+                      <input type="file" name="_p10" id="_p10" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen10($event)">
+                      </span>
+                      <label for="_p10">
+                        <span>Subir imagen</span>
+                      </label>
+                    
+                      <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen10}}</label>
+                     
+                  </div>
+                  <div class="card-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control" [(ngModel)]="infoProdservAlmacen10"
+                    [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen10" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div *ngIf="!imagen_PS_Almacen10Subida" class="centrar mt-2">
+                  <button *ngIf="!subiendoimagenes_PS_Almacen10;else cargando_PS_Almacen10" class="btn btn-success"
+                    (click)="subir_PS_Almacen10()">Guardar</button>
+                  <ng-template #cargando_PS_Almacen10>
+                    <button class="btn btn-success centrar" type="button" disabled>
+                      <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                      Guardando....
+                    </button>
+                  </ng-template>
+                </div>
+                
+              </div>
+
+
+            </div>
+                </div>
+                <div *ngIf="this.prodServ10_20==true">
+                  <h5>Productos y servicios N° 10-20</h5>
+                  <div class="row">
+                
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p11 ml-2">
+                            <input type="file" name="_p11" id="_p11" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen11($event)">
+                            </span>
+                            <label for="_p11">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen11}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen11"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen11" rows="3"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p12 ml-2">
+                            <input type="file" name="_p12" id="_p12" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen12($event)">
+                            </span>
+                            <label for="_p12">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen12}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen12"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen12" rows="3"></textarea>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p13 ml-2">
+                            <input type="file" name="_p13" id="_p13" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen13($event)">
+                            </span>
+                            <label for="_p13">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen13}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen13"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen13" rows="3"></textarea>
+                         
+                        </div>
+                      </div>
+                    </div>
+                 
+                </div>
+                <div class="row">
+                  
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p14 ml-2">
+                          <input type="file" name="_p14" id="_p14" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen14($event)">
+                          </span>
+                          <label for="_p14">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen14}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen14"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalamcen14" rows="3"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p15 ml-2">
+                          <input type="file" name="_p15" id="_p15" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen15($event)">
+                          </span>
+                          <label for="_p15">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen15}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen15"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalamcen15" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p16 ml-2">
+                          <input type="file" name="_p16" id="_p16" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen16($event)">
+                          </span>
+                          <label for="_p16">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen16}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen16"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen6" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+               
+              </div>
+              <div class="row">
+                  
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p17 ml-2">
+                        <input type="file" name="_p17" id="_p17" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen17($event)">
+                        </span>
+                        <label for="_p17">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen17}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen17"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen17" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+                
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p18 ml-2">
+                        <input type="file" name="_p18" id="_p18" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen18($event)">
+                        </span>
+                        <label for="_p18">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen18}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen18"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen18" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p19 ml-2">
+                        <input type="file" name="_p19" id="_p19" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen19($event)">
+                        </span>
+                        <label for="_p19">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen19}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen19"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen19" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+             
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                  <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                    <span class="_p20 ml-2">
+                      <input type="file" name="_p20" id="_p20" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen20($event)">
+                      </span>
+                      <label for="_p20">
+                        <span>Subir imagen</span>
+                      </label>
+                    
+                      <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen20}}</label>
+                     
+                  </div>
+                  <div class="card-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control" [(ngModel)]="infoProdservAlmacen20"
+                    [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen20" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div *ngIf="!imagen_PS_Almacen20Subida" class="centrar mt-2">
+                  <button *ngIf="!subiendoimagenes_PS_Almacen20;else cargando_PS_Almacen20" class="btn btn-success"
+                    (click)="subir_PS_Almacen20()">Guardar</button>
+                  <ng-template #cargando_PS_Almacen20>
+                    <button class="btn btn-success centrar" type="button" disabled>
+                      <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                      Guardando....
+                    </button>
+                  </ng-template>
+                </div>
+                
+              </div>
+
+
+            </div>
+                </div>
+                <div *ngIf="this.prodServ20_30==true">
+                  <h5>Productos y servicios N° 20-30</h5>
+                  <div class="row">
+                
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p21 ml-2">
+                            <input type="file" name="_p21" id="_p21" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen21($event)">
+                            </span>
+                            <label for="_p21">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen21}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen21"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen21" rows="3"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p22 ml-2">
+                            <input type="file" name="_p22" id="_p22" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen22($event)">
+                            </span>
+                            <label for="_p22">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen22}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen22"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen22" rows="3"></textarea>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                      <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                        <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                          <span class="_p23 ml-2">
+                            <input type="file" name="_p23" id="_p23" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen23($event)">
+                            </span>
+                            <label for="_p23">
+                              <span>Subir imagen</span>
+                            </label>
+                          
+                            <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen23}}</label>
+                           
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                          <textarea class="form-control" [(ngModel)]="infoProdservAlmacen23"
+                          [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen23" rows="3"></textarea>
+                         
+                        </div>
+                      </div>
+                    </div>
+                 
+                </div>
+                <div class="row">
+                  
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p24 ml-2">
+                          <input type="file" name="_p24" id="_p24" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen24($event)">
+                          </span>
+                          <label for="_p24">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen24}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen24"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalamcen24" rows="3"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p25 ml-2">
+                          <input type="file" name="_p25" id="_p25" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen25($event)">
+                          </span>
+                          <label for="_p25">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen25}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen25"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalamcen25" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                        <span class="_p26 ml-2">
+                          <input type="file" name="_p26" id="_p26" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen26($event)">
+                          </span>
+                          <label for="_p26">
+                            <span>Subir imagen</span>
+                          </label>
+                        
+                          <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen26}}</label>
+                         
+                      </div>
+                      <div class="card-body d-flex justify-content-center align-items-center">
+                        <textarea class="form-control" [(ngModel)]="infoProdservAlmacen26"
+                        [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen26" rows="3"></textarea>
+                       
+                      </div>
+                    </div>
+                  </div>
+               
+              </div>
+              <div class="row">
+                  
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p27 ml-2">
+                        <input type="file" name="_p27" id="_p27" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen27($event)">
+                        </span>
+                        <label for="_p27">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen27}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen27"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen27" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+                
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p28 ml-2">
+                        <input type="file" name="_p28" id="_p28" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen28($event)">
+                        </span>
+                        <label for="_p28">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen28}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen28"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen28" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                  <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                      <span class="_p29 ml-2">
+                        <input type="file" name="_p29" id="_p29" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen29($event)">
+                        </span>
+                        <label for="_p29">
+                          <span>Subir imagen</span>
+                        </label>
+                      
+                        <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen29}}</label>
+                       
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                      <textarea class="form-control" [(ngModel)]="infoProdservAlmacen29"
+                      [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen29" rows="3"></textarea>
+                     
+                    </div>
+                  </div>
+                </div>
+             
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="card  mt-3 mb-3" style="padding:0px !important;">
+                  <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
+                    <span class="_p30 ml-2">
+                      <input type="file" name="_p30" id="_p30" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen30($event)">
+                      </span>
+                      <label for="_p30">
+                        <span>Subir imagen</span>
+                      </label>
+                    
+                      <label class="ml-3 mr-2">{{mensajeImagenProdServAlmacen30}}</label>
+                     
+                  </div>
+                  <div class="card-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control" [(ngModel)]="infoProdservAlmacen30"
+                    [ngModelOptions]="{standalone: true}" id="txt_prodservalmacen30" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <div *ngIf="!imagen_PS_Almacen30Subida" class="centrar mt-2">
+                  <button *ngIf="!subiendoimagenes_PS_Almacen30;else cargando_PS_Almacen30" class="btn btn-success"
+                    (click)="subir_PS_Almacen30()">Guardar</button>
+                  <ng-template #cargando_PS_Almacen30>
+                    <button class="btn btn-success centrar" type="button" disabled>
+                      <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                      Guardando....
+                    </button>
+                  </ng-template>
+                </div>
+                
+              </div>
+
+
+            </div>
+                </div>
+                
+              </div>
+            </ng-template>
+
+
+
+
+ <!--aqui terminan los 30 productos-->
+
+
+
+
+
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Fin</ng-template>
+        
+        <div>
+         <h4>Completado!</h4>
+         <p>Felicidades, su solicitud ha sido completada con exito, un equipo de Producto Chile revisara meticulosamente el contenido de su OnePage para asegurar la calidad del contenido. Una vez finalizado dicho proceso, se le notificara por correo electronico cuando su OnePage este activa.</p>
         </div>
+      </mat-step>
+    </mat-vertical-stepper>
 
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ">
-          <input type="file" name="input-prodServ" id="input-prodServ" accept=".jpg, .png" (change)="guardarImagenProdServ($event)">
-          </span>
-          <label for="input-prodServ">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv1"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
+
   </div>
-  
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ2">
-          <input type="file" name="input-prodServ2" id="input-prodServ2" accept=".jpg, .png" (change)="guardarImagenProdServ2($event)">
-          </span>
-          <label for="input-prodServ2">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ2}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv2"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ3">
-          <input type="file" name="input-prodServ3" id="input-prodServ3" accept=".jpg, .png" (change)="guardarImagenProdServ3($event)">
-          </span>
-          <label for="input-prodServ3">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ3}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv3"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ4">
-          <input type="file" name="input-prodServ4" id="input-prodServ4" accept=".jpg, .png" (change)="guardarImagenProdServ4($event)">
-          </span>
-          <label for="input-prodServ4">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ4}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv4"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ5">
-          <input type="file" name="input-prodServ5" id="input-prodServ5" accept=".jpg, .png" (change)="guardarImagenProdServ5($event)">
-          </span>
-          <label for="input-prodServ5">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ5}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv5"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ6">
-          <input type="file" name="input-prodServ6" id="input-prodServ6" accept=".jpg, .png" (change)="guardarImagenProdServ6($event)">
-          </span>
-          <label for="input-prodServ6">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ6}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv6"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ7">
-          <input type="file" name="input-prodServ7" id="input-prodServ7" accept=".jpg, .png" (change)="guardarImagenProdServ7($event)">
-          </span>
-          <label for="input-prodServ7">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ7}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv7"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ8">
-          <input type="file" name="input-prodServ8" id="input-prodServ8" accept=".jpg, .png" (change)="guardarImagenProdServ8($event)">
-          </span>
-          <label for="input-prodServ8">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ8}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv8"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ9">
-          <input type="file" name="input-prodServ9" id="input-prodServ9" accept=".jpg, .png" (change)="guardarImagenProdServ9($event)">
-          </span>
-          <label for="input-prodServ9">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ9}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv9"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ10">
-          <input type="file" name="input-prodServ10" id="input-prodServ10" accept=".jpg, .png" (change)="guardarImagenProdServ10($event)">
-          </span>
-          <label for="input-prodServ10">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ10}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv10"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ11">
-          <input type="file" name="input-prodServ11" id="input-prodServ11" accept=".jpg, .png" (change)="guardarImagenProdServ11($event)">
-          </span>
-          <label for="input-prodServ11">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ11}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv11"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="card  col-6 mt-3 mb-3" style="padding:0px !important;">
-      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-        <span class="input-prodServ12">
-          <input type="file" name="input-prodServ12" id="input-prodServ12" accept=".jpg, .png" (change)="guardarImagenProdServ12($event)">
-          </span>
-          <label for="input-prodServ12">
-            <span>Subir imagen</span>
-          </label>
-        
-          <label class="ml-4">{{mensajeImagenProdServ12}}</label>
-         
-      </div>
-      <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn btn-info rounded" style="padding:10px !important" data-toggle="modal" data-target="#modal-prodserv12"> <i class="fas fa-pen-square fa-3x"></i></button>
-       
-      </div>
-    </div>
-  </div>
-
-
-<div class="centrar-horizontal">
-  <button class="btn btn-success btn-block p-3 mt-5" style="font-size: large;font-weight: bolder;" (click)="solicitarOnePage()">Solicitar OnePage</button>
 </div>
 
-    </div> 
-    </div>
+<!-- pie de pagina -->
+<!-- <app-footer></app-footer> -->
 
-  </div>
-
-  
-
-
-
-  <footer class="footerh">
-    <div class="row">
-      <div class="col-md-6 col-lg-7">
-  
-      </div>
-      <div class="col-sm-12 col-md-6 col-lg-4 centrar margen-icono-footer">
-        <i class="fab fa-facebook-f fa-2x  icono-footer-circular-face"></i>
-        <i class="fab fa-twitter fa-2x  icono-footer-circular-tw"></i>
-        <i class="fab fa-instagram fa-2x  icono-footer-circular-insta"></i>
-        <i class="fab fa-youtube fa-2x icono-footer-circular-youtube"></i>
-      </div>
-    </div>
-  </footer>
 
 <button class="chat rounded-circle" data-toggle="modal" data-target="#modal-contacto">
   <i class="far fa-comments fa-2x"></i>
 </button>
-
-<!-- Modal contacto-->
-<div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header titulo-modal ">
-        <i class="far fa-comments centrar-vertical mr-2"></i>
-        <h5 class="modal-title" id="exampleModalLongTitle">Formulario de contacto</h5>
-        <button type="button" class="close centrar-vertical" data-dismiss="modal" aria-label="Close">
-          <i class="fas fa-times" style="color: white;"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <textarea [(ngModel)]="formContacto" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese sus dudas y consultas"></textarea>
-        <div class="alert alert-primary mt-3" role="alert">
-          Recuerde visitar la seccion de <a routerLink="/panel/preguntas-frecuentes" data-dismiss="modal">preguntas frecuentes</a>.
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="sendEmailClient()" data-dismiss="modal">Enviar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-<!-- Modal ayuda-->
-<div class="modal fade bd-example-modal-lg" id="ModalAyuda" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-       <div class="modal-content">
-       
-         <div class="mr-1">
-          <button  type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="stepper.reset()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-         </div>
-         <div class="modal-body" style="padding-top:0px !important;padding-bottom:0px !important">
-        
-          <mat-horizontal-stepper #stepper>
-               <mat-step  label="Inicio" state="image">
-                 <h4>Guia de configuracion de One page</h4>
-                 <p>Bienvenido a la guia de configuracion de one page, donde se indicara la funcion de cada seccion de su pagina, asi como las productos y servicios que puede asociar.</p>
-                 <div class="d-flex justify-content-end">
-                   <button class="btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
-                 </div>
-                 
-               </mat-step>
-               <mat-step label="Cabecera" state="image">
-                
-                <div class="container mt-2">
-                  <div class="row">
-                    <div class="offset-2 col-8 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-                      <i class="fas fa-plus-circle fa-3x"></i>
-                    </div>
-                    <div class="offset-2 col-8 mt-3">
-                      <h5>Agregar una imagen de cabecera</h5>
-                      <ul>
-                        <li>Para agregar una imagen de cabecera presionar el boton agregar imagen, representado por <i class="fas fa-plus-circle"></i></li>
-                        <li>Seleccionar una imagen de su equipo.</li>
-                      </ul>
-                      
-                    </div>
-                    
-                  </div>
-                </div>
-                 <div class="d-flex justify-content-between">
-                   <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
-                   <button class="ml-3 btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
-                 </div>
-               </mat-step>
-               <mat-step label="Caracteristica" state="image">
-                <div class="container mt-2">
-                  <div class="row">
-                    
-                    <div class="col-6 mt-3 mb-3">
-                      <h5>Agregar una caracteristica</h5>
-                      <ul>
-                        <li>Este punto cuenta de 2 partes: agregar una imagen y agregar la descripcion</li>
-                        <li>Para agregar una imagen de presionar el boton agregar imagen, representado por <i class="fas fa-plus-circle"></i></li>
-                        <li>Seleccionar una imagen de su equipo y subirla</li>
-                        <li>Para agregar una descripcion, presionar el boton agregar descripcion, representado por <i class="fas fa-pen-square"></i></li>
-                        <li>Ingresar la descripcion en el cuadro emergente y presionar guardar.</li>
-                      </ul>
-                      
-                    </div>
-                    <div class="card col-6 mt-3 mb-3" style="padding:0px !important;">
-                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-                        <i class="fas fa-plus-circle fa-3x"></i>
-                      </div>
-                      <div class="card-body d-flex justify-content-center align-items-center">
-                        <i class="fas fa-pen-square fa-3x"></i>
-                      </div>
-                    </div>
-
-                    
-                    
-                  </div>
-                </div>
-                    <div class="d-flex justify-content-between">
-                         <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
-                      <button class="btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
-                    </div>
-                  </mat-step>
-                  <mat-step label="Descripcion" state="image">
-                    <div class="container mt-2">
-                      <div class="row">
-                        <div class="offset-2 col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-                          <i class="fas fa-pen-square fa-3x"></i>
-                        </div>
-                        <div class="col-4 d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-                          <i class="fas fa-plus-circle fa-3x"></i>
-                        </div>
-                        <div class="offset-2 col-8 mt-3">
-                          <h5>Agregar informacion de su negocio</h5>
-                          <ul>
-                            <li>Este punto cuenta de 2 partes: agregar una descripcion usando el boton <i class="fas fa-plus-circle"></i> y agregar una imagen usando el boton <i class="fas fa-pen-square "></i></li>
-                          </ul>
-                          
-                        </div>
-                        
-                      </div>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                         <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
-                      <button class="btn btn-primary color-vue" matStepperNext>Siguiente <i class="fas fa-angle-right"></i></button> 
-                    </div>
-                  </mat-step>
-               <mat-step label="Productos" state="image">
-                <div class="container mt-2">
-                  <div class="row">
-                    
-                    <div class="col-6 mt-3 mb-3">
-                      <h5>Producto o servicio</h5>
-                      <ul>
-                        <li>Este punto cuenta de 2 partes: agregar una imagen y agregar la descripcion del producto o servicio</li>
-                        <li>Para agregar una imagen debe presionar el boton agregar imagen, representado por <i class="fas fa-plus-circle"></i></li>
-                        <li>Seleccionar una imagen de su equipo y subirla</li>
-                        <li>Para agregar una descripcion, presionar el boton agregar descripcion, representado por <i class="fas fa-pen-square"></i></li>
-                        <li>Ingresar la descripcion en el cuadro emergente y presionar guardar.</li>
-                      </ul>
-                      
-                    </div>
-                    <div class="card col-6 mt-3 mb-3" style="padding:0px !important;">
-                      <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(185, 185, 185);height: 200px;">
-                        <i class="fas fa-plus-circle fa-3x"></i>
-                      </div>
-                      <div class="card-body d-flex justify-content-center align-items-center">
-                        <i class="fas fa-pen-square fa-3x"></i>
-                      </div>
-                    </div>
-
-                    
-                    
-                  </div>
-                </div>
-                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-light" matStepperPrevious><i class="fas fa-angle-left"></i> Atras</button>
-                 <button class="btn btn-primary color-vue" data-dismiss="modal" (click)="stepper.reset()">Finalizar <i class="fas fa-angle-right"></i></button> 
-                 
-               </div>
-                
-               </mat-step>
-               <ng-template matStepperIcon="edit">
-                <mat-icon>image</mat-icon>
-              </ng-template>
-               <!-- Icon overrides. -->
-               <ng-template matStepperIcon="phone">
-                 <mat-icon>call_end</mat-icon>
-               </ng-template>
-               <ng-template matStepperIcon="chat">
-                 <mat-icon>forum</mat-icon>
-               </ng-template>
-             </mat-horizontal-stepper>
-<!-- change default 'edit' icon -->
-
-
-         </div>
-         <!-- <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary">Save changes</button>
-         </div> -->
-       </div>
-     </div>
-   </div>
-
-
-
-   <div class="modal fade" id="modal-caracteristica1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para primera caracteristica</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoCaracteristicas" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-caracteristica2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para segunda caracteristica</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoCaracteristicas2" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="modal fade" id="modal-caracteristica3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para tercera caracteristica</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoCaracteristicas3" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-
-  <div class="modal fade" id="modal-pyme" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion de pyme</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoPyme"  class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="modal fade" id="modal-prodserv1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 1</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 2</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv2" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 3</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv3" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="modal fade" id="modal-prodserv4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 4</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv4" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 5</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv5" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 6</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv6" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv7" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 7</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv7" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv8" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 8</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv8" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv9" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 9</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv9" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv10" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 10</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv10" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv11" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 11</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv11" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-prodserv12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Ingresar informacion para p/s 12</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="infoProdserv12" class="form-control" id="c1" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-

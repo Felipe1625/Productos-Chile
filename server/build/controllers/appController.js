@@ -18,6 +18,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 class AppController {
+    //metodos de practica
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield database_1.default.query('SELECT * FROM `pyme`,`usuario-administrador`');
@@ -50,6 +51,7 @@ class AppController {
             res.json({ text: "game delete.." });
         });
     }
+    //metodos de practica
     updateDatosEmpresariales(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idPyme } = req.body;
@@ -68,6 +70,31 @@ class AppController {
             yield database_1.default.query('UPDATE `usuario-administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
             console.log('UPDATE `usuario-administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
             res.json(req.body);
+        });
+    }
+    updateUsuarioPassword(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('id= ' + req.params.id);
+            console.log('data= ' + req.body);
+            console.log('password= ' + req.body.password);
+            const password = req.body.password;
+            const newPassword = req.body.newPassword;
+            const passwordInDB = yield database_1.default.query('SELECT ClaveUsuario from `usuario-administrador` WHERE idUsuario = ?', [req.params.id]);
+            // res.json(passwordInDB)
+            console.log('passwordInDB= ' + passwordInDB[0].ClaveUsuario);
+            if (passwordInDB[0].ClaveUsuario == password) {
+                console.log('las contraseñas son iguales');
+                console.log('passwordInDB= ' + passwordInDB[0].ClaveUsuario);
+                console.log('password= ' + password);
+                const x = yield database_1.default.query('UPDATE `usuario-administrador` set ClaveUsuario=' + req.body.newPassword + ' WHERE idUsuario =' + req.params.id + '');
+                res.json({ text: "password updated.." });
+            }
+            else {
+                console.log('distintas');
+                console.log('passwordInDB= ' + passwordInDB[0].ClaveUsuario);
+                console.log('password= ' + password);
+                res.status(404).send('error');
+            }
         });
     }
     sendEmailUser(req, res) {
@@ -154,16 +181,18 @@ class AppController {
                 idUsuario: 0,
                 NombreUsuario: '',
                 idPyme: 0,
-                link_OnePage: ''
+                link_OnePage: '',
+                almacen: -1
             };
             console.log("consulta a la db por correo y password");
-            const admin = yield database_1.default.query('SELECT u.idUsuario,u.NombreUsuario,u.Pyme_idPyme,p.link_OnePage FROM `usuario-administrador` as u INNER JOIN `pyme`as p ON u.Pyme_idPyme = p.idPyme WHERE u.correo=\'' + email + '\' AND u.ClaveUsuario=\'' + password + '\'');
+            const admin = yield database_1.default.query('SELECT u.idUsuario,u.NombreUsuario,u.Pyme_idPyme,p.link_OnePage,p.almacen FROM `usuario-administrador` as u INNER JOIN `pyme`as p ON u.Pyme_idPyme = p.idPyme WHERE u.correo=\'' + email + '\' AND u.ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
                 // res.json(admin[0])
                 Admin = admin[0];
                 console.log('admin Admin= ' + Admin);
                 console.log('admin Admin= ' + Admin.NombreUsuario);
                 console.log('onePage Admin= ' + Admin.link_OnePage);
+                console.log('almacen Admin= ' + Admin.almacen);
                 const token = jsonwebtoken_1.default.sign({ _id: Admin.idUsuario }, 'secretkey');
                 return res.status(200).json({ Admin, token });
             }
@@ -304,7 +333,7 @@ class AppController {
             console.log('getProductosServiciosPorNombre metodo en node bla');
             const { nombre } = req.body;
             console.log(nombre);
-            const productosServicios = yield database_1.default.query('SELECT idProducto as id,idPyme,nombreProducto as nombre,valorProducto as valor,cantidadProducto as cantidad,idTipos_Servicios_Productos,cantidad_like_producto as likes,cantidad_dislike_producto as dislikes,rutaImagenProducto as rutaImagen,Producto FROM `producto` where Habilitado=1 and nombreProducto like \'%' + nombre + '%\' UNION ALL SELECT idServicio,idPyme,nombreServicio,valorServicio,0,idTipos_Servicios_Productos,cantidad_like_servicio,cantidad_dislike_servicio,rutaImagenServicio,Producto FROM `servicio` where Habilitado=1 and nombreServicio like \'%' + nombre + '%\'');
+            const productosServicios = yield database_1.default.query('SELECT idProducto as id,idPyme,nombreProducto as nombre,valorProducto as valor,cantidadProducto as cantidad,idTipos_Servicios_Productos,cantidad_like_producto as likes,cantidad_dislike_producto as dislikes,rutaImagenProducto as rutaImagen,Producto FROM `producto` where Habilitado=1 and LOWER(nombreProducto) like \'%' + nombre + '%\' UNION ALL SELECT idServicio,idPyme,nombreServicio,valorServicio,0,idTipos_Servicios_Productos,cantidad_like_servicio,cantidad_dislike_servicio,rutaImagenServicio,Producto FROM `servicio` where Habilitado=1 and LOWER(nombreServicio) like \'%' + nombre + '%\'');
             console.log('productosServicios= ' + productosServicios);
             res.json(productosServicios);
         });
@@ -358,8 +387,8 @@ class AppController {
                 where += " and re.nombreRegion=\'" + region + '\'';
             }
             if (nombre != '' && nombre != undefined) {
-                nombreProducto = " and p.nombreProducto LIKE \'%" + nombre + '%\'';
-                nombreServicio = " and s.nombreServicio LIKE \'%" + nombre + '%\'';
+                nombreProducto = " and LOWER(p.nombreProducto) LIKE \'%" + nombre + '%\'';
+                nombreServicio = " and LOWER(s.nombreServicio) LIKE \'%" + nombre + '%\'';
             }
             console.log('where= ' + where);
             console.log('valor= ' + valor);
@@ -636,6 +665,1245 @@ class AppController {
             });
         });
     }
+    subirImagenesCabeceraNode(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenesCabeceraNode en node');
+            // var bitmap = fs.readFileSync(req.files.uploads[0].path);
+            // convert binary data to base64 encoded string
+            // var file_encode = new Buffer(bitmap).toString('base64');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            var cabeceravar;
+            var rutacabeceravar;
+            var cabeceravar2;
+            var rutacabeceravar2;
+            var cabeceravar3;
+            var rutacabeceravar3;
+            if (req.files.cabecera != undefined) {
+                cabeceravar = req.files.cabecera[0].originalFilename;
+                rutacabeceravar = req.files.cabecera[0].path;
+            }
+            if (req.files.cabecera2 != undefined) {
+                cabeceravar2 = req.files.cabecera2[0].originalFilename;
+                rutacabeceravar2 = req.files.cabecera2[0].path;
+            }
+            if (req.files.cabecera3 != undefined) {
+                cabeceravar3 = req.files.cabecera3[0].originalFilename;
+                rutacabeceravar3 = req.files.cabecera3[0].path;
+            }
+            const cabecera = cabeceravar;
+            const rutacabecera = rutacabeceravar;
+            const cabecera2 = cabeceravar2;
+            const rutacabecera2 = rutacabeceravar2;
+            const cabecera3 = cabeceravar3;
+            const rutacabecera3 = rutacabeceravar3;
+            const idPyme = req.params.id;
+            var contentHTML;
+            contentHTML = `
+                    Solicitud de one page para pyme id= ${idPyme}
+                    Cabecera:
+                    1 - ${cabecera}
+                    2 - ${cabecera2}
+                    3 - ${cabecera3}
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                // to: 'solicitudonepage@productochile.cl',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud one page pyme id=' + idPyme,
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: cabecera,
+                        path: rutacabecera,
+                    },
+                    {
+                        filename: cabecera2,
+                        path: rutacabecera2,
+                    },
+                    {
+                        filename: cabecera3,
+                        path: rutacabecera3,
+                    },
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res.json(error.message);
+                }
+                console.log('success');
+                return res.json('bien');
+            });
+        });
+    }
+    subirImagenesCaracteristicaNode(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenesCaracteristicaNode en node');
+            // var bitmap = fs.readFileSync(req.files.uploads[0].path);
+            // convert binary data to base64 encoded string
+            // var file_encode = new Buffer(bitmap).toString('base64');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            var caracteristicavar;
+            var caracteristica2var;
+            var caracteristica3var;
+            var rutacaracteristicavar;
+            var rutacaracteristica2var;
+            var rutacaracteristica3var;
+            var infoCaracteristicavar;
+            var infoCaracteristica2var;
+            var infoCaracteristica3var;
+            if (req.files.caracteristica != undefined) {
+                caracteristicavar = req.files.caracteristica[0].originalFilename;
+                rutacaracteristicavar = req.files.caracteristica[0].path;
+            }
+            if (req.files.caracteristica2 != undefined) {
+                caracteristica2var = req.files.caracteristica2[0].originalFilename;
+                rutacaracteristica2var = req.files.caracteristica2[0].path;
+            }
+            if (req.files.caracteristica3 != undefined) {
+                caracteristica3var = req.files.caracteristica3[0].originalFilename;
+                rutacaracteristica3var = req.files.caracteristica3[0].path;
+            }
+            if (req.body.infoCaracteristica != undefined) {
+                infoCaracteristicavar = req.body.infoCaracteristica[0];
+            }
+            if (req.body.infoCaracteristica2 != undefined) {
+                infoCaracteristica2var = req.body.infoCaracteristica2[0];
+            }
+            if (req.body.infoCaracteristica3 != undefined) {
+                infoCaracteristica3var = req.body.infoCaracteristica3[0];
+            }
+            const caracteristica = caracteristicavar;
+            const caracteristica2 = caracteristica2var;
+            const caracteristica3 = caracteristica3var;
+            const rutacaracteristica = rutacaracteristicavar;
+            const rutacaracteristica2 = rutacaracteristica2var;
+            const rutacaracteristica3 = rutacaracteristica3var;
+            const infoCaracteristica = infoCaracteristicavar;
+            const infoCaracteristica2 = infoCaracteristica2var;
+            const infoCaracteristica3 = infoCaracteristica3var;
+            const idPyme = req.params.id;
+            var contentHTML;
+            contentHTML = `
+                    Solicitud de one page
+                    Caracteriticas:
+                    1 - Nombre Imagen ${caracteristica}
+                    1 - Informacion ${infoCaracteristica}
+                    2 - Nombre Imagen ${caracteristica2}
+                    2 - Informacion ${infoCaracteristica2}
+                    3 - Nombre Imagen ${caracteristica3}
+                    3 - Informacion ${infoCaracteristica3}
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud one page pyme id=' + idPyme,
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: caracteristica,
+                        path: rutacaracteristica
+                    },
+                    {
+                        filename: caracteristica2,
+                        path: rutacaracteristica2
+                    },
+                    {
+                        filename: caracteristica3,
+                        path: rutacaracteristica3
+                    }
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res.json(error.message);
+                }
+                console.log('success');
+                return res.json('bien');
+            });
+        });
+    }
+    subirImagenPymeNode(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenPymeNode en node');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            var pymevar;
+            var rutapymevar;
+            var infopymevar;
+            if (req.files.pyme != undefined) {
+                pymevar = req.files.pyme[0].originalFilename;
+                rutapymevar = req.files.pyme[0].path;
+            }
+            if (req.body.infoPyme != undefined) {
+                infopymevar = req.body.infoPyme[0];
+            }
+            const pyme = pymevar;
+            const rutapyme = rutapymevar;
+            const infopyme = infopymevar;
+            const idPyme = req.params.id;
+            var contentHTML;
+            contentHTML = `
+                    Solicitud de one page
+                    Pyme:
+                    1 - Nombre Imagen  ${pyme}
+                    1 - Informacion ${infopyme}
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud one page pyme id=' + idPyme,
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: pyme,
+                        path: rutapyme
+                    },
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res.json(error.message);
+                }
+                console.log('success');
+                return res.json('bien');
+            });
+        });
+    }
+    subirImagenesProductoServicioNode(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenesProductoServicioNode en node');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
+            const idPyme = req.params.id;
+            var contentHTML;
+            contentHTML = `
+                    Solicitud de one page
+                    Producto-Servicio:
+                    1 - Nombre Imagen ${prodServ}
+                    1 - Informacion ${infoprodserv}
+                    2 - Nombre Imagen ${prodServ2}
+                    2 - Informacion ${infoprodserv2}
+                    3 - Nombre Imagen ${prodServ3}
+                    3 - Informacion ${infoprodserv3}
+                    4 - Nombre Imagen ${prodServ4}
+                    4 - Informacion ${infoprodserv4}
+                    5 - Nombre Imagen ${prodServ5}
+                    5 - Informacion ${infoprodserv5}
+                    6 - Nombre Imagen ${prodServ6}
+                    6 - Informacion ${infoprodserv6}
+                    7 - Nombre Imagen ${prodServ7}
+                    7 - Informacion ${infoprodserv7}
+                    8 - Nombre Imagen ${prodServ8}
+                    8 - Informacion ${infoprodserv8}
+                    9 - Nombre Imagen ${prodServ9}
+                    9 - Informacion ${infoprodserv9}
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud one page pyme id=' + idPyme,
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: prodServ,
+                        path: rutaprodServ
+                    },
+                    {
+                        filename: prodServ2,
+                        path: rutaprodServ2
+                    },
+                    {
+                        filename: prodServ3,
+                        path: rutaprodServ3
+                    },
+                    {
+                        filename: prodServ4,
+                        path: rutaprodServ4
+                    },
+                    {
+                        filename: prodServ5,
+                        path: rutaprodServ5
+                    },
+                    {
+                        filename: prodServ6,
+                        path: rutaprodServ6
+                    },
+                    {
+                        filename: prodServ7,
+                        path: rutaprodServ7
+                    },
+                    {
+                        filename: prodServ8,
+                        path: rutaprodServ8
+                    },
+                    {
+                        filename: prodServ9,
+                        path: rutaprodServ9
+                    }
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res.json(error.message);
+                }
+                console.log('success');
+                return res.json('bien');
+            });
+        });
+    }
+    //almacen
+    subirImagenesProductoServicioAlmacen10Node(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenesProductoServicioAlmacen10Node en node');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            // const prodServ = req.files.ps[0].originalFilename;
+            // const prodServ2 = req.files.ps2[0].originalFilename;
+            // const prodServ3 = req.files.ps3[0].originalFilename;
+            // const prodServ4 = req.files.ps4[0].originalFilename;
+            // const prodServ5 = req.files.ps5[0].originalFilename;
+            // const prodServ6 = req.files.ps6[0].originalFilename;
+            // const prodServ7 = req.files.ps7[0].originalFilename;
+            // const prodServ8 = req.files.ps8[0].originalFilename;
+            // const prodServ9 = req.files.ps9[0].originalFilename;
+            // const prodServ10 = req.files.ps10[0].originalFilename;
+            // const rutaprodServ = req.files.ps[0].path;
+            // const rutaprodServ2 = req.files.ps2[0].path;
+            // const rutaprodServ3 = req.files.ps3[0].path;
+            // const rutaprodServ4 = req.files.ps4[0].path;
+            // const rutaprodServ5 = req.files.ps5[0].path;
+            // const rutaprodServ6 = req.files.ps6[0].path;
+            // const rutaprodServ7 = req.files.ps7[0].path;
+            // const rutaprodServ8 = req.files.ps8[0].path;
+            // const rutaprodServ9 = req.files.ps9[0].path;
+            // const rutaprodServ10 = req.files.ps9[0].path;
+            // const infoprodserv = req.body.infoPS[0];
+            // const infoprodserv2 = req.body.infoPS2[0];
+            // const infoprodserv3 = req.body.infoPS3[0];
+            // const infoprodserv4 = req.body.infoPS4[0];
+            // const infoprodserv5 = req.body.infoPS5[0];
+            // const infoprodserv6 = req.body.infoPS6[0];
+            // const infoprodserv7 = req.body.infoPS7[0];
+            // const infoprodserv8 = req.body.infoPS8[0];
+            // const infoprodserv9 = req.body.infoPS9[0];
+            // const infoprodserv10 = req.body.infoPS10[0];
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var prodServ10var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var rutaprodServ10var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            var infoprodserv10var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.files.ps10 != undefined) {
+                prodServ10var = req.files.ps10[0].originalFilename;
+                rutaprodServ10var = req.files.ps10[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            if (req.body.infoPS10 != undefined) {
+                infoprodserv10var = req.body.infoPS10[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const prodServ10 = prodServ10var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const rutaprodServ10 = rutaprodServ10var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
+            const infoprodserv10 = infoprodserv10var;
+            const idPyme = req.params.id;
+            var contentHTML;
+            contentHTML = `
+                    Solicitud de one page
+                    Producto-Servicio:
+                    1 - Nombre Imagen ${prodServ}
+                    1 - Informacion ${infoprodserv}
+                    2 - Nombre Imagen ${prodServ2}
+                    2 - Informacion ${infoprodserv2}
+                    3 - Nombre Imagen ${prodServ3}
+                    3 - Informacion ${infoprodserv3}
+                    4 - Nombre Imagen ${prodServ4}
+                    4 - Informacion ${infoprodserv4}
+                    5 - Nombre Imagen ${prodServ5}
+                    5 - Informacion ${infoprodserv5}
+                    6 - Nombre Imagen ${prodServ6}
+                    6 - Informacion ${infoprodserv6}
+                    7 - Nombre Imagen ${prodServ7}
+                    7 - Informacion ${infoprodserv7}
+                    8 - Nombre Imagen ${prodServ8}
+                    8 - Informacion ${infoprodserv8}
+                    9 - Nombre Imagen ${prodServ9}
+                    9 - Informacion ${infoprodserv9}
+                    10 - Nombre Imagen ${prodServ10}
+                    10 - Informacion ${infoprodserv10}
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud one page pyme id=' + idPyme,
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: prodServ,
+                        path: rutaprodServ
+                    },
+                    {
+                        filename: prodServ2,
+                        path: rutaprodServ2
+                    },
+                    {
+                        filename: prodServ3,
+                        path: rutaprodServ3
+                    },
+                    {
+                        filename: prodServ4,
+                        path: rutaprodServ4
+                    },
+                    {
+                        filename: prodServ5,
+                        path: rutaprodServ5
+                    },
+                    {
+                        filename: prodServ6,
+                        path: rutaprodServ6
+                    },
+                    {
+                        filename: prodServ7,
+                        path: rutaprodServ7
+                    },
+                    {
+                        filename: prodServ8,
+                        path: rutaprodServ8
+                    },
+                    {
+                        filename: prodServ9,
+                        path: rutaprodServ9
+                    }, {
+                        filename: prodServ10,
+                        path: rutaprodServ10
+                    }
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res.json(error.message);
+                }
+                console.log('success');
+                return res.json('bien');
+            });
+        });
+    }
+    subirImagenesProductoServicioAlmacen20Node(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenesProductoServicioAlmacen20Node en node');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            // const prodServ = req.files.ps[0].originalFilename;
+            // const prodServ2 = req.files.ps2[0].originalFilename;
+            // const prodServ3 = req.files.ps3[0].originalFilename;
+            // const prodServ4 = req.files.ps4[0].originalFilename;
+            // const prodServ5 = req.files.ps5[0].originalFilename;
+            // const prodServ6 = req.files.ps6[0].originalFilename;
+            // const prodServ7 = req.files.ps7[0].originalFilename;
+            // const prodServ8 = req.files.ps8[0].originalFilename;
+            // const prodServ9 = req.files.ps9[0].originalFilename;
+            // const prodServ10 = req.files.ps10[0].originalFilename;
+            // const rutaprodServ = req.files.ps[0].path;
+            // const rutaprodServ2 = req.files.ps2[0].path;
+            // const rutaprodServ3 = req.files.ps3[0].path;
+            // const rutaprodServ4 = req.files.ps4[0].path;
+            // const rutaprodServ5 = req.files.ps5[0].path;
+            // const rutaprodServ6 = req.files.ps6[0].path;
+            // const rutaprodServ7 = req.files.ps7[0].path;
+            // const rutaprodServ8 = req.files.ps8[0].path;
+            // const rutaprodServ9 = req.files.ps9[0].path;
+            // const rutaprodServ10 = req.files.ps10[0].path;
+            // const infoprodserv = req.body.infoPS[0];
+            // const infoprodserv2 = req.body.infoPS2[0];
+            // const infoprodserv3 = req.body.infoPS3[0];
+            // const infoprodserv4 = req.body.infoPS4[0];
+            // const infoprodserv5 = req.body.infoPS5[0];
+            // const infoprodserv6 = req.body.infoPS6[0];
+            // const infoprodserv7 = req.body.infoPS7[0];
+            // const infoprodserv8 = req.body.infoPS8[0];
+            // const infoprodserv9 = req.body.infoPS9[0];
+            // const infoprodserv10 = req.body.infoPS10[0];
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var prodServ10var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var rutaprodServ10var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            var infoprodserv10var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.files.ps10 != undefined) {
+                prodServ10var = req.files.ps10[0].originalFilename;
+                rutaprodServ10var = req.files.ps10[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            if (req.body.infoPS10 != undefined) {
+                infoprodserv10var = req.body.infoPS10[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const prodServ10 = prodServ10var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const rutaprodServ10 = rutaprodServ10var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
+            const infoprodserv10 = infoprodserv10var;
+            const idPyme = req.params.id;
+            var contentHTML;
+            contentHTML = `
+                    Solicitud de one page
+                    Producto-Servicio:
+                    11 - Nombre Imagen ${prodServ}
+                    11 - Informacion ${infoprodserv}
+                    12 - Nombre Imagen ${prodServ2}
+                    12 - Informacion ${infoprodserv2}
+                    13 - Nombre Imagen ${prodServ3}
+                    13 - Informacion ${infoprodserv3}
+                    14 - Nombre Imagen ${prodServ4}
+                    14 - Informacion ${infoprodserv4}
+                    15 - Nombre Imagen ${prodServ5}
+                    15 - Informacion ${infoprodserv5}
+                    16 - Nombre Imagen ${prodServ6}
+                    16 - Informacion ${infoprodserv6}
+                    17 - Nombre Imagen ${prodServ7}
+                    17 - Informacion ${infoprodserv7}
+                    18 - Nombre Imagen ${prodServ8}
+                    18 - Informacion ${infoprodserv8}
+                    19 - Nombre Imagen ${prodServ9}
+                    19 - Informacion ${infoprodserv9}
+                    20 - Nombre Imagen ${prodServ10}
+                    20 - Informacion ${infoprodserv10}
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud one page pyme id=' + idPyme,
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: prodServ,
+                        path: rutaprodServ
+                    },
+                    {
+                        filename: prodServ2,
+                        path: rutaprodServ2
+                    },
+                    {
+                        filename: prodServ3,
+                        path: rutaprodServ3
+                    },
+                    {
+                        filename: prodServ4,
+                        path: rutaprodServ4
+                    },
+                    {
+                        filename: prodServ5,
+                        path: rutaprodServ5
+                    },
+                    {
+                        filename: prodServ6,
+                        path: rutaprodServ6
+                    },
+                    {
+                        filename: prodServ7,
+                        path: rutaprodServ7
+                    },
+                    {
+                        filename: prodServ8,
+                        path: rutaprodServ8
+                    },
+                    {
+                        filename: prodServ9,
+                        path: rutaprodServ9
+                    }, {
+                        filename: prodServ10,
+                        path: rutaprodServ10
+                    }
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res.json(error.message);
+                }
+                console.log('success');
+                return res.json('bien');
+            });
+        });
+    }
+    subirImagenesProductoServicioAlmacen30Node(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenesProductoServicioAlmacen30Node en node');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            // const prodServ = req.files.ps[0].originalFilename;
+            // const prodServ2 = req.files.ps2[0].originalFilename;
+            // const prodServ3 = req.files.ps3[0].originalFilename;
+            // const prodServ4 = req.files.ps4[0].originalFilename;
+            // const prodServ5 = req.files.ps5[0].originalFilename;
+            // const prodServ6 = req.files.ps6[0].originalFilename;
+            // const prodServ7 = req.files.ps7[0].originalFilename;
+            // const prodServ8 = req.files.ps8[0].originalFilename;
+            // const prodServ9 = req.files.ps9[0].originalFilename;
+            // const prodServ10 = req.files.ps10[0].originalFilename;
+            // const rutaprodServ = req.files.ps[0].path;
+            // const rutaprodServ2 = req.files.ps2[0].path;
+            // const rutaprodServ3 = req.files.ps3[0].path;
+            // const rutaprodServ4 = req.files.ps4[0].path;
+            // const rutaprodServ5 = req.files.ps5[0].path;
+            // const rutaprodServ6 = req.files.ps6[0].path;
+            // const rutaprodServ7 = req.files.ps7[0].path;
+            // const rutaprodServ8 = req.files.ps8[0].path;
+            // const rutaprodServ9 = req.files.ps9[0].path;
+            // const rutaprodServ10 = req.files.ps10[0].path;
+            // const infoprodserv = req.body.infoPS[0];
+            // const infoprodserv2 = req.body.infoPS2[0];
+            // const infoprodserv3 = req.body.infoPS3[0];
+            // const infoprodserv4 = req.body.infoPS4[0];
+            // const infoprodserv5 = req.body.infoPS5[0];
+            // const infoprodserv6 = req.body.infoPS6[0];
+            // const infoprodserv7 = req.body.infoPS7[0];
+            // const infoprodserv8 = req.body.infoPS8[0];
+            // const infoprodserv9 = req.body.infoPS9[0];
+            // const infoprodserv10 = req.body.infoPS10[0];
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var prodServ10var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var rutaprodServ10var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            var infoprodserv10var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.files.ps10 != undefined) {
+                prodServ10var = req.files.ps10[0].originalFilename;
+                rutaprodServ10var = req.files.ps10[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            if (req.body.infoPS10 != undefined) {
+                infoprodserv10var = req.body.infoPS10[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const prodServ10 = prodServ10var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const rutaprodServ10 = rutaprodServ10var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
+            const infoprodserv10 = infoprodserv10var;
+            const idPyme = req.params.id;
+            var contentHTML;
+            contentHTML = `
+                    Solicitud de one page
+                    Producto-Servicio:
+                    21 - Nombre Imagen ${prodServ}
+                    21 - Informacion ${infoprodserv}
+                    22 - Nombre Imagen ${prodServ2}
+                    22 - Informacion ${infoprodserv2}
+                    23 - Nombre Imagen ${prodServ3}
+                    23 - Informacion ${infoprodserv3}
+                    24 - Nombre Imagen ${prodServ4}
+                    24 - Informacion ${infoprodserv4}
+                    25 - Nombre Imagen ${prodServ5}
+                    25 - Informacion ${infoprodserv5}
+                    26 - Nombre Imagen ${prodServ6}
+                    26 - Informacion ${infoprodserv6}
+                    27 - Nombre Imagen ${prodServ7}
+                    27 - Informacion ${infoprodserv7}
+                    28 - Nombre Imagen ${prodServ8}
+                    28 - Informacion ${infoprodserv8}
+                    29 - Nombre Imagen ${prodServ9}
+                    29 - Informacion ${infoprodserv9}
+                    30 - Nombre Imagen ${prodServ10}
+                    30 - Informacion ${infoprodserv10}
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud one page pyme id=' + idPyme,
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: prodServ,
+                        path: rutaprodServ
+                    },
+                    {
+                        filename: prodServ2,
+                        path: rutaprodServ2
+                    },
+                    {
+                        filename: prodServ3,
+                        path: rutaprodServ3
+                    },
+                    {
+                        filename: prodServ4,
+                        path: rutaprodServ4
+                    },
+                    {
+                        filename: prodServ5,
+                        path: rutaprodServ5
+                    },
+                    {
+                        filename: prodServ6,
+                        path: rutaprodServ6
+                    },
+                    {
+                        filename: prodServ7,
+                        path: rutaprodServ7
+                    },
+                    {
+                        filename: prodServ8,
+                        path: rutaprodServ8
+                    },
+                    {
+                        filename: prodServ9,
+                        path: rutaprodServ9
+                    }, {
+                        filename: prodServ9,
+                        path: rutaprodServ9
+                    }
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res.json(error.message);
+                }
+                console.log('success');
+                return res.json('bien');
+            });
+        });
+    }
+    //almacen
     sendEmailSolicitudProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('sendEmailSolicitudProducto  node en node');
@@ -764,6 +2032,14 @@ class AppController {
             console.log('subirImagenServicioServer en node');
             console.log(req.files.uploads[0].path);
             return res.json(req.files.uploads[0].path);
+        });
+    }
+    getPymesPorEntidad(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getPymesPorEntidad en server nodejs');
+            console.log('nombre= ' + req.params.id);
+            const pymes = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.link_OnePage,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,p.descripcionPyme,e.desEntidad,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion INNER JOIN `entidad` AS e ON p.idEntidad = e.idEntidad where e.nombreEntidad like "%' + req.params.id + '%"');
+            res.json(pymes);
         });
     }
 }

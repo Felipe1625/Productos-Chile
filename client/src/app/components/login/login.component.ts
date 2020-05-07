@@ -34,8 +34,9 @@ export class LoginComponent implements OnInit {
       this.response = res
       console.log(res)
       console.log(res['Admin'].idUsuario)
+      console.log(res['Admin'].almacen)
       this.appComponent.usuario=res['Admin'].NombreUsuario
-      localStorage.setItem('res', btoa(res['Admin'].idUsuario + '(*/as)' + res['Admin'].NombreUsuario+ '(*/as)' +res['Admin'].Pyme_idPyme+ '(*/as)' +res['Admin'].link_OnePage))
+      localStorage.setItem('res', btoa(res['Admin'].idUsuario + '(*/as)' + res['Admin'].NombreUsuario+ '(*/as)' +res['Admin'].Pyme_idPyme+ '(*/as)' +res['Admin'].link_OnePage+ '(*/as)' +res['Admin'].almacen))
       localStorage.setItem('token', res['token'])
       this.router.navigate(['/panel'])
     },

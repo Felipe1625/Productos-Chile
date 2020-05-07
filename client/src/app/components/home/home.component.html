@@ -1,25 +1,28 @@
+
+
 <!--usuario no logueado-->
 <nav class="navbar navbar-expand-md  navbar-dark w-100" style="background-color: rgb(55, 154, 213);">
-  <div class="d-flex flex-grow-1">
+  <div class="d-flex">
     <a class="navbar-brand"routerLink="/home"><img src="../../../assets/icono.png" alt="" style="height: 40px !important;"></a>
-      <form class="mr-2 my-auto w-100 d-inline-block order-1">
-          <div class="input-group">
-              <input [(ngModel)]="buscar" name="formBuscar" id="input-busqueda" type="text" class="form-control border border-right-0" placeholder="Buscar...">
-              <span class="input-group-append">
-                <!-- <a href="html/resultados_busqueda.html"> -->
-                  <button (click)="buscarProductosServiciosPorNombre()" id="button-busqueda" class="btn btn-outline-light border border-left-0" type="button">
-                      <i class="fa fa-search"></i>
-                  </button>
-                <!-- </a> -->
-                  
-              </span>
-          </div>
-      </form>
+     
   </div>
   <button class="navbar-toggler order-0" type="button" data-toggle="collapse" data-target="#navbar7">
       <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="navbar-collapse collapse flex-shrink-1 flex-grow-0 order-last" id="navbar7">
+  <div class="navbar-collapse collapse order-last" id="navbar7">
+    <form class="mr-2 my-auto w-100 d-inline-block">
+      <div class="input-group">
+          <input [(ngModel)]="buscar" name="formBuscar" id="input-busqueda" type="text" class="form-control border border-right-0" placeholder="Buscar...">
+          <span class="input-group-append">
+            <!-- <a href="html/resultados_busqueda.html"> -->
+              <button (click)="buscarProductosServiciosPorNombre()" id="button-busqueda" class="btn btn-outline-light border border-left-0" type="submit">
+                  <i class="fa fa-search"></i>
+              </button>
+            <!-- </a> -->
+              
+          </span>
+      </div>
+  </form>
     <ul class="navbar-nav">
   
       <li class="nav-item" style="cursor: pointer;">
@@ -31,9 +34,12 @@
       <li class="nav-item" style="cursor: pointer;">
         <a style="color: white !important;" class="nav-link" (click)="goContacto()">Contacto</a>
       </li>
+      <li class="nav-item" style="cursor: pointer;">
+        <a style="color: white !important;" class="nav-link" href="http://www.app.productochile.cl" target="_blank">App</a>
+      </li>
       <li class="nav-item mr-5">
         <ng-container *ngIf="authService.loggedIn();else logueado">
-          <a style="color: white !important;" class="nav-link" routerLink="/panel">Hola {{usuario}}</a>
+          <a style="color: white !important;" class="nav-link" routerLink="/panel">{{usuario}}</a>
         </ng-container>
         <ng-template #logueado>
           <a style="color: white !important;" class="nav-link" routerLink="/login">Ingresar</a>
@@ -45,7 +51,6 @@
     </ul>
   </div>
 </nav>
-
 
 
 
@@ -66,8 +71,8 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
           </ol>
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="../../../assets/banners/banner1.png" class="d-block  w-100" alt="...">
+            <div class="carousel-item active" (click)="buscarPymePorEntidad('concepcíon')"> 
+              <img  src="../../../assets/banners/entidad1.png" class="d-block  w-100" alt="...">
             </div>
             <div class="carousel-item">
               <img src="../../../assets/banners/banner2.png" class="d-block w-100 " alt="...">
@@ -134,7 +139,7 @@
       <div class="col-sm-12 col-md-12 col-lg-4 ">
         <h6 style="color: red;">Acerca de</h6>
         <h3>Nosotros</h3>
-        <p class="mt-4">Producto Chile es una empresa nacional dedicada a ayudar a las empresas (principalmente pymes) y usuarios a conectarse más rápidamente. Las empresas asociadas pueden publicar sus servicios, así como obtener ayuda tecnológica para su negocio, mientras que los usuarios pueden encontrar fácilmente lo que buscan filtrando por los tipos de servicio y/o producto que deseen encontrar.</p>
+        <p class="mt-4">Producto Chile es un emprendimiento nacional dedicada a ayudar a las pymes, emprendedores y a todos sus usuarios a conectarse más rápidamente entre sí. Los emprendedores asociados pueden publicar sus servicios, así como obtener ayuda tecnológica para su negocio, mientras que los usuarios pueden encontrar fácilmente lo que buscan filtrando por los tipos de servicio y/o producto que deseen encontrar.</p>
       </div>
       <div class="col-lg-8 ocultar-imagen-nosotros imagen-nosotros-centrar">
         <img class="float-right size-imagen" src="../../../assets/about-us.jpg">
@@ -502,8 +507,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-        <a target="_blank" href="https://api.whatsapp.com/send?phone=1234567890&text=Hola, deseo más información acerca de la forma de inscribirme en Producto Chile."><button type="button" class="btn btn-primary btn-whatsapp">Contacto</button></a>
-      </div>
+        <a target="_blank" href="https://api.whatsapp.com/send?phone=56977037354&text=Hola, deseo más información acerca de la forma de inscribirme en Producto Chile."><button type="button" class="btn btn-primary btn-whatsapp">Contacto</button></a>
+      </div> 
     </div>
+
   </div>
 </div>

@@ -24,6 +24,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PymeComponent } from './components/pyme/pyme.component';
+import { PanelDetallePreguntasFrecuentesComponent } from './components/panel-detalle-preguntas-frecuentes/panel-detalle-preguntas-frecuentes.component';
+import { PanelChangePasswordComponent } from './components/panel-change-password/panel-change-password.component';
 
 
 @NgModule({
@@ -41,7 +44,10 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     PanelServiciosComponent,
     PanelConfigOnePageComponent,
     PanelPreguntasFrecuentesComponent,
-    NavbarClientComponent
+    NavbarClientComponent,
+    PymeComponent,
+    PanelDetallePreguntasFrecuentesComponent,
+    PanelChangePasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ export class AppService {
   // API_URI = "http://localhost:3000/api/app" 
   constructor(private http: HttpClient) { }
 
-  sendEmailUser(form:any) {
+  sendEmailUser(form:any) { 
     console.log('form para email user: ' + form);
     return this.http.post(`${this.API_URI}/send-email-user`, form)
   }
@@ -35,6 +35,10 @@ export class AppService {
 
   updateDatosUsuario(idUsuario:any,data:any){
     return this.http.put(`${this.API_URI}/update-datos-usuario/${idUsuario}`,data)
+  }
+
+  updateUsuarioPassword(idUsuario:any,data:any){
+    return this.http.put(`${this.API_URI}/update-usuario-password/${idUsuario}`,data)
   }
 
   solicitarOnePage(id,formData){
@@ -114,6 +118,42 @@ export class AppService {
     return this.http.post(`${this.API_URI}/subir-imagen-node/`, formData)
   }
 
+
+
+
+//one page
+  subirImagenesCabeceraNode(idPyme,formData){
+    return this.http.post(`${this.API_URI}/subir-imagenes-cabecera-node/${idPyme}`, formData)
+  }
+
+  subirImagenesCaracteristicaNode(idPyme,formData){
+    return this.http.post(`${this.API_URI}/subir-imagenes-caracteristica-node/${idPyme}`, formData)
+  }
+
+  subirImagenPymeNode(idPyme,formData){
+    return this.http.post(`${this.API_URI}/subir-imagen-pyme-node/${idPyme}`, formData)
+  }
+
+  subirImagenesProductoServicioNode(idPyme,formData){
+    return this.http.post(`${this.API_URI}/subir-imagenes-producto-servicio-node/${idPyme}`, formData)
+  }
+
+  subirImagenesProductoServicioAlmacen10Node(idPyme,formData){
+    return this.http.post(`${this.API_URI}/subir-imagenes-producto-servicio-almacen-10-node/${idPyme}`, formData)
+  }
+
+  subirImagenesProductoServicioAlmacen20Node(idPyme,formData){
+    return this.http.post(`${this.API_URI}/subir-imagenes-producto-servicio-almacen-20-node/${idPyme}`, formData)
+  }
+
+  subirImagenesProductoServicioAlmacen30Node(idPyme,formData){
+    return this.http.post(`${this.API_URI}/subir-imagenes-producto-servicio-almacen-30-node/${idPyme}`, formData)
+  }
+//one page
+
+
+
+
   subirImagenProductoServer(formData){
     return this.http.post(`${this.API_URI}/subir-imagen-producto-server/`, formData)
   }
@@ -135,6 +175,11 @@ export class AppService {
   getProductoServicioFromHome(id){
     console.log('en getProductoServicioFromHome service')
     return this.http.get(`${this.API_URI}/get-producto-servicio-from-home/${id}`);
+  }
+
+  getPymesPorEntidad(nombre:string){
+    console.log('en getPymesPorEntidad service')
+    return this.http.get(`${this.API_URI}/get-pymes-por-entidad/${nombre}`);
   }
 
 }

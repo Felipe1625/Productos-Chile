@@ -650,3 +650,8 @@ input[type=number] { -moz-appearance:textfield; }
 color: rgb(55, 154, 213);
 border-left: 5px solid rgb(55, 154, 213);
 }
+
+.list-group > a > .list-group-item:hover{
+  color: rgb(55, 154, 213);
+  border-left: 5px solid rgb(55, 154, 213);
+  }
