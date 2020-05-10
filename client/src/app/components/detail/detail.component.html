@@ -52,69 +52,96 @@
      </div>
  </nav>
  
- <div class="container carta-resultados-busquedas mt-3">
-     <div class="row ">
-         <div class="col-6 centrar">
+ <div class=" container ">
+<div class="carta-resultados-busquedas mt-3">
+
+    <div *ngIf="mensaje404;else resultado" class="col-12 centrar-horizontal pt-3 pb-3"> 
+        <h3 class="mb-3">Ups! parece que no hay nada...</h3>
+        <img style="width: 60% !important; height: 60% !important;"  src="http://imgsistemapc.productochile.cl/404/404.png">
+        <div class="mt-3"> 
+            <button routerLink="" class="btn btn-info">Ir al inicio</button>
+        </div>
+        
+    </div>
+
+<ng-template #resultado>
+    <div class="row ">
+        <div class="col-6 centrar">
 
 <img *ngIf="prodServ.rutaImagen!=null;else imagenDefecto" class="imagen-size" src="{{prodServ.rutaImagen}}"> 
 <ng-template #imagenDefecto>
-    <img class="imagen-size" src="../../../assets/defecto/producto.png"> 
+   <img class="imagen-size" src="http://imgsistemapc.productochile.cl/imagenes_defecto/producto.png"> 
 </ng-template>
 
-         </div>
-         <div class="col-6">
-             <h3>{{prodServ.nombre}}</h3>
-             <h4 class="precio-detalle">${{prodServ.valor}}</h4>
-             <h4 class="mt-3">Datos de pyme</h4>
-             <p>{{prodServ.nombrePyme}}</p>
-             <p>{{prodServ.fonoContactoUno}}</p>
-             <p>{{prodServ.fonoContactoDos}}</p>
-             <p>{{prodServ.correoContactoPyme}}</p>
-             
-             <div class="row">
+        </div>
+        <div class="col-6">
+            <h3>{{prodServ.nombre}}</h3>
+            <h4 class="precio-detalle">${{prodServ.valor}}</h4>
+            <h4 class="mt-3">Datos de pyme</h4>
+            <p>{{prodServ.nombrePyme}}</p>
+            <p>{{prodServ.fonoContactoUno}}</p>
+            <p>{{prodServ.fonoContactoDos}}</p>
+            <p>{{prodServ.correoContactoPyme}}</p>
+            
+            <div class="row">
 
-                <a *ngIf="prodServ.link_OnePage!=null;else onePageNulo" href="{{prodServ.link_OnePage}}" target="_blank">
-                    <button type="button " class="btn btn-primary mb-4 mt-2 ml-3" >Página oficial</button>
-                </a>
+               <a *ngIf="prodServ.link_OnePage!=null;else onePageNulo" href="{{prodServ.link_OnePage}}" target="_blank">
+                   <button type="button " class="btn btn-primary mb-4 mt-2 ml-3" >Ver página web</button>
+               </a>
 
-             </div>
-             <ng-template #onePageNulo>
-                <p>Actualmente esta pyme no cuenta con OnePage</p>
-             </ng-template>
+            </div>
+            <ng-template #onePageNulo>
+               <p>Actualmente esta pyme no cuenta con OnePage</p>
+            </ng-template>
 
 <h4 class="mb-3" *ngIf="prodServ.redSocialFacebook!='' || prodServ.redSocialInstagram!=''
- || prodServ.redSocialTwitter!='' || prodServ.redSocialYoutube!=''">Visita sus redes sociales</h4>
-
+|| prodServ.redSocialTwitter!='' || prodServ.redSocialYoutube!=''">Visita sus redes sociales</h4>
+ 
 <a *ngIf="prodServ.redSocialFacebook!=''"  href="{{prodServ.redSocialFacebook}}" target="_blank">
-    <button *ngIf="prodServ.redSocialFacebook!=''" class="btn btn-success icono-face rounded-circle"><i class="fab fa-facebook fa-2x"></i></button>
+   <button *ngIf="prodServ.redSocialFacebook!=''" class="btn btn-success icono-face rounded-circle"><i class="fab fa-facebook fa-2x"></i></button>
 </a>
 <a *ngIf="prodServ.redSocialInstagram!=''" href="{{prodServ.redSocialInstagram}}" target="_blank">
-    <button *ngIf="prodServ.redSocialInstagram!=''" class="btn btn-success icono-insta rounded-circle"><i class="fab fa-instagram fa-2x"></i></button>
+   <button *ngIf="prodServ.redSocialInstagram!=''" class="btn btn-success icono-insta rounded-circle"><i class="fab fa-instagram fa-2x"></i></button>
 </a>
 <a *ngIf="prodServ.redSocialTwitter!=''" href="{{prodServ.redSocialTwitter}}" target="_blank">
-    <button *ngIf="prodServ.redSocialTwitter!=''" class="btn btn-success icono-tw rounded-circle"><i class="fab fa-twitter fa-2x"></i></button>
+   <button *ngIf="prodServ.redSocialTwitter!=''" class="btn btn-success icono-tw rounded-circle"><i class="fab fa-twitter fa-2x"></i></button>
 </a>
 <a *ngIf="prodServ.redSocialYoutube!=''" href="{{prodServ.redSocialYoutube}}" target="_blank">
-    <button *ngIf="prodServ.redSocialYoutube!=''" class="btn btn-success icono-yt rounded-circle"><i class="fab fa-youtube fa-2x"></i></button>
+   <button *ngIf="prodServ.redSocialYoutube!=''" class="btn btn-success icono-yt rounded-circle"><i class="fab fa-youtube fa-2x"></i></button>
 </a>
 
 
-    
-         </div>
-     </div>
- 
- <div class="row">
-     <div class="col-6 ">
-         <h3 class="centrar-horizontal">Descripcion</h3>
-         <p>{{prodServ.descripcion}}</p>
-     </div>
+   
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-6 ">
+        <h3 class="centrar-horizontal">Descripcion</h3>
+        <p>{{prodServ.descripcion}}</p>
+    </div>
+</div>
+
+</ng-template>
+
+</div>
  </div>
  
- 
- </div>
- 
- <app-footer></app-footer>
- <button class="btn btn-success chat rounded-circle" data-toggle="modal" data-target="#modal-contacto"><i class="fab fa-whatsapp fa-2x"></i></button>
+
+
+
+
+ <!--footer-->
+ <!-- <app-footer></app-footer> -->
+
+
+
+
+
+
+
+
+ <button *ngIf="!mensaje404" class="btn btn-success chat rounded-circle" data-toggle="modal" data-target="#modal-contacto"><i class="fab fa-whatsapp fa-2x"></i></button>
 <!-- Modal contacto-->
 <div class="modal fade" id="modal-contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -131,7 +158,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-          <a target="_blank" href="https://api.whatsapp.com/send?phone={{prodServ.fonoContactoUno}}&text=Hola, deseo más información acerca de este producto: {{prodServ.nombre}}"><button type="button" class="btn btn-primary btn-whatsapp">Contacto</button></a>
+
+          <a  target="_blank" href="https://api.whatsapp.com/send?phone={{fono}}&text=Hola, deseo más información acerca de este producto: {{nombre}}"><button type="button" class="btn btn-primary btn-whatsapp">Contacto</button></a>
         </div> 
       </div>
   

@@ -6,8 +6,8 @@ import {Router} from '@angular/router'
   providedIn: 'root'
 })
 export class AuthService {
-  API_URI = "https://apppc.herokuapp.com/api/app" 
-  // API_URI = "http://localhost:3000/api/app" 
+  // API_URI = "https://apppc.herokuapp.com/api/app" 
+  API_URI = "http://localhost:3000/api/app" 
   constructor(private http:HttpClient,private router:Router) { }
 
   signin(user){

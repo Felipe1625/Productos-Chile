@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AppService {
   
-  API_URI = "https://apppc.herokuapp.com/api/app"
-  // API_URI = "http://localhost:3000/api/app" 
+  // API_URI = "https://apppc.herokuapp.com/api/app"
+  API_URI = "http://localhost:3000/api/app" 
   constructor(private http: HttpClient) { }
 
   sendEmailUser(form:any) { 

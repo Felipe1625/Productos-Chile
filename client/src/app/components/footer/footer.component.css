@@ -1,61 +1,11 @@
 .footerh {
-     margin-top: 20px;
-     background-image: url("../../../assets/footer.png");
+     margin-top: 30px;
+     background-image: url("http://imgsistemapc.productochile.cl/footer/footer.png");
      background-repeat: no-repeat;
      width: 100%;
-     height: 99px;
+     height: 98px;
      background-color: white;
     
-     
-   }
-
- /* @media only screen and (min-width: 300px) and (max-width: 767px) {
-    
-.footerh{
-  background-image: url("../../../assets/footer-movil.png");
-}
-} */
-
-/* @media only screen and (min-width: 768px) and (max-width: 991px) {
-    
-  .footerh{
-    background-image: url("../../../assets/footer-tablet.png");
-  } 
-  } */
-
-  /* @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    
-    .footerh{
-      background-image: url("../../../assets/footer-pc.jpg");
-    }
-    } */
-
-    /* @media only screen and (min-width: 1200px)  {
-    
-      .footerh{
-        background-image: url("../../../assets/footer-pc.png");
-      }
-      }  */
-
-
-   
-   .footer-panel{
-       margin-top: 20px;
-     /* background-image: url("../Images/abstract.png"); */
-     background-repeat: no-repeat;
-     width: 100%;
-     height: 100px;
-     background-color: white;
-     position:absolute; 
-     bottom:0; 
-     width:100%; 
-     
-   }
-   
-   
-   
-   .texto_derecha {
-     text-align: right;
    }
    
    .margen-icono-footer {
@@ -67,7 +17,6 @@
      padding-top: 10px;
      padding-left: 20px;
      padding-right: 20px;
-     /* background-color: #3d5b99; */
      color: #3d5b99;
      transition: 0.3s;
    }
@@ -82,7 +31,6 @@
      padding-top: 10px;
      padding-left: 20px;
      padding-right: 20px;
-     /* background-color: #3d5b99; */
      color: #00aced;
      transition: 0.3s;
    }
@@ -97,7 +45,6 @@
      padding-top: 10px;
      padding-left: 20px;
      padding-right: 20px;
-     /* background-color: #3d5b99; */
      color: #e1306c;
      transition: 0.3s;
    }
@@ -112,7 +59,6 @@
      padding-top: 10px;
      padding-left: 20px;
      padding-right: 20px;
-     /* background-color: #3d5b99; */
      color: #c4302b;
      transition: 0.3s; 
    }

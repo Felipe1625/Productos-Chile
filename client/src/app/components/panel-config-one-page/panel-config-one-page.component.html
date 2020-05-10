@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg" style="background-color: rgb(55, 154, 213);">
-
+ 
   <div class="d-flex centrar">
     <a class="navbar-brand" routerLink="/home"><img src="../../../assets/icono.png" alt=""
         style="height: 40px !important;"></a>
@@ -65,7 +65,7 @@
                 <input type="file" name="input-cabecera" id="input-cabecera" accept=".jpg, .png"
                   (change)="guardarImagenCabecera($event)" [disabled]="imagenesCabeceraSubidas">
               </span>
-              <label for="input-cabecera">
+              <label for="input-cabecera" class="label-input">
                 <i class="fas fa-file-image"></i><span> Subir imagen 1</span>
               </label>
               <label class="ml-4">{{mensajeImagenCabecera}}</label>
@@ -75,7 +75,7 @@
                 <input type="file" name="input-cabecera2" id="input-cabecera2" accept=".jpg, .png"
                   (change)="guardarImagenCabecera2($event)" [disabled]="imagenesCabeceraSubidas">
               </span>
-              <label for="input-cabecera2">
+              <label for="input-cabecera2" class="label-input">
                 <i class="fas fa-file-image"></i><span> Subir imagen 2</span>
               </label>
               <label class="ml-4">{{mensajeImagenCabecera2}}</label>
@@ -84,8 +84,8 @@
               <span class="input-cabecera3">
                 <input type="file" name="input-cabecera3" id="input-cabecera3" accept=".jpg, .png"
                   (change)="guardarImagenCabecera3($event)" [disabled]="imagenesCabeceraSubidas">
-              </span>
-              <label for="input-cabecera3">
+              </span> 
+              <label for="input-cabecera3" class="label-input">
                 <i class="fas fa-file-image"></i><span> Subir imagen 3</span>
               </label>
               <label class="ml-4">{{mensajeImagenCabecera3}}</label>
@@ -137,7 +137,7 @@
                           (change)="guardarImagenCaracteristica($event)" [disabled]="imagenesCaracteristicasSubidas">
                       </span>
 
-                      <label for="input-caracteristica">
+                      <label for="input-caracteristica" class="label-input">
                         <span>Subir imagen</span>
                       </label>
 
@@ -166,7 +166,7 @@
                         <input type="file" name="input-caracteristica2" id="input-caracteristica2" accept=".jpg, .png"
                           (change)="guardarImagenCaracteristica2($event)" [disabled]="imagenesCaracteristicasSubidas">
                       </span>
-                      <label for="input-caracteristica2">
+                      <label for="input-caracteristica2" class="label-input">
                         <span>Subir imagen</span>
                       </label>
                       <label class="ml-3 mr-2">{{mensajeImagenCaracteristica2}}</label>
@@ -191,7 +191,7 @@
                         <input type="file" name="input-caracteristica3" id="input-caracteristica3" accept=".jpg, .png"
                           (change)="guardarImagenCaracteristica3($event)" [disabled]="imagenesCaracteristicasSubidas">
                       </span>
-                      <label for="input-caracteristica3">
+                      <label for="input-caracteristica3" class="label-input">
                         <span>Subir imagen</span>
                       </label>
                       <label class="ml-3 mr-2">{{mensajeImagenCaracteristica3}}</label>
@@ -252,7 +252,7 @@
                   <input type="file" name="input-pyme-imagen" id="input-pyme-imagen" accept=".jpg, .png"
                     (change)="guardarImagenPyme($event)" [disabled]="imagenPymeSubida">
                 </span>
-                <label for="input-pyme-imagen">
+                <label for="input-pyme-imagen" class="label-input">
                   <span>Subir imagen</span>
                 </label>
                 <label class="ml-4">{{mensajeImagenPyme}}</label>
@@ -316,7 +316,7 @@
                         <span class="input-prodServ ml-2">
                           <input type="file" name="input-prodServ" id="input-prodServ" accept=".jpg, .png" (change)="guardarImagenProdServ($event)">
                           </span>
-                          <label for="input-prodServ">
+                          <label for="input-prodServ" class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -337,7 +337,7 @@
                         <span class="input-prodServ2 ml-2">
                           <input type="file" name="input-prodServ2" id="input-prodServ2" accept=".jpg, .png" (change)="guardarImagenProdServ2($event)">
                           </span>
-                          <label for="input-prodServ2">
+                          <label for="input-prodServ2" class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -358,7 +358,7 @@
                         <span class="input-prodServ3 ml-2">
                           <input type="file" name="input-prodServ3" id="input-prodServ3" accept=".jpg, .png" (change)="guardarImagenProdServ3($event)">
                           </span>
-                          <label for="input-prodServ3">
+                          <label for="input-prodServ3" class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -382,7 +382,7 @@
                       <span class="input-prodServ4 ml-2">
                         <input type="file" name="input-prodServ4" id="input-prodServ4" accept=".jpg, .png" (change)="guardarImagenProdServ4($event)">
                         </span>
-                        <label for="input-prodServ4">
+                        <label for="input-prodServ4" class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -403,7 +403,7 @@
                       <span class="input-prodServ5 ml-2">
                         <input type="file" name="input-prodServ5" id="input-prodServ5" accept=".jpg, .png" (change)="guardarImagenProdServ5($event)">
                         </span>
-                        <label for="input-prodServ5">
+                        <label for="input-prodServ5" class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -424,7 +424,7 @@
                       <span class="input-prodServ6 ml-2">
                         <input type="file" name="input-prodServ6" id="input-prodServ6" accept=".jpg, .png" (change)="guardarImagenProdServ6($event)">
                         </span>
-                        <label for="input-prodServ6">
+                        <label for="input-prodServ6" class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -448,7 +448,7 @@
                     <span class="input-prodServ7 ml-2">
                       <input type="file" name="input-prodServ7" id="input-prodServ7" accept=".jpg, .png" (change)="guardarImagenProdServ7($event)">
                       </span>
-                      <label for="input-prodServ7">
+                      <label for="input-prodServ7" class="label-input">
                         <span>Subir imagen</span>
                       </label>
                     
@@ -469,7 +469,7 @@
                     <span class="input-prodServ8 ml-2">
                       <input type="file" name="input-prodServ8" id="input-prodServ8" accept=".jpg, .png" (change)="guardarImagenProdServ8($event)">
                       </span>
-                      <label for="input-prodServ8">
+                      <label for="input-prodServ8" class="label-input">
                         <span>Subir imagen</span>
                       </label>
                     
@@ -490,7 +490,7 @@
                     <span class="input-prodServ9 ml-2">
                       <input type="file" name="input-prodServ9" id="input-prodServ9" accept=".jpg, .png" (change)="guardarImagenProdServ9($event)">
                       </span>
-                      <label for="input-prodServ9">
+                      <label for="input-prodServ9" class="label-input">
                         <span>Subir imagen</span>
                       </label>
                     
@@ -588,7 +588,7 @@
                           <span class="_p1 ml-2">
                             <input type="file" name="_p1" id="_p1" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen($event)">
                             </span>
-                            <label for="_p1">
+                            <label for="_p1"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -609,7 +609,7 @@
                           <span class="_p2 ml-2">
                             <input type="file" name="_p2" id="_p2" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen2($event)">
                             </span>
-                            <label for="_p2">
+                            <label for="_p2"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -630,7 +630,7 @@
                           <span class="_p3 ml-2">
                             <input type="file" name="_p3" id="_p3" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen3($event)">
                             </span>
-                            <label for="_p3">
+                            <label for="_p3"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -654,7 +654,7 @@
                         <span class="_p4 ml-2">
                           <input type="file" name="_p4" id="_p4" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen4($event)">
                           </span>
-                          <label for="_p4">
+                          <label for="_p4"  class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -675,7 +675,7 @@
                         <span class="_p5 ml-2">
                           <input type="file" name="_p5" id="_p5" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen5($event)">
                           </span>
-                          <label for="_p5">
+                          <label for="_p5" class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -696,7 +696,7 @@
                         <span class="_p6 ml-2">
                           <input type="file" name="_p6" id="_p6" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen6($event)">
                           </span>
-                          <label for="_p6">
+                          <label for="_p6" class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -720,7 +720,7 @@
                       <span class="_p7 ml-2">
                         <input type="file" name="_p7" id="_p7" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen7($event)">
                         </span>
-                        <label for="_p7">
+                        <label for="_p7" class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -741,7 +741,7 @@
                       <span class="_p8 ml-2">
                         <input type="file" name="_p8" id="_p8" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen8($event)">
                         </span>
-                        <label for="_p8">
+                        <label for="_p8"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -762,7 +762,7 @@
                       <span class="_p9 ml-2">
                         <input type="file" name="_p9" id="_p9" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen9($event)">
                         </span>
-                        <label for="_p9">
+                        <label for="_p9"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -785,7 +785,7 @@
                     <span class="_p10 ml-2">
                       <input type="file" name="_p10" id="_p10" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen10($event)">
                       </span>
-                      <label for="_p10">
+                      <label for="_p10"  class="label-input">
                         <span>Subir imagen</span>
                       </label>
                     
@@ -825,7 +825,7 @@
                           <span class="_p11 ml-2">
                             <input type="file" name="_p11" id="_p11" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen11($event)">
                             </span>
-                            <label for="_p11">
+                            <label for="_p11"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -846,7 +846,7 @@
                           <span class="_p12 ml-2">
                             <input type="file" name="_p12" id="_p12" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen12($event)">
                             </span>
-                            <label for="_p12">
+                            <label for="_p12"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -867,7 +867,7 @@
                           <span class="_p13 ml-2">
                             <input type="file" name="_p13" id="_p13" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen13($event)">
                             </span>
-                            <label for="_p13">
+                            <label for="_p13"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -891,7 +891,7 @@
                         <span class="_p14 ml-2">
                           <input type="file" name="_p14" id="_p14" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen14($event)">
                           </span>
-                          <label for="_p14">
+                          <label for="_p14"  class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -912,7 +912,7 @@
                         <span class="_p15 ml-2">
                           <input type="file" name="_p15" id="_p15" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen15($event)">
                           </span>
-                          <label for="_p15">
+                          <label for="_p15"  class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -933,7 +933,7 @@
                         <span class="_p16 ml-2">
                           <input type="file" name="_p16" id="_p16" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen16($event)">
                           </span>
-                          <label for="_p16">
+                          <label for="_p16"  class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -957,7 +957,7 @@
                       <span class="_p17 ml-2">
                         <input type="file" name="_p17" id="_p17" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen17($event)">
                         </span>
-                        <label for="_p17">
+                        <label for="_p17"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -978,7 +978,7 @@
                       <span class="_p18 ml-2">
                         <input type="file" name="_p18" id="_p18" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen18($event)">
                         </span>
-                        <label for="_p18">
+                        <label for="_p18"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -999,7 +999,7 @@
                       <span class="_p19 ml-2">
                         <input type="file" name="_p19" id="_p19" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen19($event)">
                         </span>
-                        <label for="_p19">
+                        <label for="_p19"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -1022,7 +1022,7 @@
                     <span class="_p20 ml-2">
                       <input type="file" name="_p20" id="_p20" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen20($event)">
                       </span>
-                      <label for="_p20">
+                      <label for="_p20"  class="label-input">
                         <span>Subir imagen</span>
                       </label>
                     
@@ -1062,7 +1062,7 @@
                           <span class="_p21 ml-2">
                             <input type="file" name="_p21" id="_p21" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen21($event)">
                             </span>
-                            <label for="_p21">
+                            <label for="_p21"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -1083,7 +1083,7 @@
                           <span class="_p22 ml-2">
                             <input type="file" name="_p22" id="_p22" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen22($event)">
                             </span>
-                            <label for="_p22">
+                            <label for="_p22"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -1104,7 +1104,7 @@
                           <span class="_p23 ml-2">
                             <input type="file" name="_p23" id="_p23" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen23($event)">
                             </span>
-                            <label for="_p23">
+                            <label for="_p23"  class="label-input">
                               <span>Subir imagen</span>
                             </label>
                           
@@ -1128,7 +1128,7 @@
                         <span class="_p24 ml-2">
                           <input type="file" name="_p24" id="_p24" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen24($event)">
                           </span>
-                          <label for="_p24">
+                          <label for="_p24"  class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -1149,7 +1149,7 @@
                         <span class="_p25 ml-2">
                           <input type="file" name="_p25" id="_p25" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen25($event)">
                           </span>
-                          <label for="_p25">
+                          <label for="_p25"  class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -1170,7 +1170,7 @@
                         <span class="_p26 ml-2">
                           <input type="file" name="_p26" id="_p26" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen26($event)">
                           </span>
-                          <label for="_p26">
+                          <label for="_p26"  class="label-input">
                             <span>Subir imagen</span>
                           </label>
                         
@@ -1194,7 +1194,7 @@
                       <span class="_p27 ml-2">
                         <input type="file" name="_p27" id="_p27" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen27($event)">
                         </span>
-                        <label for="_p27">
+                        <label for="_p27"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -1215,7 +1215,7 @@
                       <span class="_p28 ml-2">
                         <input type="file" name="_p28" id="_p28" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen28($event)">
                         </span>
-                        <label for="_p28">
+                        <label for="_p28"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -1236,7 +1236,7 @@
                       <span class="_p29 ml-2">
                         <input type="file" name="_p29" id="_p29" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen29($event)">
                         </span>
-                        <label for="_p29">
+                        <label for="_p29"  class="label-input">
                           <span>Subir imagen</span>
                         </label>
                       
@@ -1259,7 +1259,7 @@
                     <span class="_p30 ml-2">
                       <input type="file" name="_p30" id="_p30" accept=".jpg, .png" (change)="guardarImagenProdServAlmacen30($event)">
                       </span>
-                      <label for="_p30">
+                      <label for="_p30"  class="label-input">
                         <span>Subir imagen</span>
                       </label>
                     
@@ -1321,8 +1321,7 @@
 
 <!-- pie de pagina -->
 <!-- <app-footer></app-footer> -->
-
-
+  
 <button class="chat rounded-circle" data-toggle="modal" data-target="#modal-contacto">
   <i class="far fa-comments fa-2x"></i>
 </button>

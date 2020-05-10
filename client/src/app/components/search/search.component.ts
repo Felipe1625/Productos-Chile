@@ -19,10 +19,11 @@ export class SearchComponent implements OnInit {
   list_resultados: any;
   buscar: string = this.appComponent.busqueda;
   usuario: string = "";
-  precio:string="";
+  precio:string=""; 
   producto:boolean=true;
   servicio:boolean=true;
   cargando:boolean=true;
+  mensaje404:boolean=false;
   constructor(private appService: AppService, private router: Router, private appComponent: AppComponent, public authService: AuthService) { }
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class SearchComponent implements OnInit {
 
 
   getProductosServiciosPorNombre(num, busqueda) {
+    this.cargando=true;
     var data
     if (num == 0) {
       data = {
@@ -61,10 +63,18 @@ export class SearchComponent implements OnInit {
     this.appService.getProductosServiciosPorNombre(data).subscribe(res => {
       console.log(res);
       this.list_resultados = res;
+      
+      if(this.list_resultados.length==0){
+        this.mensaje404=true;
+      }else{
+        this.mensaje404=false;
+      }
       this.cargando=false;
     },
       err => {
         console.log(err)
+        this.mensaje404=true;
+        this.cargando=false;
       }
 
     )
@@ -72,16 +82,25 @@ export class SearchComponent implements OnInit {
 
 
   getProductosServiciosPorRubro(rubro) {
+    this.cargando=true;
     var data = {
       rubro: rubro
     }
     this.appService.getProductosServiciosPorRubro(data).subscribe(res => {
       console.log(res);
       this.list_resultados = res;
+      
+      if(this.list_resultados.length==0){
+        this.mensaje404=true;
+      }else{
+        this.mensaje404=false;
+      }
       this.cargando=false;
     },
       err => {
         console.log(err)
+        this.mensaje404=true;
+        this.cargando=false;
       }
 
     )
@@ -89,7 +108,7 @@ export class SearchComponent implements OnInit {
 
 
   buscarProductosServiciosPorFiltros() {
-   
+    this.cargando=true;
   console.log('region='+this.region);
   console.log('rubro= '+this.rubro);
   console.log('precio= '+this.precio);
@@ -107,10 +126,17 @@ export class SearchComponent implements OnInit {
   this.appService.getProductosServiciosPorFiltros(data).subscribe(res => {
     console.log(res);
     this.list_resultados = res;
+    if(this.list_resultados.length==0){
+      this.mensaje404=true;
+    }else{
+      this.mensaje404=false;
+    }
     this.cargando=false;
   },
     err => {
       console.log(err)
+      this.mensaje404=true;
+      this.cargando=false;
     }
 
   )
