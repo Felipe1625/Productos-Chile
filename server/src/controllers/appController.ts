@@ -2387,6 +2387,11 @@ if(req.body.infoPS9!=undefined){
           res.json(pymes);
      } 
 
+     public async getEntidades(req: Request, res: Response) {
+          const data = await pool.query('SELECT * FROM `entidad`');
+          res.json(data);
+     }
+
 }
 
 const appController = new AppController();

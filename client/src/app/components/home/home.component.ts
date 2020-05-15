@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     mensaje: '',
   };
 
-  buscar:string=""
+  buscar:string="" 
   formEmail:boolean=true
   btnContacto:boolean=false;
   constructor(private appService: AppService, private router: Router,public authService:AuthService,private appComponent:AppComponent) { }
@@ -89,6 +89,11 @@ export class HomeComponent implements OnInit {
     console.log(nombre)
     this.appComponent.entidad=nombre
     this.router.navigate(['/detalle-pyme'])
+  }
+
+  buscarEntidades(){
+    console.log('buscar entidades')
+    this.router.navigate(['/listado-entidades'])
   }
 
 }

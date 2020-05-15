@@ -1,0 +1,160 @@
+<!--usuario no logueado--> 
+<nav class="navbar navbar-expand-md  navbar-dark w-100" style="background-color: rgb(55, 154, 213);">
+     <div class="d-flex">
+       <a class="navbar-brand"routerLink="/home"><img src="../../../assets/icono.png" alt="" style="height: 40px !important;"></a>
+        
+     </div>
+     <button class="navbar-toggler order-0" type="button" data-toggle="collapse" data-target="#navbar7">
+         <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="navbar-collapse collapse order-last" id="navbar7">
+       <form class="mr-2 my-auto w-100 d-inline-block">
+         <div class="input-group">
+             <input [(ngModel)]="buscar" name="formBuscar" id="input-busqueda" type="text" class="form-control border border-right-0" placeholder="Buscar...">
+             <span class="input-group-append">
+               <!-- <a href="html/resultados_busqueda.html"> -->
+                 <button (click)="buscarProductosServiciosPorNombre()" id="button-busqueda" class="btn btn-outline-light border border-left-0" type="submit">
+                     <i class="fa fa-search"></i>
+                 </button>
+               <!-- </a> -->
+                 
+             </span>
+         </div>
+     </form>
+       <ul class="navbar-nav">
+     
+         <li class="nav-item" style="cursor: pointer;">
+           <a class="nav-link"  style="color: white !important;">Nosotros</a>
+         </li>
+         <li class="nav-item" style="cursor: pointer;">
+           <a style="color: white !important;" class="nav-link" >Categorías</a>
+         </li>
+         <li class="nav-item" style="cursor: pointer;">
+           <a style="color: white !important;" class="nav-link">Contacto</a>
+         </li>
+         <li class="nav-item" style="cursor: pointer;">
+           <a style="color: white !important;" class="nav-link" href="http://www.app.productochile.cl" target="_blank">App</a>
+         </li>
+         <li class="nav-item mr-5">
+           <ng-container *ngIf="authService.loggedIn();else logueado">
+             <a style="color: white !important;" class="nav-link" routerLink="/panel">{{usuario}}</a>
+           </ng-container>
+           <ng-template #logueado>
+             <a style="color: white !important;" class="nav-link" routerLink="/login">Ingresar</a>
+           </ng-template>
+           
+          
+         </li>
+        
+       </ul>
+     </div>
+   </nav>
+
+   <div class="container carta">
+     <div class="row">
+          <div class="col-8">
+              <h4>Artículos prohibidos</h4>
+<p>Última actualización: 20/04/2019</p>
+<p>A continuación se encuentra el listado de productos y servicios cuyo ofrecimiento, solicitud, publicación, compra o venta están prohibidos por Mercado Libre por políticas internas y/o para garantizar el cumplimiento de alguna ley vigente, según sea el caso.</p>
+<p>Los vendedores son exclusivos responsables de la legalidad y legitimidad de los artículos que ofrecen. Los vendedores deberán cumplir con todas las obligaciones regulatorias pertinentes y contar con los registros, habilitaciones, permismos y/o autorizaciones exigidos por la normativa aplicable para la venta de los bienes y servicios ofrecidos. Mercado Libre no asume responsabilidad alguna por la existencia en el sitio de productos o servicios que infrinjan las políticas o cualquier ley o resolución judicial vigente.</p>
+<p>MercadoLibre podrá finalizar las publicaciones que no cumplan con las políticas aquí mencionadas. Por eso, te recomendamos revisar este listado antes de publicar un artículo.</p>
+<p>Mediante la aceptación de los Términos y Condiciones Generales en el momento de la inscripción el usuario acepta las políticas aquí contenidas.</p>
+<h4>Armas, municiones y material explosivo</h4>
+<p style="font-weight: bold;">No permitimos publicar y/o solicitar</p>
+<ul>
+     <li>Armas de fuego de alto o bajo calibre: armas deportivas, de colección, reliquias o antiguas (disparen o no).</li>
+     <li>Parte de armas de fuego, accesorios o elementos relacionados con el funcionamiento del arma: cañones, correderas, gatillos, silenciadores, etc.</li>
+     <li>Granadas, explosivos, misiles, proyectiles y pólvora.</li>
+     <li>Miras para armas de fuego, así como también cualquier tipo de miras infrarrojas o detección de calor.</li>
+     <li>Balas y municiones para armas de fuego.</li>
+     <li>Productos o dispositivos cuyo fin sea el armado de explosivos.</li>
+     <li>Máquinas para recarga y fabricación de municiones.</li>
+     <li>Herramientas o equipos que permitan modificar armas.</li>
+     <li>Planos que enseñen a modificar armas de fuego.</li>
+</ul>
+<h4> Qué puedes publicar</h4>
+<p>Los productos aquí mencionados son solo ejemplos.</p>
+<ul>
+     <li>Réplicas de armas de fuego siempre que no permitan disparar proyectiles.</li>
+     <li>Productos relacionados con aire comprimido, Co2 y paintball.</li>
+     <li>Cuchillos, machetes, sables, espadas y navajas.</li>
+     <li>Armas para artes marciales y de combate cuerpo a cuerpo. Por ejemplo: nunchakus, puños, bastones, etc.</li>
+     <li>Arcos, flechas y ballestas.</li>
+     <li>Aparatos de choque o stun guns.</li>
+     <li>Accesorios que no participen del funcionamiento del arma. Por ejemplo: correas, cartucheras, etc.</li>
+     <li>Artículos decorativos realizados en base a balas o municiones.</li>
+     <li>Cajas vacías de balas.</li>
+     <li>Publicaciones informativas sobre esta temática.</li>
+</ul>
+<p>Daremos de baja aquellas publicaciones que no respeten nuestras Políticas de Publicación o cualquier ley vigente. Esto puede llevar a la inhabilitación de la cuenta.</p>
+<h4>Celulares y servicios para celulares fuera de ley</h4>
+<p style="font-weight: bold;">No permitimos publicar y/o solicitar</p>
+<ul>
+     <li>Equipos de telefonía celular o módems reportados, en banda negativa, clonados o hayan sido encontrados.</li>
+     <li>Productos o servicios que tengan como fin la alteración, reemplazo, duplicación, o modificación de equipos de telefonía celular.</li>
+     <li>Equipos que permitan desbloquear o liberar celulares. Por ejemplo clips o box.</li>
+     <li>Códigos de subsidio</li>
+     <li>Servicios de desbloqueo de celulares y/ o módems o solución definitiva.</li>
+     <li>•	Servicios de obtención de códigos de subsidio o modificación de números de serie y códigos del equipo.</li>
+     <li>•	Servicios o aplicaciones para tener internet en forma gratuita.</li>
+     <li>•	Servicio de configuración o aplicaciones de mensajes de texto y llamadas ilimitadas gratuitas.</li>
+     <li>•	Equipo de telefonía celular Samsung Galaxy Note 7. Para más información, revisa el comunicado oficial de Samsung.</li>
+     <li>•	Equipos móviles no homologados o registrados.</li>
+</ul>
+<h4> Qué puedes publicar</h4>
+<p>Los productos aquí mencionados son solo ejemplos.</p>
+<ul><li>•	Equipos telefonía celular, a menos que tengan configuradas aplicaciones de mensajes de texto y/o llamadas ilimitadas gratuitas.</li>
+<li>•	Chips turbo SIM, XSIM o placas dual SIM.</li>
+<li>•	Kits de reparación para celulares.</li>
+<li>•	Software original.</li>
+<li>•	Servicios de flasheo, jailbreak o rooteo.</li>
+<li>•	Servicios de actualización de software.</li>
+</ul>
+<p>Daremos de baja aquellas publicaciones que no respeten nuestras Políticas de Publicación o cualquier ley vigente. Esto puede llevar a la inhabilitación de la cuenta.
+    </p>
+    <h4>Estupefacientes y sustancias prohibidas</h4>
+    <p style="font-weight: bold;">No permitimos publicar y/o solicitar</p>
+    <ul>
+         <li>•	Estupefacientes, drogas, alucinógenos o cualquier tipo de sustancia no permitida por la ley vigente, en ninguna de las formas existentes.</li>
+         <li>•	Aceite de cannabis.</li>
+         <li>•	Drogas o productos que posean efectos alucinógenos, por ejemplo:
+              <ul>
+                   <li>o	Peyote</li>
+                   <li>o	Popper</li>
+                   <li>o	Cactus San Pedro</li>
+                  
+              </ul>
+         </li>
+         <li>•	Utensilios que sirvan para producir, modificar, procesar, consumir o promover el consumo, distribución y producción de las sustancias prohibidas.</li>
+         <li>•	Publicaciones que promuevan expresamente el consumo de drogas.</li>
+    </ul>
+    <p>Daremos de baja aquellas publicaciones que no respeten nuestras Políticas de Publicación o cualquier ley vigente. Esto puede llevar a la inhabilitación de la cuenta.</p>
+    <h4>Flora, fauna y derivados</h4>
+    <p style="font-weight: bold;">No permitimos publicar y/o solicitar:</p>
+    <ul>
+         <li>•	Flora o fauna que esté en peligro de extinción o cuya venta fuere contraria a la ley.
+          </li>
+         <li>•	Fauna silvestre.</li>
+         <li>•	Venta de animales domésticos en los que se evidencian malos tratos.</li>
+         <li>•	Animales para pelea y sus accesorios.</li>
+         <li>•	Productos destinados para la captura y/o tratamiento de especies prohibidas (por ejemplo, trampas para caza, jaulas, terrarios, peceras, etc).</li>
+         <li>•	Restos o partes de animales sin procesar.</li>
+         <li>•	Medicamentos para animales.</li>
+    </ul>
+    <h4>Qué puedes publicar:</h4>
+    <ul>
+         <li>•	Animales domésticos o de granja en buen cuidado y con los permisos o recaudos sanitarios correspondientes.*</li>
+         <li>•	Peces, calamares y frutos de mar.*</li>
+         <li>•	Huevos.*</li>
+         <li>•	Carnes de animales procesadas y vendidas como delicatesen.*</li>
+         <li>•	Marroquinería y/o restos de animales procesados.*</li>
+         <li>•	Alimentos para animales que cuenten con las inscripciones pertinentes.</li>
+         <li>•	Accesorios para animales de venta libre.</li>
+    </ul>
+    <p>* que no fueren especies en peligro de extinción o cuya venta fuere contraria a la ley.</p>
+          </div>
+     </div>
+   </div>
+   
+   
+

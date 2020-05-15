@@ -2050,6 +2050,12 @@ class AppController {
             res.json(pymes);
         });
     }
+    getEntidades(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = yield database_1.default.query('SELECT * FROM `entidad`');
+            res.json(data);
+        });
+    }
 }
 const appController = new AppController();
 exports.default = appController;

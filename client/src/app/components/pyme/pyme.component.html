@@ -23,7 +23,7 @@
        <ul class="navbar-nav">
      
          <li class="nav-item" style="cursor: pointer;">
-           <a class="nav-link"  style="color: white !important;">Nosotros</a>
+           <a class="nav-link"  style="color: white !important;" (click)="buscarEntidades()">Entidades</a>
          </li>
          <li class="nav-item" style="cursor: pointer;">
            <a style="color: white !important;" class="nav-link">Categorías</a>
@@ -47,8 +47,8 @@
    </nav>
 <div class="container">
      <div class="row">
-          <img  src="../../../assets/banners/entidad1.png" class="d-block  w-100" alt="...">
-     </div>
+          <img  src="http://imgsistemapc.productochile.cl/home/banners/entidad1.png" class="d-block  w-100" alt="...">
+     </div> 
      <div *ngIf="desEntidad!=''"class="row carta-forma-pago mt-3">
           <div class="col-sm-12 col-md-12 col-lg-12 centrar">
             <div class="letra-forma-pago ml-3 ">
@@ -58,22 +58,28 @@
         </div>
      <div class="row">
           <div class="col-12 mt-3 mb-4 ">
-               <div  *ngFor="let pyme of listPymes">
+            <div *ngIf="!cardNoPyme;else templateListPymesVacia">
+              <div  *ngFor="let pyme of listPymes">
           
-                    <div class="card mb-3">
-                         <div class="card-header">{{pyme.nombrePyme}}</div>
-                         <div class="card-body">
-                           <h5 class="card-title">Rubro de {{pyme.nombreRubro}}</h5>
-                           <p class="card-text">Presente en la {{pyme.nombreRegion}}</p>
-                           <p class="card-text">{{pyme.descripcionPyme}}</p>
-                           <p class="card-text">Fono de contacto: {{pyme.fonoContactoUno}}</p>
-                         </div>
-                         <div *ngIf="pyme.link_OnePage!=''"class="card-footer bg-transparent centrar">
-                           <a href="{{pyme.link_OnePage}}" target="_blanck"><button class="btn btn-info">Visitar OnePage</button></a>
-                         </div>
-                       </div>
-               </div>
-          
+                <div class="card mb-3">
+                     <div class="card-header">{{pyme.nombrePyme}}</div>
+                     <div class="card-body">
+                       <h5 class="card-title">Rubro de {{pyme.nombreRubro}}</h5>
+                       <p class="card-text">Presente en la {{pyme.nombreRegion}}</p>
+                       <p class="card-text">{{pyme.descripcionPyme}}</p>
+                       <p class="card-text">Fono de contacto: {{pyme.fonoContactoUno}}</p>
+                     </div>
+                     <div *ngIf="pyme.link_OnePage!=''"class="card-footer bg-transparent centrar">
+                       <a href="{{pyme.link_OnePage}}" target="_blanck"><button class="btn btn-info">Visitar OnePage</button></a>
+                     </div>
+                   </div>
+           </div>
+            </div>
+            <ng-template #templateListPymesVacia>
+              <div class="card mb-3 centrar-vertical pt-3 pb-3">
+                La entidad no posee pymes asociadas
+              </div>
+              </ng-template>
            </div>
      </div>
 </div>

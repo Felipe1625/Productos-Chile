@@ -1,0 +1,22 @@
+.carta {
+     /* transition: 0.3s; */
+     padding: 20px;
+     background-color: white;
+   }
+
+   
+.centrar {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   
+   .centrar-horizontal {
+     text-align: center;
+   }
+   
+   .centrar-vertical {
+     display: flex;
+     align-items: center;
+   }
+   

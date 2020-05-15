@@ -176,4 +176,10 @@ export class SearchComponent implements OnInit {
     this.appComponent.rubroUltimoProductoServicio=-1
     this.router.navigate(['/detalle-item'])
   }
+
+  
+  buscarEntidades(){
+    console.log('buscar entidades')
+    this.router.navigate(['/listado-entidades'])
+  }
 }

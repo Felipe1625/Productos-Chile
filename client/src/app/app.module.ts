@@ -27,6 +27,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PymeComponent } from './components/pyme/pyme.component';
 import { PanelDetallePreguntasFrecuentesComponent } from './components/panel-detalle-preguntas-frecuentes/panel-detalle-preguntas-frecuentes.component';
 import { PanelChangePasswordComponent } from './components/panel-change-password/panel-change-password.component';
+import { PoliticasDeUsoComponent } from './components/politicas-de-uso/politicas-de-uso.component';
+import { PoliticasDeProductosComponent } from './components/politicas-de-productos/politicas-de-productos.component';
+import { EntidadesComponent } from './components/entidades/entidades.component';
 
 
 @NgModule({
@@ -47,7 +50,10 @@ import { PanelChangePasswordComponent } from './components/panel-change-password
     NavbarClientComponent,
     PymeComponent,
     PanelDetallePreguntasFrecuentesComponent,
-    PanelChangePasswordComponent
+    PanelChangePasswordComponent,
+    PoliticasDeUsoComponent,
+    PoliticasDeProductosComponent,
+    EntidadesComponent
   ],
   imports: [
     BrowserModule,

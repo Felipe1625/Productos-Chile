@@ -182,4 +182,8 @@ export class AppService {
     return this.http.get(`${this.API_URI}/get-pymes-por-entidad/${nombre}`);
   }
 
+  getEntidades(){
+    return this.http.get(`${this.API_URI}/get-entidades`);
+  }
+
 }

@@ -27,6 +27,9 @@ import { AuthGuard } from './auth.guard';
 import { PymeComponent } from './components/pyme/pyme.component';
 import { PanelDetallePreguntasFrecuentesComponent } from './components/panel-detalle-preguntas-frecuentes/panel-detalle-preguntas-frecuentes.component';
 import { PanelChangePasswordComponent } from './components/panel-change-password/panel-change-password.component';
+import { PoliticasDeUsoComponent } from './components/politicas-de-uso/politicas-de-uso.component';
+import { PoliticasDeProductosComponent } from './components/politicas-de-productos/politicas-de-productos.component';
+import { EntidadesComponent } from './components/entidades/entidades.component';
 
 const routes: Routes = [
   {
@@ -51,6 +54,11 @@ const routes: Routes = [
     component : PymeComponent
   },
   {
+    path:'listado-entidades',
+    pathMatch:'full',
+    component : EntidadesComponent
+  },
+  {
     path:'detalle-item',
     pathMatch:'full',
     component : DetailComponent
@@ -59,6 +67,16 @@ const routes: Routes = [
     path:'login',
     pathMatch:'full',
     component : LoginComponent
+  },
+  {
+    path:'politicas-de-uso',
+    pathMatch:'full',
+    component : PoliticasDeUsoComponent
+  },
+  {
+    path:'politicas-de-productos',
+    pathMatch:'full',
+    component : PoliticasDeProductosComponent
   },
   {
     path:'panel',

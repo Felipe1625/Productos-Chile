@@ -120,4 +120,10 @@ export class DetailComponent implements OnInit {
     this.appComponent.busqueda=this.buscar.toLocaleLowerCase()
     this.router.navigate(['/busqueda-servicio-producto'])
   }
+
+  buscarEntidades(){
+    console.log('buscar entidades')
+    this.router.navigate(['/listado-entidades'])
+  }
+
 }

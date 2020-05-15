@@ -8,10 +8,46 @@
     
    }
    
-   .margen-icono-footer {
+a{
+  color: white;
+}
+
+a:hover{
+  color: white;
+}
+
+a:visited{
+  color: white;
+}
+
+
+   /* .margen-icono-footer {
      margin-top: 20px;
-   }
-   
+   } */
+
+   .margen-footer-lados {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+   .centrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .centrar-horizontal {
+    text-align: center;
+  }
+  
+  .centrar-vertical {
+    display: flex; 
+    align-items: center;
+  }
+
+  
+
+
    .icono-footer-circular-face {
      padding-bottom: 10px;
      padding-top: 10px;
@@ -20,6 +56,68 @@
      color: #3d5b99;
      transition: 0.3s;
    }
+
+   .icono-footer-face{
+    color: #ffffff;
+    transition: 0.3s;
+   }
+
+   .icono-footer-face:hover{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #3d5b99;
+    transition: 0.3s;
+   }
+
+   .icono-footer-insta{
+    color: #ffffff;
+    transition: 0.3s;
+   }
+
+   .icono-footer-insta:hover{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #e1306c;
+    transition: 0.3s;
+   }
+
+   .icono-footer-tw{
+    color: #ffffff;
+    transition: 0.3s;
+   }
+
+   .icono-footer-tw:hover{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #00aced;
+    transition: 0.3s;
+   }
+
+   .icono-footer-yt{
+    color: #ffffff;
+    transition: 0.3s;
+   }
+
+   .icono-footer-yt:hover{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #c4302b;
+    transition: 0.3s;
+   }
+
+   /* .icono-footer-circular-face:hover {
+    background-color: #3d5b99;
+    color: white;
+  } */
+
    
    .icono-footer-circular-face:hover {
      background-color: #3d5b99;
@@ -67,4 +165,16 @@
      background-color: #c4302b;
      color: white;
    }
+
+   .titulo-modal {
+    background-color:  #00C6FF;
+    color: white;
+  }
+
+  .btn-messenger {
+    background-color: #00C6FF !important;
+    color: white !important;
+  
+    border: none !important;
+  }
    
